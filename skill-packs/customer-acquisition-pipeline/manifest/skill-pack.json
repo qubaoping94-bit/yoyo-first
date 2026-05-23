@@ -1,0 +1,14 @@
+{
+  "name": "customer-acquisition-pipeline-pack",
+  "version": "1.0.0",
+  "type": "single-skill-pack",
+  "skill": {
+    "name": "customer-acquisition-pipeline",
+    "path": "skills/customer-acquisition-pipeline",
+    "purpose": "Orchestrates public lead acquisition, Lark Base CRM updates, and cold email draft generation."
+  },
+  "companionSkills": "manifest/companion-skills.json",
+  "installScript": "scripts/install.ps1",
+  "companionInstallScript": "scripts/install-companion-skills.ps1",
+  "verifyScript": "scripts/verify.ps1"
+}

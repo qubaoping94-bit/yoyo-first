@@ -1,0 +1,4 @@
+interface:
+  display_name: "Customer Acquisition Pipeline"
+  short_description: "Build a scraped-lead outbound CRM loop"
+  default_prompt: "Use $customer-acquisition-pipeline to build a Codex-managed acquisition pipeline."

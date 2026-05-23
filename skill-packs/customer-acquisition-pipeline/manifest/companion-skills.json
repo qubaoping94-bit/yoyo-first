@@ -1,0 +1,30 @@
+[
+  {
+    "name": "just-scrape",
+    "repo": "ScrapeGraphAI/just-scrape",
+    "path": "skills/just-scrape",
+    "phase": "lead discovery and public web extraction",
+    "notes": "Requires just-scrape CLI and SGAI_API_KEY."
+  },
+  {
+    "name": "lark-shared",
+    "repo": "larksuite/cli",
+    "path": "skills/lark-shared",
+    "phase": "Lark CLI authentication and permission setup",
+    "notes": "Install before lark-base."
+  },
+  {
+    "name": "lark-base",
+    "repo": "larksuite/cli",
+    "path": "skills/lark-base",
+    "phase": "CRM table, record, view, dashboard, and workflow operations",
+    "notes": "Requires lark-cli and working Lark/Feishu authentication."
+  },
+  {
+    "name": "cold-email",
+    "repo": "coreyhaines31/marketingskills",
+    "path": "skills/cold-email",
+    "phase": "first-touch and follow-up email draft generation",
+    "notes": "Drafting only; does not send email."
+  }
+]
