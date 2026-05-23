@@ -1,10 +1,15 @@
 param(
-  [string]$CodexSkillsDir = "$env:USERPROFILE\.codex\skills",
+  [string]$CodexSkillsDir = "",
   [switch]$WithCompanions
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
+
+$homeDir = if ($env:USERPROFILE) { $env:USERPROFILE } else { $HOME }
+if ([string]::IsNullOrWhiteSpace($CodexSkillsDir)) {
+  $CodexSkillsDir = Join-Path $homeDir ".codex\skills"
+}
 
 $repoRoot = Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")
 $sourceSkills = Join-Path $repoRoot "skills"

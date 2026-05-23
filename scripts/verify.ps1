@@ -1,5 +1,5 @@
 param(
-  [string]$CodexSkillsDir = "$env:USERPROFILE\.codex\skills",
+  [string]$CodexSkillsDir = "",
   [switch]$InstalledOnly
 )
 
@@ -7,9 +7,14 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 $env:PYTHONUTF8 = "1"
 
+$homeDir = if ($env:USERPROFILE) { $env:USERPROFILE } else { $HOME }
+if ([string]::IsNullOrWhiteSpace($CodexSkillsDir)) {
+  $CodexSkillsDir = Join-Path $homeDir ".codex\skills"
+}
+
 $repoRoot = Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")
 $customSkills = @("ai-product-delivery-pipeline", "douyin-skill-installer")
-$validator = Join-Path $env:USERPROFILE ".codex\skills\.system\skill-creator\scripts\quick_validate.py"
+$validator = Join-Path $homeDir ".codex\skills\.system\skill-creator\scripts\quick_validate.py"
 
 function Test-SkillFolder {
   param([string]$Path, [string]$Name)
@@ -53,4 +58,3 @@ if ($InstalledOnly) {
     Test-SkillFolder -Path (Join-Path $CodexSkillsDir $name) -Name $name
   }
 }
-

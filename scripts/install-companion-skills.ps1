@@ -1,11 +1,16 @@
 param(
-  [string]$CodexSkillsDir = "$env:USERPROFILE\.codex\skills"
+  [string]$CodexSkillsDir = ""
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-$installer = Join-Path $env:USERPROFILE ".codex\skills\.system\skill-installer\scripts\install-skill-from-github.py"
+$homeDir = if ($env:USERPROFILE) { $env:USERPROFILE } else { $HOME }
+if ([string]::IsNullOrWhiteSpace($CodexSkillsDir)) {
+  $CodexSkillsDir = Join-Path $homeDir ".codex\skills"
+}
+
+$installer = Join-Path $homeDir ".codex\skills\.system\skill-installer\scripts\install-skill-from-github.py"
 if (-not (Test-Path -LiteralPath $installer)) {
   throw "Codex skill installer not found: $installer"
 }
@@ -37,4 +42,3 @@ foreach ($item in $items) {
 }
 
 Write-Host "Companion skill installation complete."
-
