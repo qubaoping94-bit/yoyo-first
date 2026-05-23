@@ -1,0 +1,17 @@
+.env
+.env.*
+*.log
+*.tmp
+*.bak
+*.zip
+node_modules/
+.venv/
+venv/
+__pycache__/
+.DS_Store
+Thumbs.db
+.azure/
+*.secret
+*token*
+*cookie*
+

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Douyin Skill Installer"
+  short_description: "Extract Douyin videos and install mentioned skills"
+  default_prompt: "Use $douyin-skill-installer to extract a Douyin video and install the Codex skills it mentions."
+policy:
+  allow_implicit_invocation: true

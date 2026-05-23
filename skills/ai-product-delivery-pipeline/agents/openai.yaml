@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Product Delivery Pipeline"
+  short_description: "Ship AI web products from idea to Azure"
+  default_prompt: "Use $ai-product-delivery-pipeline to take this AI product from idea through frontend, AI architecture, validation, and Azure deployment."

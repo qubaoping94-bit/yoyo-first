@@ -1,0 +1,56 @@
+{
+  "companionSkills": [
+    {
+      "name": "vercel-react-best-practices",
+      "repo": "vercel-labs/agent-skills",
+      "path": "skills/react-best-practices",
+      "installName": "vercel-react-best-practices",
+      "phase": "React/Next.js engineering quality"
+    },
+    {
+      "name": "web-design-guidelines",
+      "repo": "vercel-labs/agent-skills",
+      "path": "skills/web-design-guidelines",
+      "phase": "UI/UX audit"
+    },
+    {
+      "name": "microsoft-foundry",
+      "repo": "microsoft/github-copilot-for-azure",
+      "path": "plugin/skills/microsoft-foundry",
+      "phase": "Foundry agent architecture, evaluation, prompt optimization, fine-tuning"
+    },
+    {
+      "name": "azure-ai",
+      "repo": "microsoft/github-copilot-for-azure",
+      "path": "plugin/skills/azure-ai",
+      "phase": "Azure AI services"
+    },
+    {
+      "name": "azure-aigateway",
+      "repo": "microsoft/github-copilot-for-azure",
+      "path": "plugin/skills/azure-aigateway",
+      "phase": "AI gateway governance"
+    },
+    {
+      "name": "azure-prepare",
+      "repo": "microsoft/github-copilot-for-azure",
+      "path": "plugin/skills/azure-prepare",
+      "phase": "Azure deployment preparation"
+    },
+    {
+      "name": "azure-validate",
+      "repo": "microsoft/github-copilot-for-azure",
+      "path": "plugin/skills/azure-validate",
+      "phase": "Azure pre-deployment validation"
+    },
+    {
+      "name": "azure-deploy",
+      "repo": "microsoft/github-copilot-for-azure",
+      "path": "plugin/skills/azure-deploy",
+      "phase": "Azure deployment execution"
+    }
+  ],
+  "notVendored": true,
+  "note": "Companion skills are installed from their official repositories by scripts/install-companion-skills.ps1."
+}
+
