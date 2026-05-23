@@ -1,14 +1,16 @@
 # Codex AI Product Skill Kit
 
-这是一套面向 Codex 的 AI 产品工程化交付技能包，包含两个自定义 skill：
+这是一套面向 Codex 的 AI 产品工程化交付技能包，包含三个自定义 skill：
 
 - `ai-product-delivery-pipeline`：AI 产品工程化交付流水线，总控型 skill。
 - `douyin-skill-installer`：从抖音视频内容中识别并安装提到的 Codex/agent skill。
+- `github-skill-pack-publisher`：把 skill/workflow 整理成 GitHub 仓库、完整文档、安装脚本、zip，并推送发布。
 
 它们适合长期复用在两类任务里：
 
 - 把 AI Web 产品、AI SaaS、内部 AI 工具、Agent 应用从想法推进到可上线版本。
 - 从抖音/短视频/教程内容里提取 skill 名称，查找官方来源，安全核验后安装到 Codex。
+- 把本地 skill 打包成可复用的 GitHub 项目，后续重复发布时按标准流程执行。
 
 ## 目录结构
 
@@ -19,6 +21,9 @@ codex-ai-product-skill-kit/
       SKILL.md
       agents/openai.yaml
     douyin-skill-installer/
+      SKILL.md
+      agents/openai.yaml
+    github-skill-pack-publisher/
       SKILL.md
       agents/openai.yaml
   scripts/
@@ -88,6 +93,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1
 |---|---|---|
 | `ai-product-delivery-pipeline` | 编排 AI 产品从需求到上线的完整工程化流程 | "做一个 AI 产品并上线"、"把这个 demo 变成可交付产品" |
 | `douyin-skill-installer` | 从抖音内容中提取 skill 名称、定位来源、核验并安装 | "根据这个抖音链接安装里面提到的 skill" |
+| `github-skill-pack-publisher` | 打包、写文档、生成 zip、提交并推送 GitHub skill 仓库 | "把这个 skill 打包上传到我的 GitHub 仓库" |
 
 ## 推荐配套 skill
 

@@ -12,10 +12,14 @@
       "name": "douyin-skill-installer",
       "path": "skills/douyin-skill-installer",
       "purpose": "Extracts Douyin video content, identifies mentioned Codex skills, vets sources, installs, and verifies them."
+    },
+    {
+      "name": "github-skill-pack-publisher",
+      "path": "skills/github-skill-pack-publisher",
+      "purpose": "Packages Codex skills and reusable workflows with complete docs, install/verify scripts, zip archive, Git commits, GitHub push, and remote confirmation."
     }
   ],
   "companionManifest": "manifest/companion-skills.json",
   "installScript": "scripts/install.ps1",
   "verifyScript": "scripts/verify.ps1"
 }
-

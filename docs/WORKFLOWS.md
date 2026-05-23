@@ -76,3 +76,29 @@
 
 这能避免跳过准备和验证直接上线导致失败。
 
+## 工作流 E：打包并发布 skill 到 GitHub
+
+触发方式：
+
+```text
+把刚刚这个工作流程保存成 skill，并打包上传到我的 GitHub 仓库，说明要全面。
+```
+
+执行顺序：
+
+1. 确认目标 GitHub 仓库和分支。
+2. 创建或更新本地 skill。
+3. 把 skill 复制进 `skills/` 目录。
+4. 更新 README、功能说明、安装说明、工作流、安全说明、示例提示词和 manifest。
+5. 增加或更新安装脚本、验证脚本和 GitHub Actions。
+6. 运行本地验证。
+7. 生成 zip 包。
+8. 克隆或更新远程 GitHub 仓库。
+9. commit 并 push。
+10. 使用 `git ls-remote` 或网页确认远程更新。
+
+注意：
+
+- 没有 GitHub CLI 也可以用普通 Git HTTPS 推送。
+- 不提交 `.env`、token、cookie、私有源码等敏感文件。
+- 如果认证失败，保留本地准备好的仓库并输出手动上传步骤。

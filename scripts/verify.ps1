@@ -13,7 +13,7 @@ if ([string]::IsNullOrWhiteSpace($CodexSkillsDir)) {
 }
 
 $repoRoot = Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")
-$customSkills = @("ai-product-delivery-pipeline", "douyin-skill-installer")
+$customSkills = @("ai-product-delivery-pipeline", "douyin-skill-installer", "github-skill-pack-publisher")
 $validator = Join-Path $homeDir ".codex\skills\.system\skill-creator\scripts\quick_validate.py"
 
 function Test-SkillFolder {

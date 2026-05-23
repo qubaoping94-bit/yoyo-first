@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Skill Pack Publisher"
+  short_description: "Package, document, zip, and publish Codex skills"
+  default_prompt: "Use $github-skill-pack-publisher to package these Codex skills with full docs and publish them to my GitHub repository."

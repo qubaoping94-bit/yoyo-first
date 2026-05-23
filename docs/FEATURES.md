@@ -74,3 +74,38 @@ Skill 名称：`douyin-skill-installer`
 | Azure AI | `azure-ai` | `microsoft/github-copilot-for-azure` |
 | Azure Deploy | `azure-deploy` | `microsoft/github-copilot-for-azure` |
 
+## 3. GitHub Skill 包发布器
+
+Skill 名称：`github-skill-pack-publisher`
+
+定位：把本地 Codex skill 或重复工作流整理成可上传、可安装、可验证的 GitHub 仓库项目。
+
+### 适用场景
+
+- 用户要求把刚生成的 skill 上传到 GitHub
+- 用户希望把一组 skill 打包成公开仓库
+- 用户需要 README、功能说明、安装说明、安全说明、示例提示词等完整材料
+- 用户需要本地 zip 包和 GitHub 远程仓库同时保存
+- 用户以后会大量重复类似发布操作，希望按同一套标准执行
+
+### 标准交付物
+
+| 类型 | 内容 |
+|---|---|
+| skill 源码 | `skills/<skill-name>/SKILL.md` 与 `agents/openai.yaml` |
+| 文档 | `README.md`、`docs/FEATURES.md`、`docs/INSTALLATION.md`、`docs/WORKFLOWS.md`、`docs/SECURITY.md` |
+| 脚本 | `scripts/install.ps1`、`scripts/install-companion-skills.ps1`、`scripts/verify.ps1` |
+| 清单 | `manifest/skill-pack.json`、`manifest/companion-skills.json` |
+| 示例 | `examples/prompts.md` |
+| 发布辅助 | `.github/workflows/validate.yml`、`.gitignore`、`LICENSE`、`THIRD_PARTY_NOTICES.md` |
+
+### 执行结果
+
+执行完成后应报告：
+
+- GitHub 仓库地址
+- 新增或更新的 skill
+- commit hash
+- zip 路径
+- 本地验证结果
+- 是否已远程确认

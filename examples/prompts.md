@@ -38,3 +38,12 @@
 帮我检查 ai-product-delivery-pipeline 依赖的 companion skills 是否都安装了，缺什么补什么。
 ```
 
+## 打包并发布到 GitHub
+
+```text
+用 $github-skill-pack-publisher 把刚刚这个工作流程保存成 skill，整理完整文档、安装脚本、验证脚本、zip，并上传到我的 GitHub 仓库。
+```
+
+```text
+把这几个本地 skill 打包成一个 GitHub skill pack，README 和功能说明要全面，然后 commit 并 push。
+```
