@@ -1,4 +1,4 @@
-name: Validate Skill Pack
+name: Validate Independent Skill Packs
 
 on:
   push:
@@ -11,6 +11,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate package structure
+      - name: Validate every independent skill pack
         shell: pwsh
-        run: ./scripts/verify.ps1
+        run: |
+          Get-ChildItem -LiteralPath "skill-packs" -Directory | ForEach-Object {
+            $verify = Join-Path $_.FullName "scripts/verify.ps1"
+            if (-not (Test-Path -LiteralPath $verify)) {
+              throw "Missing verify script: $verify"
+            }
+            & $verify
+          }
+

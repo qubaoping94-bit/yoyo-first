@@ -1,0 +1,47 @@
+{
+  "companionSkills": [
+    {
+      "name": "vercel-react-best-practices",
+      "repo": "vercel-labs/agent-skills",
+      "path": "skills/react-best-practices",
+      "installName": "vercel-react-best-practices"
+    },
+    {
+      "name": "web-design-guidelines",
+      "repo": "vercel-labs/agent-skills",
+      "path": "skills/web-design-guidelines"
+    },
+    {
+      "name": "microsoft-foundry",
+      "repo": "microsoft/github-copilot-for-azure",
+      "path": "plugin/skills/microsoft-foundry"
+    },
+    {
+      "name": "azure-ai",
+      "repo": "microsoft/github-copilot-for-azure",
+      "path": "plugin/skills/azure-ai"
+    },
+    {
+      "name": "azure-aigateway",
+      "repo": "microsoft/github-copilot-for-azure",
+      "path": "plugin/skills/azure-aigateway"
+    },
+    {
+      "name": "azure-prepare",
+      "repo": "microsoft/github-copilot-for-azure",
+      "path": "plugin/skills/azure-prepare"
+    },
+    {
+      "name": "azure-validate",
+      "repo": "microsoft/github-copilot-for-azure",
+      "path": "plugin/skills/azure-validate"
+    },
+    {
+      "name": "azure-deploy",
+      "repo": "microsoft/github-copilot-for-azure",
+      "path": "plugin/skills/azure-deploy"
+    }
+  ],
+  "notVendored": true
+}
+

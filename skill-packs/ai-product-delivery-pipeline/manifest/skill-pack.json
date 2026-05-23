@@ -1,0 +1,14 @@
+{
+  "name": "ai-product-delivery-pipeline-pack",
+  "version": "1.0.0",
+  "type": "single-skill-pack",
+  "skill": {
+    "name": "ai-product-delivery-pipeline",
+    "path": "skills/ai-product-delivery-pipeline",
+    "purpose": "Orchestrates AI product delivery from idea through frontend, AI architecture, Azure validation, and deployment."
+  },
+  "companionManifest": "manifest/companion-skills.json",
+  "installScript": "scripts/install.ps1",
+  "verifyScript": "scripts/verify.ps1"
+}
+

@@ -27,18 +27,8 @@ $items = @(
 )
 
 foreach ($item in $items) {
-  $args = @(
-    $installer,
-    "--repo", $item.Repo,
-    "--path", $item.Path,
-    "--dest", $CodexSkillsDir,
-    "--method", "git"
-  )
-  if ($item.Name) {
-    $args += @("--name", $item.Name)
-  }
-  Write-Host "Installing companion skill from $($item.Repo): $($item.Path)"
+  $args = @($installer, "--repo", $item.Repo, "--path", $item.Path, "--dest", $CodexSkillsDir, "--method", "git")
+  if ($item.Name) { $args += @("--name", $item.Name) }
   python @args
 }
 
-Write-Host "Companion skill installation complete."

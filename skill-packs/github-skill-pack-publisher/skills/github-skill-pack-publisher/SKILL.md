@@ -7,7 +7,7 @@ description: Use when a user wants to package Codex/agent skills or reusable wor
 
 ## Overview
 
-Use this workflow to turn local Codex skills or repeatable agent workflows into a polished GitHub repository package. The expected outcome is not just uploaded files; it is a documented, installable, verifiable skill pack with a clean commit history and remote confirmation.
+Use this workflow to turn local Codex skills or repeatable agent workflows into polished GitHub repository packages. The default is one independent package per skill; create a combined multi-skill package only when the user explicitly asks for a bundle, collection, or several skills packaged together.
 
 ## When to Use
 
@@ -33,12 +33,19 @@ Discover these from the user's message, screenshot, browser page, local git conf
 
 If the repo URL cannot be inferred safely, ask for it before pushing.
 
-## Standard Package Structure
+## Default Packaging Rule
+
+- Default: one skill becomes one independent skill package.
+- If the user asks to publish 3 skills, create 3 separate package folders and 3 separate archives unless they explicitly request a combined bundle.
+- Only create a multi-skill package when the user explicitly asks to combine, bundle, merge, package together, or create one shared package containing multiple skills.
+- The root of a GitHub repository may act as an index, but it should not pretend to be a combined package unless the user asked for that.
+
+## Standard Single-Skill Package Structure
 
 Use this structure unless the target repo already has a strong convention:
 
 ```text
-<package-name>/
+skill-packs/<skill-name>/
   skills/
     <skill-name>/
       SKILL.md
@@ -55,15 +62,12 @@ Use this structure unless the target repo already has a strong convention:
     INSTALLATION.md
     WORKFLOWS.md
     SECURITY.md
-    GITHUB_UPLOAD.md
   examples/
     prompts.md
-  .github/workflows/validate.yml
-  .gitignore
   README.md
-  LICENSE
-  THIRD_PARTY_NOTICES.md
 ```
+
+For a multi-skill bundle requested explicitly by the user, place multiple skill folders under `skills/` and label the package `type` as `multi-skill-pack` in the manifest.
 
 ## Workflow
 
@@ -76,6 +80,7 @@ Use this structure unless the target repo already has a strong convention:
    - Copy custom skill folders from the local Codex skills directory, usually `%USERPROFILE%\.codex\skills`.
    - Include `SKILL.md` and `agents/openai.yaml`.
    - Do not vendor large third-party companion skills unless the user explicitly asks. Prefer a companion manifest and installer script pointing to official upstream repos.
+   - For multiple skills, repeat the package structure independently for each skill unless the user explicitly asked for one combined bundle.
 
 3. **Write comprehensive repository docs**
    - `README.md`: purpose, skill list, quick install, quick verify, docs links, GitHub upload notes.
@@ -105,10 +110,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1
    - If Codex `quick_validate.py` exists, validate every packaged skill with `PYTHONUTF8=1`.
    - Fix validator errors before upload.
 
-6. **Create a zip archive**
-   - Generate `<package-name>.zip` beside the package directory.
+6. **Create zip archives**
+   - Generate one `<skill-name>-skill-pack.zip` per independent package.
+   - For explicit combined bundles, generate one `<package-name>.zip` beside the package directory.
    - Exclude `.git` folders and sensitive files.
-   - Report the absolute zip path.
+   - Report all absolute zip paths.
 
 7. **Publish to GitHub**
    - If pushing to an existing repo, clone to a clean temporary/local upload directory.

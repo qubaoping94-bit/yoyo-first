@@ -1,0 +1,13 @@
+{
+  "name": "github-skill-pack-publisher-pack",
+  "version": "1.0.0",
+  "type": "single-skill-pack",
+  "skill": {
+    "name": "github-skill-pack-publisher",
+    "path": "skills/github-skill-pack-publisher",
+    "purpose": "Packages Codex skills and reusable workflows as independent GitHub-ready skill packs by default."
+  },
+  "installScript": "scripts/install.ps1",
+  "verifyScript": "scripts/verify.ps1"
+}
+

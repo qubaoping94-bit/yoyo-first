@@ -1,0 +1,13 @@
+{
+  "name": "douyin-skill-installer-pack",
+  "version": "1.0.0",
+  "type": "single-skill-pack",
+  "skill": {
+    "name": "douyin-skill-installer",
+    "path": "skills/douyin-skill-installer",
+    "purpose": "Extracts Douyin video content, identifies mentioned Codex skills, vets sources, installs, and verifies them."
+  },
+  "installScript": "scripts/install.ps1",
+  "verifyScript": "scripts/verify.ps1"
+}
+
