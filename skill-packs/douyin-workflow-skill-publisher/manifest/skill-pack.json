@@ -1,0 +1,13 @@
+{
+  "name": "douyin-workflow-skill-publisher-pack",
+  "version": "1.0.0",
+  "type": "single-skill-pack",
+  "skill": {
+    "name": "douyin-workflow-skill-publisher",
+    "path": "skills/douyin-workflow-skill-publisher",
+    "purpose": "Turns Douyin skill videos into installed skills, synthesized workflow skills, and independent GitHub skill packs."
+  },
+  "companionSkills": "manifest/companion-skills.json",
+  "installScript": "scripts/install.ps1",
+  "verifyScript": "scripts/verify.ps1"
+}

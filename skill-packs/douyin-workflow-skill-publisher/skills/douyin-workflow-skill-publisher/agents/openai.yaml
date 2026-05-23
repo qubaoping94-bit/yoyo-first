@@ -1,0 +1,4 @@
+interface:
+  display_name: "Douyin Workflow Skill Publisher"
+  short_description: "Turn Douyin skill videos into workflow packs"
+  default_prompt: "Use $douyin-workflow-skill-publisher to extract a Douyin skill video, install mentioned skills, synthesize any workflow, and publish it as an independent skill pack."

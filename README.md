@@ -14,6 +14,7 @@
 |---|---|---|
 | `ai-product-delivery-pipeline` | AI 产品工程化交付流水线，从需求、前端、AI 架构、Azure AI 到验证部署 | [skill-packs/ai-product-delivery-pipeline](skill-packs/ai-product-delivery-pipeline) |
 | `douyin-skill-installer` | 从抖音短视频内容识别、核验并安装提到的 Codex/agent skill | [skill-packs/douyin-skill-installer](skill-packs/douyin-skill-installer) |
+| `douyin-workflow-skill-publisher` | 抖音 skill 视频到组合 workflow skill，再到独立 GitHub 技能包发布的完整流水线 | [skill-packs/douyin-workflow-skill-publisher](skill-packs/douyin-workflow-skill-publisher) |
 | `github-skill-pack-publisher` | 把 skill/workflow 整理成独立 GitHub 技能包、文档、脚本、zip 并上传 | [skill-packs/github-skill-pack-publisher](skill-packs/github-skill-pack-publisher) |
 | `customer-acquisition-pipeline` | 抖音获客流水线组合 skill：公开线索抓取、飞书客户库、冷邮件草稿 | [skill-packs/customer-acquisition-pipeline](skill-packs/customer-acquisition-pipeline) |
 

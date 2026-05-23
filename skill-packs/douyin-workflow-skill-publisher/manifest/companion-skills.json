@@ -1,0 +1,32 @@
+[
+  {
+    "name": "douyin-skill-installer",
+    "source": "local/custom",
+    "phase": "Douyin extraction, skill identification, vetting, installation, and verification"
+  },
+  {
+    "name": "skill-vetter",
+    "source": "local/installed",
+    "phase": "Security review before unknown skill installation"
+  },
+  {
+    "name": "skill-installer",
+    "source": "system",
+    "phase": "Curated or GitHub skill installation"
+  },
+  {
+    "name": "skill-creator",
+    "source": "system",
+    "phase": "New workflow skill initialization and validation"
+  },
+  {
+    "name": "writing-skills",
+    "source": "local/installed",
+    "phase": "Reusable skill authoring guidance"
+  },
+  {
+    "name": "github-skill-pack-publisher",
+    "source": "local/custom",
+    "phase": "Independent package creation, zip generation, GitHub push, and remote confirmation"
+  }
+]
