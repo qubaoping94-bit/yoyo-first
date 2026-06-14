@@ -1,0 +1,19 @@
+name: Validate skill pack
+
+on:
+  push:
+    paths:
+      - "skill-packs/youyou-special-demo-delivery-pipeline/**"
+  pull_request:
+    paths:
+      - "skill-packs/youyou-special-demo-delivery-pipeline/**"
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify package
+        shell: pwsh
+        run: |
+          powershell -NoProfile -ExecutionPolicy Bypass -File .\skill-packs\youyou-special-demo-delivery-pipeline\scripts\verify.ps1

@@ -1,0 +1,7 @@
+interface:
+  display_name: "优优专项演示交付流水线"
+  short_description: "从参考图生成优优专项演示系统并完成总站同步上线审计"
+  default_prompt: "Use $youyou-special-demo-delivery-pipeline to create and publish a new Youyou inorganic-board special-topic demo system."
+
+policy:
+  allow_implicit_invocation: true

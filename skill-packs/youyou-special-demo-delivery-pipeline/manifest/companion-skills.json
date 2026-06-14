@@ -1,0 +1,25 @@
+{
+  "companions": [
+    {
+      "name": "youyou-special-demo-system",
+      "phase": "visual and copy direction",
+      "installMethod": "expected local custom skill"
+    },
+    {
+      "name": "ian-xiaohei-scenes",
+      "phase": "Xiaohei long-scroll scene language",
+      "installMethod": "expected local custom skill"
+    },
+    {
+      "name": "html-production-defaults",
+      "phase": "production page defaults",
+      "installMethod": "expected local custom skill"
+    },
+    {
+      "name": "github-skill-pack-publisher",
+      "phase": "package and publish skill workflows",
+      "installMethod": "expected local custom skill"
+    }
+  ]
+}
+
