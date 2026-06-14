@@ -1,0 +1,14 @@
+{
+  "name": "youyou-demo-page-delivery-pipeline-pack",
+  "version": "1.0.0",
+  "type": "single-skill-pack",
+  "skill": {
+    "name": "youyou-demo-page-delivery-pipeline",
+    "path": "skills/youyou-demo-page-delivery-pipeline",
+    "purpose": "Builds and publishes repeatable Youyou inorganic board demo-system pages from reference images or themes."
+  },
+  "installScript": "scripts/install.ps1",
+  "verifyScript": "scripts/verify.ps1",
+  "companionSkills": "manifest/companion-skills.json"
+}
+

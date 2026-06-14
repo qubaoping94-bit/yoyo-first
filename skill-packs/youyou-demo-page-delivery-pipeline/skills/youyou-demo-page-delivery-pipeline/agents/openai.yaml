@@ -1,0 +1,4 @@
+interface:
+  display_name: "优优演示页交付流水线"
+  short_description: "生成并上线优优无机板演示系统页面的完整复用交付流程"
+  default_prompt: "Use $youyou-demo-page-delivery-pipeline to build and publish a new 优优无机板演示系统 page from reference images."

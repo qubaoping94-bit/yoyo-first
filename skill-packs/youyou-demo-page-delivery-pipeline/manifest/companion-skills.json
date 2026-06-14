@@ -1,0 +1,20 @@
+{
+  "requiredForFullWorkflow": [
+    {
+      "name": "youyou-special-demo-system",
+      "reason": "Applies the established Youyou special demo-system visual and HTML workflow.",
+      "install": "Install from the local Codex skills library or the user's trusted upstream source."
+    },
+    {
+      "name": "ian-xiaohei-scenes",
+      "reason": "Provides the Xiaohei long-scroll story-image style used by the demo-system series.",
+      "install": "Install from the local Codex skills library or the user's trusted upstream source."
+    },
+    {
+      "name": "html-production-defaults",
+      "reason": "Provides production HTML and browser-verification expectations.",
+      "install": "Install from the local Codex skills library or the user's trusted upstream source."
+    }
+  ]
+}
+
