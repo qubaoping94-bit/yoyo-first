@@ -24,9 +24,14 @@ $required = @(
   "skills\youyou-inorganic-board-guide\SKILL.md",
   "skills\youyou-inorganic-board-guide\agents\openai.yaml",
   "skills\youyou-inorganic-board-guide\references\knowledge-map.md",
+  "skills\youyou-inorganic-board-guide\references\audience-playbooks.md",
   "skills\youyou-inorganic-board-guide\references\website-router.md",
   "skills\youyou-inorganic-board-guide\references\faq-and-sales-scripts.md",
-  "skills\youyou-inorganic-board-guide\scripts\check-links.mjs"
+  "skills\youyou-inorganic-board-guide\references\response-templates.md",
+  "skills\youyou-inorganic-board-guide\references\claim-safety-checklist.md",
+  "skills\youyou-inorganic-board-guide\references\sample-outputs.md",
+  "skills\youyou-inorganic-board-guide\scripts\check-links.mjs",
+  "skills\youyou-inorganic-board-guide\scripts\smoke-test.mjs"
 )
 
 $issues = @()
@@ -44,6 +49,12 @@ if (Test-Path $skillMd) {
   }
   if ($text -notmatch "First Response") {
     $issues += "SKILL.md does not include first-response guidance"
+  }
+  if ($text -notmatch "Service Modes") {
+    $issues += "SKILL.md does not include service modes"
+  }
+  if ($text -match "Create only the resource directories") {
+    $issues += "SKILL.md still contains template residue"
   }
 }
 
@@ -74,6 +85,8 @@ if ($issues.Count -gt 0) {
   $issues | ForEach-Object { Write-Host "[FAIL] $_" }
   throw "Verification failed with $($issues.Count) issue(s)."
 }
+
+node (Join-Path $skillDir "scripts\smoke-test.mjs")
 
 if ($CheckLinks) {
   node (Join-Path $skillDir "scripts\check-links.mjs")

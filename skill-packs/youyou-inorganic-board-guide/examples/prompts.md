@@ -19,3 +19,11 @@ Use $youyou-inorganic-board-guide to write a short WeChat message introducing Yo
 ```text
 Use $youyou-inorganic-board-guide to compare Youyou inorganic board with ordinary panels without making unsupported claims.
 ```
+
+```text
+Use $youyou-inorganic-board-guide as a showroom presenter. Give me a 90-second talk track and the best links to show in order.
+```
+
+```text
+Use $youyou-inorganic-board-guide to answer a customer asking about fire-resistant performance, but do not invent standards or test values.
+```

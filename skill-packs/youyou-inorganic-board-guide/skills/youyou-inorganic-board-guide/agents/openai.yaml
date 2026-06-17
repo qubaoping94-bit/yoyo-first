@@ -1,4 +1,4 @@
 interface:
   display_name: "优优无机板产品顾问"
-  short_description: "讲解优优无机板产品体系、客户话术和公开资料入口"
-  default_prompt: "Use $youyou-inorganic-board-guide to introduce Youyou inorganic board and recommend the right public website links for a customer or dealer."
+  short_description: "为客户和经销商讲解优优无机板、话术与公开资料入口"
+  default_prompt: "Use $youyou-inorganic-board-guide to act as a polished Youyou inorganic-board product consultant, answer the customer or dealer, and recommend the best public links."

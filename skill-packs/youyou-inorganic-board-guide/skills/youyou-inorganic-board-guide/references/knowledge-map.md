@@ -17,6 +17,17 @@ Use this file for product explanations, customer/dealer education, and safe clai
 - **优优无机复合家具板**: solid-wood composite `2 + 14 + 2` structure, total thickness 18 mm.
 - **门墙柜一体化无机空间**: the recommended strategic framing when customers ask why the product matters beyond a single board.
 
+## High-Level Mental Model
+
+Use this order when explaining the system:
+
+1. **材料源头**: inorganic/mineral material story and basalt-system framing.
+2. **核心基板**: Youyou inorganic board as the base material.
+3. **结构复合**: board surface, quiet core, wall panel, furniture-board structures.
+4. **成品矩阵**: board, door, wall panel, furniture board.
+5. **空间系统**: door-wall-cabinet integrated inorganic space.
+6. **客户资料入口**: public hub, gallery, product-evolution demos, moments copy.
+
 ## Material Story
 
 - Use stable material language: `玄武岩体系`, `高温熔融`, `拉丝成纤`, `材料稳定`, `复合增强潜力`.
@@ -44,6 +55,19 @@ Use these as broad scenario categories:
 - office projects
 - transportation or public spaces
 - dealer showroom and project presentation scenarios
+
+## Topic-To-Value Map
+
+| Customer concern | Safe value angle | Best first response |
+|---|---|---|
+| Environmental health | material cognition and inorganic-space upgrade | Explain the material path, then route to environmental demo pages. |
+| Humidity or waterproofing | damp-space confidence and dry/humid cycle stability | Route to waterproof/moisture and dry-humid cycle demos; avoid unsupported duration claims. |
+| Mildew and hygiene | damp environment and clean-space concerns | Route to antibacterial/mildew-proof demo; avoid exact rates unless report is provided. |
+| Fire-resistant topic | safer material selection discussion | Route to A-class noncombustible demo; require official reports for standards. |
+| Sound or quietness | door/wall comfort and hotel/office/residential needs | Route to sound-insulation demo; discuss scenario, not universal decibel claims. |
+| Durability | structure, composite products, long-term stability | Route to lifetime/performance demo; avoid fixed service-life claims. |
+| Price | specification, finish, quantity, and project conditions | Ask for application part and scenario; do not quote without project inputs. |
+| Construction | drawings, base condition, node design, and install plan | Treat public materials as early understanding; require project plan for delivery commitments. |
 
 ## Dealer Communication
 

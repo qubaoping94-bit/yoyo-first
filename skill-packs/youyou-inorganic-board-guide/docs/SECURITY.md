@@ -32,3 +32,7 @@ The skill should not invent:
 - antibacterial rates, waterproof durations, fire ratings, deformation rates, or percentages
 
 When the user needs final engineering or purchasing decisions, combine public materials with official reports, samples, drawings, quotations, and project requirements.
+
+## Evidence Handling
+
+Use the skill's `references/claim-safety-checklist.md` before answering technical questions. If the evidence is only a public demo page, give a high-level explanation and link the page. If exact values are needed, ask for official source material instead of guessing.

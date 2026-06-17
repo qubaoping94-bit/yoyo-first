@@ -7,6 +7,17 @@
 3. Recommend the website hub and product-evolution hub.
 4. Ask what scenario the customer cares about: home, hotel, commercial, education, healthcare, office, dealer showroom, or project delivery.
 
+## Six Service Modes
+
+Use the mode table in `SKILL.md` before answering:
+
+- `快速了解`: short product explanation and first links
+- `经销商转发`: WeChat-ready forwarding message
+- `专项答疑`: performance concern with evidence boundary
+- `选型顾问`: project part or scenario recommendation
+- `内容生成`:朋友圈, short video, or customer copy
+- `AI商业样本`: Youyou as an实体企业AI训练 and sales enablement sample
+
 ## Dealer Forwarding
 
 1. Keep the message short enough for WeChat.
@@ -36,3 +47,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1 -CheckL
 ```
 
 If one link fails, check whether it is a temporary CDN/router issue before changing skill content.
+
+## Skill Quality Maintenance
+
+Run the smoke test after any content edit:
+
+```powershell
+node .\skills\youyou-inorganic-board-guide\scripts\smoke-test.mjs
+```
+
+The smoke test should fail if template placeholders return, if required references are missing, or if the default prompt no longer mentions `$youyou-inorganic-board-guide`.

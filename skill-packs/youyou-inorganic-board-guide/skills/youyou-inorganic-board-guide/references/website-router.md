@@ -52,3 +52,12 @@ For a customer asking one specific objection:
 1. Send the matching topic page from the table.
 2. Add one sentence explaining why that page is relevant.
 3. Ask what scenario they are applying it to so the next link can be more precise.
+
+## Routing Rules
+
+- If the user is new, start with the website hub.
+- If the user asks for proof, start with the product-evolution hub or matching topic page.
+- If the user wants images, samples, or posters, send the AI gallery.
+- If the user wants content to forward or post, send the moments copy site.
+- If the user asks about AI-enabled business, send the industry sample.
+- If multiple links are relevant, send no more than three and explain the order.

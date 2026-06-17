@@ -28,6 +28,8 @@ Open a new Codex session after installing so the skill list refreshes.
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1
 ```
 
+This checks the package structure and runs the skill smoke test.
+
 To verify the installed copy as well:
 
 ```powershell
