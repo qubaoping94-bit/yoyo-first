@@ -32,6 +32,19 @@ Use the mode table in `SKILL.md` before answering:
 3. Use `references/website-router.md` to pick one relevant demo page.
 4. Avoid unsupported metrics; ask for official report or quotation context when needed.
 
+## OCR Image Pairing
+
+1. For product, performance, application, dealer, or customer-education questions, run:
+
+```powershell
+node .\skills\youyou-inorganic-board-guide\scripts\find-gallery-images.mjs "<customer question>" --limit 3
+```
+
+2. Choose images primarily by `图片文字命中`, not only by title, category, or visual style.
+3. Include the image title, why it matches, OCR hit terms, a short OCR excerpt, thumbnail URL, and high-resolution URL.
+4. If the chat surface supports Markdown images, use the returned Markdown thumbnail link.
+5. If the match is weak, say that this is the closest public gallery match and offer to refine by scenario.
+
 ## Public Link Maintenance
 
 Run:
@@ -57,3 +70,9 @@ node .\skills\youyou-inorganic-board-guide\scripts\smoke-test.mjs
 ```
 
 The smoke test should fail if template placeholders return, if required references are missing, or if the default prompt no longer mentions `$youyou-inorganic-board-guide`.
+
+For image-routing changes, also run:
+
+```powershell
+node .\skills\youyou-inorganic-board-guide\scripts\find-gallery-images.mjs "防潮 回南天 厨卫" --limit 2
+```

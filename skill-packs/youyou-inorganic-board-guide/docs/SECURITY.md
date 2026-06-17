@@ -6,7 +6,9 @@ This skill pack includes only:
 
 - concise public-facing Markdown guidance
 - public Youyou website links
+- public Youyou gallery links and OCR image-text routing guidance
 - a small link-check script
+- a gallery-image lookup script that reads public gallery/OCR data
 - install and verification scripts
 
 ## Excluded Material
@@ -19,6 +21,14 @@ Do not add:
 - unpublished internal logs or business-sensitive material
 - complete chat logs
 - large PDFs, images, videos, or source archives
+
+## Image Boundaries
+
+- Use only public URLs from `https://youyou-ai-gallery.pages.dev/`.
+- Use the public OCR index only to choose relevant images and summarize why they match.
+- Do not include local desktop image paths in user-facing answers.
+- Do not package private image folders, unpublished source archives, or raw design files.
+- Do not treat OCR text as an official technical report; it is a routing signal for choosing the most relevant visual material.
 
 ## Claim Boundaries
 

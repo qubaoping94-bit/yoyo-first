@@ -27,3 +27,7 @@ Use $youyou-inorganic-board-guide as a showroom presenter. Give me a 90-second t
 ```text
 Use $youyou-inorganic-board-guide to answer a customer asking about fire-resistant performance, but do not invent standards or test values.
 ```
+
+```text
+Use $youyou-inorganic-board-guide to answer a customer asking about 防潮 and 回南天. Include the right website link and 2 matching gallery images selected by image OCR text.
+```

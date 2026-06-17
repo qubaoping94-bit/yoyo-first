@@ -36,7 +36,7 @@ To verify the installed copy as well:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1 -CheckInstalled
 ```
 
-To check public links:
+To check public links and the public gallery OCR image router:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1 -CheckLinks

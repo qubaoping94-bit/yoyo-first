@@ -26,11 +26,13 @@ $required = @(
   "skills\youyou-inorganic-board-guide\references\knowledge-map.md",
   "skills\youyou-inorganic-board-guide\references\audience-playbooks.md",
   "skills\youyou-inorganic-board-guide\references\website-router.md",
+  "skills\youyou-inorganic-board-guide\references\image-router.md",
   "skills\youyou-inorganic-board-guide\references\faq-and-sales-scripts.md",
   "skills\youyou-inorganic-board-guide\references\response-templates.md",
   "skills\youyou-inorganic-board-guide\references\claim-safety-checklist.md",
   "skills\youyou-inorganic-board-guide\references\sample-outputs.md",
   "skills\youyou-inorganic-board-guide\scripts\check-links.mjs",
+  "skills\youyou-inorganic-board-guide\scripts\find-gallery-images.mjs",
   "skills\youyou-inorganic-board-guide\scripts\smoke-test.mjs"
 )
 
@@ -52,6 +54,9 @@ if (Test-Path $skillMd) {
   }
   if ($text -notmatch "Service Modes") {
     $issues += "SKILL.md does not include service modes"
+  }
+  if ($text -notmatch "OCR" -or $text -notmatch "image-router.md") {
+    $issues += "SKILL.md does not include OCR image matching guidance"
   }
   if ($text -match "Create only the resource directories") {
     $issues += "SKILL.md still contains template residue"
@@ -90,6 +95,8 @@ node (Join-Path $skillDir "scripts\smoke-test.mjs")
 
 if ($CheckLinks) {
   node (Join-Path $skillDir "scripts\check-links.mjs")
+  $galleryQuery = "$([char]0x9632)$([char]0x6f6e) $([char]0x56de)$([char]0x5357)$([char]0x5929) $([char]0x53a8)$([char]0x536b)"
+  node (Join-Path $skillDir "scripts\find-gallery-images.mjs") $galleryQuery --limit 2
 }
 
 Write-Host "Skill pack verification passed."

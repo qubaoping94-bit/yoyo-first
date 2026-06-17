@@ -16,6 +16,14 @@
 - Routes performance or topic-specific questions to product-evolution demo pages.
 - Routes WeChat or朋友圈 copy requests to the moments copy site.
 
+## OCR Gallery Image Matching
+
+- Adds 1-3 relevant images from the public Youyou AI gallery when the answer benefits from visuals.
+- Reads `gallery-ocr-data.js` and treats image text as the primary selection standard.
+- Uses image title, category, prompt, and notes only as secondary signals after OCR text.
+- Outputs thumbnail URL, high-resolution URL, OCR hit terms, and a short image-text excerpt.
+- Helps customers understand specific questions such as 防潮, 阻燃, 无机门, 静音, 经销商转发, and AI赋能 with matching visual material.
+
 ## FAQ And Dealer Scripts
 
 - Provides forwarding scripts for dealers.
@@ -32,3 +40,4 @@
 
 - `scripts/smoke-test.mjs` checks required files, prompt metadata, key guidance, public-link references, and template cleanup.
 - `scripts/check-links.mjs` fetches the public Youyou pages, verifies successful HTML responses, and checks key page text on primary entrypoints.
+- `scripts/find-gallery-images.mjs` fetches the public gallery data and OCR index, then verifies that a customer topic can return matched gallery images.
