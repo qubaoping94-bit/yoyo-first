@@ -1,0 +1,82 @@
+param(
+  [switch]$CheckInstalled,
+  [switch]$CheckLinks,
+  [string]$SkillsRoot = "$env:USERPROFILE\.codex\skills"
+)
+
+$ErrorActionPreference = "Stop"
+$packageRoot = Split-Path -Parent $PSScriptRoot
+$skillDir = Join-Path $packageRoot "skills\youyou-inorganic-board-guide"
+$required = @(
+  "README.md",
+  "THIRD_PARTY_NOTICES.md",
+  "docs\FEATURES.md",
+  "docs\INSTALLATION.md",
+  "docs\WORKFLOWS.md",
+  "docs\SECURITY.md",
+  "docs\GITHUB_UPLOAD.md",
+  "examples\prompts.md",
+  "manifest\skill-pack.json",
+  "manifest\companion-skills.json",
+  "scripts\install.ps1",
+  "scripts\install-companion-skills.ps1",
+  "scripts\verify.ps1",
+  "skills\youyou-inorganic-board-guide\SKILL.md",
+  "skills\youyou-inorganic-board-guide\agents\openai.yaml",
+  "skills\youyou-inorganic-board-guide\references\knowledge-map.md",
+  "skills\youyou-inorganic-board-guide\references\website-router.md",
+  "skills\youyou-inorganic-board-guide\references\faq-and-sales-scripts.md",
+  "skills\youyou-inorganic-board-guide\scripts\check-links.mjs"
+)
+
+$issues = @()
+foreach ($rel in $required) {
+  if (!(Test-Path (Join-Path $packageRoot $rel))) {
+    $issues += "Missing $rel"
+  }
+}
+
+$skillMd = Join-Path $skillDir "SKILL.md"
+if (Test-Path $skillMd) {
+  $text = Get-Content -Raw -Encoding UTF8 $skillMd
+  if ($text -notmatch "(?s)^---\s*.*name:\s*youyou-inorganic-board-guide.*description:\s*.+?---") {
+    $issues += "SKILL.md frontmatter is incomplete"
+  }
+  if ($text -notmatch "First Response") {
+    $issues += "SKILL.md does not include first-response guidance"
+  }
+}
+
+$openaiYaml = Join-Path $skillDir "agents\openai.yaml"
+if (Test-Path $openaiYaml) {
+  $yaml = Get-Content -Raw -Encoding UTF8 $openaiYaml
+  if ($yaml -notmatch "\$youyou-inorganic-board-guide") {
+    $issues += "agents/openai.yaml default_prompt must mention `$youyou-inorganic-board-guide"
+  }
+}
+
+$manifestPath = Join-Path $packageRoot "manifest\skill-pack.json"
+if (Test-Path $manifestPath) {
+  $manifest = Get-Content -Raw -Encoding UTF8 $manifestPath | ConvertFrom-Json
+  if ($manifest.name -ne "youyou-inorganic-board-guide") {
+    $issues += "Manifest name mismatch"
+  }
+}
+
+if ($CheckInstalled) {
+  $installed = Join-Path $SkillsRoot "youyou-inorganic-board-guide\SKILL.md"
+  if (!(Test-Path $installed)) {
+    $issues += "Installed skill not found at $installed"
+  }
+}
+
+if ($issues.Count -gt 0) {
+  $issues | ForEach-Object { Write-Host "[FAIL] $_" }
+  throw "Verification failed with $($issues.Count) issue(s)."
+}
+
+if ($CheckLinks) {
+  node (Join-Path $skillDir "scripts\check-links.mjs")
+}
+
+Write-Host "Skill pack verification passed."

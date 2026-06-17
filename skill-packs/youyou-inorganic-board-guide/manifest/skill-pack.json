@@ -1,0 +1,14 @@
+{
+  "name": "youyou-inorganic-board-guide",
+  "type": "single-skill-pack",
+  "version": "1.0.0",
+  "generatedAt": "2026-06-17",
+  "repository": "https://github.com/qubaoping94-bit/yoyo-first",
+  "skills": [
+    {
+      "name": "youyou-inorganic-board-guide",
+      "path": "skills/youyou-inorganic-board-guide",
+      "description": "Customer/dealer product consultant guide for Youyou inorganic board and public website routing."
+    }
+  ]
+}
