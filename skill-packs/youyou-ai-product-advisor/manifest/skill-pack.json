@@ -1,0 +1,27 @@
+{
+  "name": "youyou-ai-product-advisor",
+  "displayName": "优优 AI 产品顾问",
+  "description": "优优无机板客户问答与经销商话术顾问 Skill",
+  "generatedAt": "2026-06-23T07:48:56.211Z",
+  "sourceProject": "D:\\桌面应用软件下载库\\OneDrive\\Desktop\\two",
+  "advisorVersion": "2026-06-23-android-webview-chat-fix-v1",
+  "entryCount": 45,
+  "routeCount": 1607,
+  "skillPath": "skills/youyou-ai-product-advisor",
+  "install": [
+    "install.bat",
+    "scripts/install.ps1"
+  ],
+  "verify": "scripts/verify.ps1",
+  "urls": {
+    "advisor": "https://youyou-ai-product-advisor.pages.dev/",
+    "wechat": "https://youyou-ai-product-advisor.pages.dev/wechat/",
+    "android": "https://youyou-ai-product-advisor.pages.dev/android",
+    "gallery": "https://youyou-ai-gallery.pages.dev/",
+    "sites": "https://youyou-sites-list.pages.dev/",
+    "qr": "https://youyou-ai-product-advisor.pages.dev/api/channel-qr.svg?dealer=skill&target=wechat",
+    "card": "https://youyou-ai-product-advisor.pages.dev/api/channel-card.svg?dealer=skill&target=wechat",
+    "equality": "https://youyou-ai-gallery.pages.dev/product-evolution/youyou-five-equality-demo/",
+    "panorama": "https://youyou-ai-gallery.pages.dev/product-evolution/youyou-functional-panorama-summary-demo/"
+  }
+}

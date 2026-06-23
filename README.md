@@ -19,6 +19,7 @@
 | `customer-acquisition-pipeline` | 抖音获客流水线组合 skill：公开线索抓取、飞书客户库、冷邮件草稿 | [skill-packs/customer-acquisition-pipeline](skill-packs/customer-acquisition-pipeline) |
 | `youyou-demo-page-delivery-pipeline` | 优优无机板演示系统页面从参考图到生成、接入、部署、审计和记忆收尾的完整交付流水线 | [skill-packs/youyou-demo-page-delivery-pipeline](skill-packs/youyou-demo-page-delivery-pipeline) |
 | `youyou-inorganic-board-guide` | 优优无机板产品顾问 skill：面向客户/经销商讲解产品体系、话术和公开资料入口 | [skill-packs/youyou-inorganic-board-guide](skill-packs/youyou-inorganic-board-guide) |
+| `youyou-ai-product-advisor` | 优优 AI 产品顾问 skill：安装后可直接按标准文库回答客户问题、匹配语义问法、生成经销商话术 | [skill-packs/youyou-ai-product-advisor](skill-packs/youyou-ai-product-advisor) |
 
 ## 通用安装方式
 

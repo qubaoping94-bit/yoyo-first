@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="优优 AI 产品顾问">
+  <rect width="512" height="512" rx="96" fill="#0F7A4F"/>
+  <circle cx="132" cy="132" r="42" fill="#DDF6E8"/>
+  <path d="M166 332c42-116 78-174 122-174 45 0 76 59 106 174h-58c-8-29-17-53-28-73h-89c-11 21-21 45-30 73h-23Zm75-123h45c-9-13-17-20-26-20-8 0-15 7-19 20Z" fill="#FFFFFF"/>
+  <path d="M119 379h274" stroke="#DDF6E8" stroke-width="32" stroke-linecap="round"/>
+</svg>

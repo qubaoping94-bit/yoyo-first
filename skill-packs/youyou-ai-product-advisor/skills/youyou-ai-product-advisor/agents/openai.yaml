@@ -1,0 +1,9 @@
+interface:
+  display_name: "优优 AI 产品顾问"
+  short_description: "优优无机板客户问答与经销商话术顾问"
+  icon_small: "./assets/youyou-skill-icon.svg"
+  icon_large: "./assets/youyou-skill-icon.svg"
+  brand_color: "#0F7A4F"
+  default_prompt: "Use $youyou-ai-product-advisor to answer a customer question about 优优无机板."
+policy:
+  allow_implicit_invocation: true
