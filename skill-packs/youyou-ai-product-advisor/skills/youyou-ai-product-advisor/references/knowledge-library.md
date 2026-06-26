@@ -1,6 +1,6 @@
 # 优优 AI 产品顾问标准文库
 
-版本：2026-06-23-android-webview-chat-fix-v1
+版本：2026-06-25-semantic-library-routing-v1
 条目数：45
 说明：这是客户可见回答口径整理版，用于 Skill 检索和回答，不包含密钥、后台配置或内部日志。
 
