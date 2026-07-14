@@ -1,0 +1,5 @@
+interface:
+  display_name: "Mike Cover Flow"
+  short_description: "Build smooth integrated Cover Flow galleries"
+  default_prompt: "Use $mike-cover-flow to build a production-ready Cover Flow gallery following the accepted interaction and visual standards."
+

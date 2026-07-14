@@ -1,0 +1,12 @@
+{
+  "name": "mike-cover-flow",
+  "version": "1.0.0",
+  "type": "single-skill-pack",
+  "skill": {
+    "name": "mike-cover-flow",
+    "path": "skills/mike-cover-flow",
+    "purpose": "Builds production-ready immersive Cover Flow galleries using Mike's accepted interaction and visual standards."
+  },
+  "installScript": "scripts/install.ps1",
+  "verifyScript": "scripts/verify.ps1"
+}
