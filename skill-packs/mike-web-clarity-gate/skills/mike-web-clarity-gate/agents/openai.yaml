@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mike 网站清晰度门禁"
+  short_description: "在建站与验收中约束单行标题、消除 AI 模板感并协调页面布局"
+  default_prompt: "Use $mike-web-clarity-gate to design or audit this website for concise single-line headings, natural visual hierarchy, and coordinated layout."

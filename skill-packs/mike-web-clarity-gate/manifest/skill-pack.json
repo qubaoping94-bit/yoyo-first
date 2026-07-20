@@ -1,0 +1,12 @@
+{
+  "name": "mike-web-clarity-gate",
+  "version": "1.0.0",
+  "type": "single-skill-pack",
+  "skill": {
+    "name": "mike-web-clarity-gate",
+    "path": "skills/mike-web-clarity-gate",
+    "purpose": "Designs and audits mature websites for concise single-line headings, non-AI visual language, and coordinated responsive layouts."
+  },
+  "installScript": "scripts/install.ps1",
+  "verifyScript": "scripts/verify.ps1"
+}

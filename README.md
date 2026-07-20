@@ -21,6 +21,7 @@
 | `youyou-inorganic-board-guide` | 优优无机板产品顾问 skill：面向客户/经销商讲解产品体系、话术和公开资料入口 | [skill-packs/youyou-inorganic-board-guide](skill-packs/youyou-inorganic-board-guide) |
 | `youyou-ai-product-advisor` | 优优 AI 产品顾问 skill：安装后可直接按标准文库回答客户问题、匹配语义问法、生成经销商话术 | [skill-packs/youyou-ai-product-advisor](skill-packs/youyou-ai-product-advisor) |
 | `mike-cover-flow` | 按 Mike 实机验收标准构建顺滑、完整显示并与网站无缝融合的 Cover Flow 图片流 | [skill-packs/mike-cover-flow](skill-packs/mike-cover-flow) |
+| `mike-web-clarity-gate` | 在网站制作与验收中约束单行标题、消除 AI 模板感并检查页面布局协调性 | [skill-packs/mike-web-clarity-gate](skill-packs/mike-web-clarity-gate) |
 
 ## 通用安装方式
 
