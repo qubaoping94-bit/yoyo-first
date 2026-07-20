@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mike 网站全流程制作"
+  short_description: "编排产品设计、Figma、视觉系统、动效、验收和发布全流程"
+  default_prompt: "Use $mike-website-production-pipeline to plan, design, build, animate, audit, and prepare this website for release."

@@ -1,0 +1,12 @@
+{
+  "name": "mike-website-production-pipeline",
+  "version": "1.0.0",
+  "type": "single-skill-pack",
+  "skill": {
+    "name": "mike-website-production-pipeline",
+    "path": "skills/mike-website-production-pipeline",
+    "purpose": "Orchestrates complete website product definition, visual direction, implementation, motion, QA, approval, deployment, and rollback."
+  },
+  "installScript": "scripts/install.ps1",
+  "verifyScript": "scripts/verify.ps1"
+}
