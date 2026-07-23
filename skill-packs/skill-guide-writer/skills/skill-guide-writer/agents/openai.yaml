@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill 使用说明生成器"
+  short_description: "全面审计任意 Skill 并生成可直接使用的中文 Markdown 指南"
+  default_prompt: "Use $skill-guide-writer to audit a skill and create a complete Chinese Markdown guide with the simplest copyable invocation on the first screen."

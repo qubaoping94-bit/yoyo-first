@@ -1,0 +1,16 @@
+{
+  "name": "skill-guide-writer-pack",
+  "version": "1.0.0",
+  "type": "single-skill-pack",
+  "skill": {
+    "name": "skill-guide-writer",
+    "path": "skills/skill-guide-writer",
+    "purpose": "Audits AI skills and creates evidence-based Markdown usage guides with a copyable first-screen invocation."
+  },
+  "runtime": {
+    "python": ">=3.9",
+    "network": "optional; required only for current official-source verification"
+  },
+  "installScript": "scripts/install.ps1",
+  "verifyScript": "scripts/verify.ps1"
+}
