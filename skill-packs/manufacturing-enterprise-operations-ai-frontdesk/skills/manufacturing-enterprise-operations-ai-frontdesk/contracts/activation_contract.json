@@ -1,0 +1,115 @@
+{
+  "contract_version": "1.2.0",
+  "enterprise_profile_schema_version": "A-MFG-PROFILE-1.1.0",
+  "profile_file": "企业启用档案.json",
+  "runtime_mode_rule": "mode由render唯一计算：不完整或未授权确认=SETUP；完整DEMO=DEMO；完整FORMAL且授权确认=LIVE",
+  "purpose": "由AI从管理员上传资料生成企业启用预览；管理员不要手改JSON",
+  "minimum_required": {
+    "enterprise": [
+      "enterprise.name",
+      "enterprise.business_type",
+      "enterprise.timezone",
+      "enterprise.currency"
+    ],
+    "products": [
+      "products_and_units[].product_id",
+      "products_and_units[].name",
+      "products_and_units[].specification",
+      "products_and_units[].unit",
+      "products_and_units[].price_policy"
+    ],
+    "people": [
+      "employees_roles_permissions[].account_id",
+      "employees_roles_permissions[].display_name",
+      "employees_roles_permissions[].role",
+      "employees_roles_permissions[].permissions"
+    ],
+    "operations": [
+      "numbering_rules.order",
+      "numbering_rules.production",
+      "enabled_workflows",
+      "external_interfaces"
+    ],
+    "evidence": [
+      "source_evidence[].sha256",
+      "source_evidence[].source",
+      "source_evidence[].extracted_at"
+    ]
+  },
+  "conditional_required": {
+    "订单": [
+      "customers_projects[]"
+    ],
+    "采购": [
+      "suppliers_warehouses_logistics.suppliers[]"
+    ],
+    "仓储": [
+      "suppliers_warehouses_logistics.warehouses[]"
+    ],
+    "交付": [
+      "suppliers_warehouses_logistics.logistics[]"
+    ]
+  },
+  "optional": [
+    "customers_projects[]",
+    "suppliers_warehouses_logistics",
+    "enabled_workflows之外未启用流程的主档"
+  ],
+  "field_sources": [
+    "系统生成",
+    "已确认主档或历史快照自动带出",
+    "附件或OCR识别后确认",
+    "当前登录且有权限的人员点击确认",
+    "系统计算"
+  ],
+  "setup_flow": [
+    "AI抽取并去重",
+    "列出缺项与冲突",
+    "生成一张启用预览",
+    "管理员一次确认"
+  ],
+  "preview_fields": [
+    "enterprise",
+    "products_and_units",
+    "employees_roles_permissions",
+    "customers_projects",
+    "suppliers_warehouses_logistics",
+    "numbering_rules",
+    "enabled_workflows",
+    "external_interfaces",
+    "missing_fields",
+    "conflicts",
+    "profile_version"
+  ],
+  "confirmation": {
+    "object_path": "confirmation",
+    "status_required": "CONFIRMED",
+    "account_path": "confirmation.confirmed_by_account_id",
+    "permission_required": "企业启用确认",
+    "snapshot_paths": [
+      "confirmation.display_name_snapshot",
+      "confirmation.role_snapshot",
+      "confirmation.confirmed_at",
+      "confirmation.source_profile_version",
+      "confirmation.source_sha256"
+    ],
+    "single_confirmation": true,
+    "before_confirmation_formal_write_count": 0
+  },
+  "versioning": {
+    "append_new_version": true,
+    "never_rewrite_historical_records": true,
+    "idempotency_key_fields": [
+      "enterprise.name",
+      "profile_version",
+      "confirmation.source_sha256"
+    ]
+  },
+  "responses": {
+    "missing": "SETUP_BLOCKED：列出缺项，正式写入0",
+    "conflict": "SETUP_BLOCKED：并列冲突来源，请管理员选择，正式写入0",
+    "unauthorized": "PERMISSION_DENIED：当前账号无企业启用确认权限，正式写入0",
+    "cancel": "SETUP_CANCELLED：不保存预览为正式档案，正式写入0",
+    "rollback": "ROLLBACK_READY：恢复上一已确认版本与导入前副本，不回写历史"
+  }
+}

@@ -1,0 +1,7940 @@
+[
+  {
+    "workflow_id": "AWF01",
+    "intent": "新增客户",
+    "access_mode": "WRITE",
+    "target_note": "01｜客户与商机/01-01｜模板｜新增客户.txt",
+    "title_format": "新增客户｜CUSTOMER编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "客户名称",
+      "客户类型",
+      "联系人电话"
+    ],
+    "auto_fields": [
+      "CUSTOMER编号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "客户名称",
+      "客户类型",
+      "联系人电话"
+    ],
+    "permission_confirm_fields": [
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得凭空补客户信用或付款能力"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "名片或客户书面资料",
+      "本次客户描述",
+      "本次名片或客户确认资料",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "无同名客户或税号冲突"
+    ],
+    "on_confirm_create": [
+      "客户主档"
+    ],
+    "on_confirm_update": [
+      "建立首次跟进待办"
+    ],
+    "idempotency_key": "CUSTOMER编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "建立首次跟进待办",
+    "record_schema": [
+      {
+        "field": "CUSTOMER编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "CUSTOMER-A-DEMO-001"
+      },
+      {
+        "field": "客户名称",
+        "source": "名片或客户书面资料",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "DEMO晨曦工程客户"
+      },
+      {
+        "field": "客户类型",
+        "source": "本次客户描述",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "装饰公司"
+      },
+      {
+        "field": "联系人电话",
+        "source": "本次名片或客户确认资料",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "陈工 138****1024"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示销售专员周敏"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-01 10:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-01 10:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "无同名客户或税号冲突"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "建立首次跟进待办"
+      }
+    ],
+    "summary_fields": [
+      "CUSTOMER编号",
+      "客户名称",
+      "客户类型",
+      "联系人电话",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤"
+    ],
+    "employee_field_count": 3
+  },
+  {
+    "workflow_id": "AWF02",
+    "intent": "新增商机",
+    "access_mode": "WRITE",
+    "target_note": "01｜客户与商机/01-02｜模板｜新增商机.txt",
+    "title_format": "新增商机｜OPP编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "项目名称",
+      "预计门数",
+      "预计成交日"
+    ],
+    "auto_fields": [
+      "OPP编号",
+      "客户编号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "项目名称",
+      "预计门数",
+      "预计成交日"
+    ],
+    "permission_confirm_fields": [
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得把询价自动算作成交"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "09-08客户主档唯一匹配",
+      "本次线索描述",
+      "本次需求沟通",
+      "客户沟通确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "客户已唯一匹配"
+    ],
+    "on_confirm_create": [
+      "商机事件"
+    ],
+    "on_confirm_update": [
+      "建立首次跟进待办"
+    ],
+    "idempotency_key": "OPP编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "建立首次跟进待办",
+    "record_schema": [
+      {
+        "field": "OPP编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "OPP-A-DEMO-001"
+      },
+      {
+        "field": "客户编号",
+        "source": "09-08客户主档唯一匹配",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "CUSTOMER-A-DEMO-001"
+      },
+      {
+        "field": "项目名称",
+        "source": "本次线索描述",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "DEMO云栖项目产品项目"
+      },
+      {
+        "field": "预计门数",
+        "source": "本次需求沟通",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "32件"
+      },
+      {
+        "field": "预计成交日",
+        "source": "客户沟通确认",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-09-20"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示销售专员周敏"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-02 10:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-02 10:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "客户已唯一匹配"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "建立首次跟进待办"
+      }
+    ],
+    "summary_fields": [
+      "OPP编号",
+      "客户编号",
+      "项目名称",
+      "预计门数",
+      "预计成交日",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 3
+  },
+  {
+    "workflow_id": "AWF03",
+    "intent": "客户跟进",
+    "access_mode": "WRITE",
+    "target_note": "01｜客户与商机/01-03｜模板｜客户跟进.txt",
+    "title_format": "客户跟进｜FOLLOW编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "沟通事实",
+      "客户反馈",
+      "下次动作时间"
+    ],
+    "auto_fields": [
+      "FOLLOW编号",
+      "商机编号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "沟通事实",
+      "客户反馈",
+      "下次动作时间"
+    ],
+    "permission_confirm_fields": [
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得代替客户承诺成交"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已确认商机快照",
+      "本次电话或拜访记录",
+      "本次沟通原话摘要",
+      "本次跟进确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "商机未关闭"
+    ],
+    "on_confirm_create": [
+      "客户跟进事件"
+    ],
+    "on_confirm_update": [
+      "更新商机阶段并建立下次跟进"
+    ],
+    "idempotency_key": "FOLLOW编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "更新商机阶段并建立下次跟进",
+    "record_schema": [
+      {
+        "field": "FOLLOW编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "FOLLOW-A-DEMO-001"
+      },
+      {
+        "field": "商机编号",
+        "source": "已确认商机快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "OPP-A-DEMO-001"
+      },
+      {
+        "field": "沟通事实",
+        "source": "本次电话或拜访记录",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "客户确认8月12日现场测量"
+      },
+      {
+        "field": "客户反馈",
+        "source": "本次沟通原话摘要",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "关注静音性能和交期"
+      },
+      {
+        "field": "下次动作时间",
+        "source": "本次跟进确认",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-08-12 09:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示销售专员周敏"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-03 10:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-03 10:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "商机未关闭"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "更新商机阶段并建立下次跟进"
+      }
+    ],
+    "summary_fields": [
+      "FOLLOW编号",
+      "商机编号",
+      "沟通事实",
+      "客户反馈",
+      "下次动作时间",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 3
+  },
+  {
+    "workflow_id": "AWF04",
+    "intent": "商机成交或失单复盘",
+    "access_mode": "WRITE",
+    "target_note": "01｜客户与商机/01-04｜模板｜商机成交或失单复盘.txt",
+    "title_format": "商机成交或失单复盘｜OPPREVIEW编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "成交或失单原因",
+      "复盘结论"
+    ],
+    "auto_fields": [
+      "OPPREVIEW编号",
+      "商机编号",
+      "转订单编号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "成交或失单原因"
+    ],
+    "permission_confirm_fields": [
+      "复盘结论",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得无订单或客户依据判成交失单"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已确认商机与跟进快照",
+      "本次有权限销售确认",
+      "订单关联或客户书面反馈",
+      "已确认订单；未成交时不适用",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "存在明确成交订单或失单依据"
+    ],
+    "on_confirm_create": [
+      "商机复盘事件"
+    ],
+    "on_confirm_update": [
+      "成交转订单；失单建立改进行动"
+    ],
+    "idempotency_key": "OPPREVIEW编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "成交转订单；失单建立改进行动",
+    "record_schema": [
+      {
+        "field": "OPPREVIEW编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "OPPREVIEW-A-DEMO-001"
+      },
+      {
+        "field": "商机编号",
+        "source": "已确认商机与跟进快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "OPP-A-DEMO-001"
+      },
+      {
+        "field": "复盘结论",
+        "source": "本次有权限销售确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "成交，转方案报价"
+      },
+      {
+        "field": "成交或失单原因",
+        "source": "订单关联或客户书面反馈",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "方案匹配且交期可接受"
+      },
+      {
+        "field": "转订单编号",
+        "source": "已确认订单；未成交时不适用",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "ORDER-A-DEMO-001"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示销售专员周敏"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-16 16:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-16 16:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "存在明确成交订单或失单依据"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "成交转订单；失单建立改进行动"
+      }
+    ],
+    "summary_fields": [
+      "OPPREVIEW编号",
+      "商机编号",
+      "复盘结论",
+      "成交或失单原因",
+      "转订单编号",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 2
+  },
+  {
+    "workflow_id": "AWF05",
+    "intent": "新建现场测量任务",
+    "access_mode": "WRITE",
+    "target_note": "02｜测量、方案与报价/02-01｜模板｜新建现场测量任务.txt",
+    "title_format": "新建现场测量任务｜MEASURETASK编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "预约时间",
+      "测量人员"
+    ],
+    "auto_fields": [
+      "MEASURETASK编号",
+      "客户项目",
+      "测量地址",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "预约时间"
+    ],
+    "permission_confirm_fields": [
+      "测量人员",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得把预约当成已测量"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已确认客户与商机快照",
+      "09-09项目送货点当前有效版本",
+      "客户本次确认",
+      "09-07员工权限与排班",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "客户和地址唯一"
+    ],
+    "on_confirm_create": [
+      "测量任务事件"
+    ],
+    "on_confirm_update": [
+      "建立测量待办"
+    ],
+    "idempotency_key": "MEASURETASK编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "建立测量待办",
+    "record_schema": [
+      {
+        "field": "MEASURETASK编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "MEASURETASK-A-DEMO-001"
+      },
+      {
+        "field": "客户项目",
+        "source": "已确认客户与商机快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "DEMO晨曦工程客户／DEMO云栖项目"
+      },
+      {
+        "field": "测量地址",
+        "source": "09-09项目送货点当前有效版本",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "上海市浦东新区云台路88号"
+      },
+      {
+        "field": "预约时间",
+        "source": "客户本次确认",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-08-12 09:00"
+      },
+      {
+        "field": "测量人员",
+        "source": "09-07员工权限与排班",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示测量员李师傅"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示测量工程师李工"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-11 15:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-11 15:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "客户和地址唯一"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "建立测量待办"
+      }
+    ],
+    "summary_fields": [
+      "MEASURETASK编号",
+      "客户项目",
+      "测量地址",
+      "预约时间",
+      "测量人员",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 2
+  },
+  {
+    "workflow_id": "AWF06",
+    "intent": "填写现场测量结果",
+    "access_mode": "WRITE",
+    "target_note": "02｜测量、方案与报价/02-02｜模板｜填写现场测量结果.txt",
+    "title_format": "填写现场测量结果｜MEASURE编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "需求项号",
+      "需求项尺寸",
+      "现场条件"
+    ],
+    "auto_fields": [
+      "MEASURE编号",
+      "测量任务号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "需求项号",
+      "需求项尺寸",
+      "现场条件"
+    ],
+    "permission_confirm_fields": [
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得猜测未测尺寸"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已确认测量任务快照",
+      "本次测量表/OCR",
+      "本次照片与测量说明",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "任务已派发且实际测量完成"
+    ],
+    "on_confirm_create": [
+      "测量结果事件"
+    ],
+    "on_confirm_update": [
+      "生成需求项清单并转方案"
+    ],
+    "idempotency_key": "MEASURE编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "生成需求项清单并转方案",
+    "record_schema": [
+      {
+        "field": "MEASURE编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "MEASURE-A-DEMO-001"
+      },
+      {
+        "field": "测量任务号",
+        "source": "已确认测量任务快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "MEASURETASK-A-DEMO-001"
+      },
+      {
+        "field": "需求项号",
+        "source": "本次测量表/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "OPENING-01"
+      },
+      {
+        "field": "需求项尺寸",
+        "source": "本次测量表/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "高2100×宽900×墙厚240mm"
+      },
+      {
+        "field": "现场条件",
+        "source": "本次照片与测量说明",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "左开，地面已完成"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示测量工程师李工"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-12 12:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-12 12:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "任务已派发且实际测量完成"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "生成需求项清单并转方案"
+      }
+    ],
+    "summary_fields": [
+      "MEASURE编号",
+      "测量任务号",
+      "需求项号",
+      "需求项尺寸",
+      "现场条件",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 3
+  },
+  {
+    "workflow_id": "AWF07",
+    "intent": "确认需求项与产品清单",
+    "access_mode": "WRITE",
+    "target_note": "02｜测量、方案与报价/02-03｜模板｜确认需求项与产品清单.txt",
+    "title_format": "确认需求项与产品清单｜OPENINGLIST编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "清单确认结论"
+    ],
+    "auto_fields": [
+      "OPENINGLIST编号",
+      "测量结果号",
+      "需求项产品行",
+      "开启方向",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [
+      "清单确认结论",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得用后来主档覆盖测量快照"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已确认测量结果快照",
+      "测量结果+09-10门型主档",
+      "测量结果快照",
+      "技术人员点击确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "全部需求项尺寸有来源"
+    ],
+    "on_confirm_create": [
+      "需求项产品清单事件"
+    ],
+    "on_confirm_update": [
+      "转图纸或方案确认"
+    ],
+    "idempotency_key": "OPENINGLIST编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "转图纸或方案确认",
+    "record_schema": [
+      {
+        "field": "OPENINGLIST编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "OPENINGLIST-A-DEMO-001"
+      },
+      {
+        "field": "测量结果号",
+        "source": "已确认测量结果快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "MEASURE-A-DEMO-001"
+      },
+      {
+        "field": "需求项产品行",
+        "source": "测量结果+09-10门型主档",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "OPENING-01／DEMO标准产品A／1件"
+      },
+      {
+        "field": "开启方向",
+        "source": "测量结果快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "左开"
+      },
+      {
+        "field": "清单确认结论",
+        "source": "技术人员点击确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "32个需求项与产品已核对"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示测量工程师李工"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-13 10:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-13 10:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "全部需求项尺寸有来源"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "转图纸或方案确认"
+      }
+    ],
+    "summary_fields": [
+      "OPENINGLIST编号",
+      "测量结果号",
+      "需求项产品行",
+      "开启方向",
+      "清单确认结论",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF08",
+    "intent": "确认方案或图纸",
+    "access_mode": "WRITE",
+    "target_note": "02｜测量、方案与报价/02-04｜模板｜确认方案或图纸.txt",
+    "title_format": "确认方案或图纸｜DRAWING编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "图纸版本",
+      "客户确认凭证",
+      "确认范围"
+    ],
+    "auto_fields": [
+      "DRAWING编号",
+      "需求项清单号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "图纸版本",
+      "客户确认凭证",
+      "确认范围"
+    ],
+    "permission_confirm_fields": [
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得用未签图纸放行生产"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已确认需求项产品清单",
+      "本次图纸文件/OCR",
+      "客户签字回传文件",
+      "本次确认说明",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "需求项清单完整且图纸版本唯一"
+    ],
+    "on_confirm_create": [
+      "方案图纸确认事件"
+    ],
+    "on_confirm_update": [
+      "允许报价并冻结图纸版本"
+    ],
+    "idempotency_key": "DRAWING编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "允许报价并冻结图纸版本",
+    "record_schema": [
+      {
+        "field": "DRAWING编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "DRAWING-A-DEMO-001"
+      },
+      {
+        "field": "需求项清单号",
+        "source": "已确认需求项产品清单",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "OPENINGLIST-A-DEMO-001"
+      },
+      {
+        "field": "图纸版本",
+        "source": "本次图纸文件/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "DRAWING-A-DEMO-001"
+      },
+      {
+        "field": "客户确认凭证",
+        "source": "客户签字回传文件",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "DEMO云栖项目图纸V2确认.pdf"
+      },
+      {
+        "field": "确认范围",
+        "source": "本次确认说明",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "32件门型、颜色、开启方向"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示测量工程师李工"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-14 15:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-14 15:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "需求项清单完整且图纸版本唯一"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "允许报价并冻结图纸版本"
+      }
+    ],
+    "summary_fields": [
+      "DRAWING编号",
+      "需求项清单号",
+      "图纸版本",
+      "客户确认凭证",
+      "确认范围",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 3
+  },
+  {
+    "workflow_id": "AWF09",
+    "intent": "新增报价",
+    "access_mode": "WRITE",
+    "target_note": "02｜测量、方案与报价/02-05｜模板｜新增报价.txt",
+    "title_format": "新增报价｜QUOTE编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "折扣",
+      "运费"
+    ],
+    "auto_fields": [
+      "QUOTE编号",
+      "图纸版本",
+      "报价明细",
+      "税费",
+      "报价总额",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "折扣",
+      "运费"
+    ],
+    "permission_confirm_fields": [
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得从到账事件生成价格"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已确认方案图纸快照",
+      "图纸清单+09-10产品价格规则",
+      "本次报价申请",
+      "税率规则+不含税金额",
+      "本次交付约定",
+      "明细×折扣+税费+运费",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "税率规则+不含税金额",
+      "明细×折扣+税费+运费"
+    ],
+    "state_prerequisites": [
+      "图纸已确认且价格版本有效"
+    ],
+    "on_confirm_create": [
+      "报价事件"
+    ],
+    "on_confirm_update": [
+      "发起折扣审批或合同评审"
+    ],
+    "idempotency_key": "QUOTE编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "发起折扣审批或合同评审",
+    "record_schema": [
+      {
+        "field": "QUOTE编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "QUOTE-A-DEMO-001"
+      },
+      {
+        "field": "图纸版本",
+        "source": "已确认方案图纸快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "DRAWING-A-DEMO-001"
+      },
+      {
+        "field": "报价明细",
+        "source": "图纸清单+09-10产品价格规则",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "DEMO标准产品A32件×2800元"
+      },
+      {
+        "field": "折扣",
+        "source": "本次报价申请",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "95%"
+      },
+      {
+        "field": "税费",
+        "source": "税率规则+不含税金额",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "税基85120元×13%=11065.60元"
+      },
+      {
+        "field": "运费",
+        "source": "本次交付约定",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "1800元"
+      },
+      {
+        "field": "报价总额",
+        "source": "明细×折扣+税费+运费",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "97985.60元"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示销售专员周敏"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-15 10:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-15 10:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "图纸已确认且价格版本有效"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "发起折扣审批或合同评审"
+      }
+    ],
+    "summary_fields": [
+      "QUOTE编号",
+      "图纸版本",
+      "报价明细",
+      "折扣",
+      "税费",
+      "运费",
+      "报价总额",
+      "实际操作人"
+    ],
+    "employee_field_count": 2
+  },
+  {
+    "workflow_id": "AWF10",
+    "intent": "特价或折扣审批",
+    "access_mode": "WRITE",
+    "target_note": "02｜测量、方案与报价/02-06｜模板｜特价或折扣审批.txt",
+    "title_format": "特价或折扣审批｜DISCOUNT编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "申请总价",
+      "审批结论"
+    ],
+    "auto_fields": [
+      "DISCOUNT编号",
+      "报价编号",
+      "标准总价",
+      "价格偏差",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "申请总价"
+    ],
+    "permission_confirm_fields": [
+      "审批结论",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得由申请人自动批准"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已确认报价快照",
+      "报价快照标准价",
+      "本次申请",
+      "申请总价-标准总价",
+      "本动作业务事实，由具备相应权限的人员确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "申请总价-标准总价"
+    ],
+    "state_prerequisites": [
+      "报价有效且审批人在授权额度内"
+    ],
+    "on_confirm_create": [
+      "折扣审批事件"
+    ],
+    "on_confirm_update": [
+      "批准后回写报价审批状态"
+    ],
+    "idempotency_key": "DISCOUNT编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "批准后回写报价审批状态",
+    "record_schema": [
+      {
+        "field": "DISCOUNT编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "DISCOUNT-A-DEMO-001"
+      },
+      {
+        "field": "报价编号",
+        "source": "已确认报价快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "QUOTE-A-DEMO-001"
+      },
+      {
+        "field": "标准总价",
+        "source": "报价快照标准价",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "89600元"
+      },
+      {
+        "field": "申请总价",
+        "source": "本次申请",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "85120元"
+      },
+      {
+        "field": "价格偏差",
+        "source": "申请总价-标准总价",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "-4480元"
+      },
+      {
+        "field": "审批结论",
+        "source": "本动作业务事实，由具备相应权限的人员确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "同意95折，有效至8月31日"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示销售专员周敏"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-15 16:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-15 16:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "报价有效且审批人在授权额度内"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "批准后回写报价审批状态"
+      }
+    ],
+    "summary_fields": [
+      "DISCOUNT编号",
+      "报价编号",
+      "标准总价",
+      "申请总价",
+      "价格偏差",
+      "审批结论",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 2
+  },
+  {
+    "workflow_id": "AWF11",
+    "intent": "合同评审",
+    "access_mode": "WRITE",
+    "target_note": "03｜合同、订单与回款/03-01｜模板｜合同评审.txt",
+    "title_format": "合同评审｜CONTRACTREVIEW编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "付款条件",
+      "风险事项"
+    ],
+    "auto_fields": [
+      "CONTRACTREVIEW编号",
+      "报价编号",
+      "交付范围",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "付款条件"
+    ],
+    "permission_confirm_fields": [
+      "风险事项",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得将草案当生效合同"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已批准报价快照",
+      "报价与图纸快照",
+      "合同草案/OCR",
+      "评审人员确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "报价已批准且合同草案齐全"
+    ],
+    "on_confirm_create": [
+      "合同评审事件"
+    ],
+    "on_confirm_update": [
+      "通过后允许签订合同"
+    ],
+    "idempotency_key": "CONTRACTREVIEW编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "通过后允许签订合同",
+    "record_schema": [
+      {
+        "field": "CONTRACTREVIEW编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "CONTRACTREVIEW-A-DEMO-001"
+      },
+      {
+        "field": "报价编号",
+        "source": "已批准报价快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "QUOTE-A-DEMO-001"
+      },
+      {
+        "field": "交付范围",
+        "source": "报价与图纸快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "32件静音门含安装"
+      },
+      {
+        "field": "付款条件",
+        "source": "合同草案/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "定金40%，发货前50%，验收后10%"
+      },
+      {
+        "field": "风险事项",
+        "source": "评审人员确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "工期45天，电梯保护由客户负责"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示销售专员周敏"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-16 10:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-16 10:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "报价已批准且合同草案齐全"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "通过后允许签订合同"
+      }
+    ],
+    "summary_fields": [
+      "CONTRACTREVIEW编号",
+      "报价编号",
+      "交付范围",
+      "付款条件",
+      "风险事项",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 2
+  },
+  {
+    "workflow_id": "AWF12",
+    "intent": "新增合同",
+    "access_mode": "WRITE",
+    "target_note": "03｜合同、订单与回款/03-02｜模板｜新增合同.txt",
+    "title_format": "新增合同｜CONTRACT编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "合同来源编号",
+      "合同金额",
+      "签署日期",
+      "合同附件"
+    ],
+    "auto_fields": [
+      "CONTRACT编号",
+      "评审编号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "合同来源编号",
+      "合同金额",
+      "签署日期",
+      "合同附件"
+    ],
+    "permission_confirm_fields": [
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得把未签草案保存为生效合同"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "本次合同文件/OCR",
+      "已通过合同评审快照",
+      "签署合同/OCR",
+      "本次上传",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "合同评审通过且双方签署"
+    ],
+    "on_confirm_create": [
+      "合同事件"
+    ],
+    "on_confirm_update": [
+      "建立收款与下单待办"
+    ],
+    "idempotency_key": "CONTRACT编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "建立收款与下单待办",
+    "record_schema": [
+      {
+        "field": "CONTRACT编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "CONTRACT-A-DEMO-001"
+      },
+      {
+        "field": "合同来源编号",
+        "source": "本次合同文件/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "HT-2026-0817-01"
+      },
+      {
+        "field": "评审编号",
+        "source": "已通过合同评审快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "CONTRACTREVIEW-A-DEMO-001"
+      },
+      {
+        "field": "合同金额",
+        "source": "签署合同/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "97985.60元"
+      },
+      {
+        "field": "签署日期",
+        "source": "签署合同/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-08-17"
+      },
+      {
+        "field": "合同附件",
+        "source": "本次上传",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "DEMO云栖项目产品合同.pdf"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示销售专员周敏"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-17 10:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-17 10:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "合同评审通过且双方签署"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "建立收款与下单待办"
+      }
+    ],
+    "summary_fields": [
+      "CONTRACT编号",
+      "合同来源编号",
+      "评审编号",
+      "合同金额",
+      "签署日期",
+      "合同附件",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 4
+  },
+  {
+    "workflow_id": "AWF13",
+    "intent": "新增订单",
+    "access_mode": "WRITE",
+    "target_note": "03｜合同、订单与回款/03-03｜模板｜新增订单.txt",
+    "title_format": "新增订单｜ORDER编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "订单日期"
+    ],
+    "auto_fields": [
+      "ORDER编号",
+      "合同编号",
+      "客户项目地址快照",
+      "产品行快照",
+      "折扣与税基快照",
+      "税费与运费快照",
+      "订单数量",
+      "订单总额",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "订单日期"
+    ],
+    "permission_confirm_fields": [
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得让主档后改覆盖订单快照"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已生效合同快照",
+      "合同+09-08/09-09当前资料冻结",
+      "已确认报价与图纸快照",
+      "已确认报价快照",
+      "合同产品行",
+      "已生效合同金额 + 已确认报价行/折扣/税费/运费冻结快照：85120+11065.60+1800",
+      "本次采购单或下单描述",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "合同生效且产品图纸版本已冻结"
+    ],
+    "on_confirm_create": [
+      "订单事件"
+    ],
+    "on_confirm_update": [
+      "建立收款、拆单和交期待办"
+    ],
+    "idempotency_key": "ORDER编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "建立收款、拆单和交期待办",
+    "record_schema": [
+      {
+        "field": "ORDER编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "ORDER-A-DEMO-001"
+      },
+      {
+        "field": "合同编号",
+        "source": "已生效合同快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "CONTRACT-A-DEMO-001"
+      },
+      {
+        "field": "客户项目地址快照",
+        "source": "合同+09-08/09-09当前资料冻结",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "DEMO晨曦工程客户／DEMO云栖项目／云台路88号"
+      },
+      {
+        "field": "产品行快照",
+        "source": "已确认报价与图纸快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "DEMO标准产品A32件×2800元=标准价89600元"
+      },
+      {
+        "field": "折扣与税基快照",
+        "source": "已确认报价快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "95折；不含税税基85120元"
+      },
+      {
+        "field": "税费与运费快照",
+        "source": "已确认报价快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "13%税11065.60元；运费1800元"
+      },
+      {
+        "field": "订单数量",
+        "source": "合同产品行",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "32件"
+      },
+      {
+        "field": "订单总额",
+        "source": "已生效合同金额 + 已确认报价行/折扣/税费/运费冻结快照：85120+11065.60+1800",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "97985.60元"
+      },
+      {
+        "field": "订单日期",
+        "source": "本次采购单或下单描述",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-08-17"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示销售专员周敏"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-17 11:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-17 11:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "合同生效且产品图纸版本已冻结"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "建立收款、拆单和交期待办"
+      }
+    ],
+    "summary_fields": [
+      "ORDER编号",
+      "合同编号",
+      "客户项目地址快照",
+      "产品行快照",
+      "折扣与税基快照",
+      "税费与运费快照",
+      "订单数量",
+      "订单总额"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF14",
+    "intent": "登记付款凭证",
+    "access_mode": "WRITE",
+    "target_note": "03｜合同、订单与回款/03-04｜模板｜新增收款.txt",
+    "title_format": "登记付款凭证｜PAYPROOF编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "凭证号",
+      "付款方",
+      "凭证金额",
+      "付款日期"
+    ],
+    "auto_fields": [
+      "PAYPROOF编号",
+      "订单编号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "凭证号",
+      "付款方",
+      "凭证金额",
+      "付款日期"
+    ],
+    "permission_confirm_fields": [
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "凭证登记不得自动改已收"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已确认订单快照唯一关联",
+      "本次银行回单/OCR",
+      "订单客户候选+凭证/OCR",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "订单唯一且凭证未重复"
+    ],
+    "on_confirm_create": [
+      "付款凭证事件"
+    ],
+    "on_confirm_update": [
+      "建立财务到账核验待办"
+    ],
+    "idempotency_key": "PAYPROOF编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "建立财务到账核验待办",
+    "record_schema": [
+      {
+        "field": "PAYPROOF编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "PAYPROOF-A-DEMO-001"
+      },
+      {
+        "field": "订单编号",
+        "source": "已确认订单快照唯一关联",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "ORDER-A-DEMO-001"
+      },
+      {
+        "field": "凭证号",
+        "source": "本次银行回单/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "PAYPROOF-A-DEMO-001"
+      },
+      {
+        "field": "付款方",
+        "source": "订单客户候选+凭证/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "DEMO晨曦工程客户"
+      },
+      {
+        "field": "凭证金额",
+        "source": "本次银行回单/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "39194.24元"
+      },
+      {
+        "field": "付款日期",
+        "source": "本次银行回单/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-08-18"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示财务会计陈洁"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-18 09:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-18 09:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "订单唯一且凭证未重复"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "建立财务到账核验待办"
+      }
+    ],
+    "summary_fields": [
+      "PAYPROOF编号",
+      "订单编号",
+      "凭证号",
+      "付款方",
+      "凭证金额",
+      "付款日期",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 4
+  },
+  {
+    "workflow_id": "AWF15",
+    "intent": "确认实际到账",
+    "access_mode": "WRITE",
+    "target_note": "03｜合同、订单与回款/03-04A｜模板｜确认实际到账.txt",
+    "title_format": "确认实际到账｜RECEIPT编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "实际到账金额",
+      "到账时间"
+    ],
+    "auto_fields": [
+      "RECEIPT编号",
+      "订单编号",
+      "凭证号",
+      "累计已收",
+      "未收",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [
+      "实际到账金额",
+      "到账时间",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得由凭证金额直接推定到账"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "付款凭证关联的订单快照",
+      "待核验付款凭证",
+      "银行流水由财务核验",
+      "已确认到账事件累计",
+      "订单总额-累计已收",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "已确认到账事件累计",
+      "订单总额-累计已收"
+    ],
+    "state_prerequisites": [
+      "凭证未核验且财务有权限"
+    ],
+    "on_confirm_create": [
+      "实际到账事件"
+    ],
+    "on_confirm_update": [
+      "更新订单应收卡"
+    ],
+    "idempotency_key": "RECEIPT编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "更新订单应收卡",
+    "record_schema": [
+      {
+        "field": "RECEIPT编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "RECEIPT-A-DEMO-001"
+      },
+      {
+        "field": "订单编号",
+        "source": "付款凭证关联的订单快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "ORDER-A-DEMO-001"
+      },
+      {
+        "field": "凭证号",
+        "source": "待核验付款凭证",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "PAYPROOF-A-DEMO-001"
+      },
+      {
+        "field": "实际到账金额",
+        "source": "银行流水由财务核验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "39194.24元"
+      },
+      {
+        "field": "到账时间",
+        "source": "银行流水由财务核验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "2026-08-18 10:20:00 Asia/Shanghai"
+      },
+      {
+        "field": "累计已收",
+        "source": "已确认到账事件累计",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "39194.24元"
+      },
+      {
+        "field": "未收",
+        "source": "订单总额-累计已收",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "58791.36元"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示财务会计陈洁"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-18 10:20:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-18 10:25:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "凭证未核验且财务有权限"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "更新订单应收卡"
+      }
+    ],
+    "summary_fields": [
+      "RECEIPT编号",
+      "订单编号",
+      "凭证号",
+      "实际到账金额",
+      "到账时间",
+      "累计已收",
+      "未收",
+      "实际操作人"
+    ],
+    "employee_field_count": 2
+  },
+  {
+    "workflow_id": "AWF16",
+    "intent": "新增应收催款",
+    "access_mode": "WRITE",
+    "target_note": "03｜合同、订单与回款/03-05｜模板｜新增应收催款.txt",
+    "title_format": "新增应收催款｜COLLECT编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "催款日期"
+    ],
+    "auto_fields": [
+      "COLLECT编号",
+      "订单编号",
+      "应收金额",
+      "已收金额",
+      "本期应催",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "催款日期"
+    ],
+    "permission_confirm_fields": [
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得在到账未核验时减少欠款"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "订单与到账快照",
+      "订单付款节点",
+      "已确认到账事件",
+      "应收-已收",
+      "本次计划",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "应收-已收"
+    ],
+    "state_prerequisites": [
+      "付款节点已到且存在未收"
+    ],
+    "on_confirm_create": [
+      "催款事件"
+    ],
+    "on_confirm_update": [
+      "建立催款待办"
+    ],
+    "idempotency_key": "COLLECT编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "建立催款待办",
+    "record_schema": [
+      {
+        "field": "COLLECT编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "COLLECT-A-DEMO-001"
+      },
+      {
+        "field": "订单编号",
+        "source": "订单与到账快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "ORDER-A-DEMO-001"
+      },
+      {
+        "field": "应收金额",
+        "source": "订单付款节点",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "48992.80元"
+      },
+      {
+        "field": "已收金额",
+        "source": "已确认到账事件",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "39194.24元"
+      },
+      {
+        "field": "本期应催",
+        "source": "应收-已收",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "9798.56元"
+      },
+      {
+        "field": "催款日期",
+        "source": "本次计划",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-08-20"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示销售专员周敏"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-20 09:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-20 09:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "付款节点已到且存在未收"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "建立催款待办"
+      }
+    ],
+    "summary_fields": [
+      "COLLECT编号",
+      "订单编号",
+      "应收金额",
+      "已收金额",
+      "本期应催",
+      "催款日期",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF17",
+    "intent": "订单变更或取消",
+    "access_mode": "WRITE",
+    "target_note": "03｜合同、订单与回款/03-06｜模板｜订单变更或取消.txt",
+    "title_format": "订单变更或取消｜ORDERCHANGE编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "变更后数量",
+      "变更原因",
+      "批准结论"
+    ],
+    "auto_fields": [
+      "ORDERCHANGE编号",
+      "订单编号",
+      "变更前数量",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "变更后数量",
+      "变更原因"
+    ],
+    "permission_confirm_fields": [
+      "批准结论",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得覆盖原订单版本"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "变更前订单历史快照",
+      "订单快照",
+      "客户书面变更/OCR",
+      "客户书面申请",
+      "有权限订单负责人点击确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "未进入不可逆生产或已完成授权评估"
+    ],
+    "on_confirm_create": [
+      "订单变更取消事件"
+    ],
+    "on_confirm_update": [
+      "生成新订单版本并重开拆单"
+    ],
+    "idempotency_key": "ORDERCHANGE编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "生成新订单版本并重开拆单",
+    "record_schema": [
+      {
+        "field": "ORDERCHANGE编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "ORDERCHANGE-A-DEMO-002"
+      },
+      {
+        "field": "订单编号",
+        "source": "变更前订单历史快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "ORDER-A-DEMO-002"
+      },
+      {
+        "field": "变更前数量",
+        "source": "订单快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "20件"
+      },
+      {
+        "field": "变更后数量",
+        "source": "客户书面变更/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "18件"
+      },
+      {
+        "field": "变更原因",
+        "source": "客户书面申请",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "两处需求项取消"
+      },
+      {
+        "field": "批准结论",
+        "source": "有权限订单负责人点击确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "批准变更，重算BOM和交期"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示销售专员周敏"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-12 14:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-12 14:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "未进入不可逆生产或已完成授权评估"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "生成新订单版本并重开拆单"
+      }
+    ],
+    "summary_fields": [
+      "ORDERCHANGE编号",
+      "订单编号",
+      "变更前数量",
+      "变更后数量",
+      "变更原因",
+      "批准结论",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 3
+  },
+  {
+    "workflow_id": "AWF18",
+    "intent": "订单技术拆单",
+    "access_mode": "WRITE",
+    "target_note": "04｜拆单、采购与排产/04-01｜模板｜订单技术拆单.txt",
+    "title_format": "订单技术拆单｜SPLIT编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "部件配套件五金清单"
+    ],
+    "auto_fields": [
+      "SPLIT编号",
+      "订单编号",
+      "图纸版本",
+      "拆单版本",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [
+      "部件配套件五金清单",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得用当前产品主档改写订单图纸"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已确认订单与图纸快照",
+      "订单冻结图纸快照",
+      "上一有效版本+1",
+      "图纸+BOM规则计算后技术确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "订单技术资料齐全"
+    ],
+    "on_confirm_create": [
+      "技术拆单事件"
+    ],
+    "on_confirm_update": [
+      "生成BOM版本并转齐套检查"
+    ],
+    "idempotency_key": "SPLIT编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "生成BOM版本并转齐套检查",
+    "record_schema": [
+      {
+        "field": "SPLIT编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "SPLIT-A-DEMO-001"
+      },
+      {
+        "field": "订单编号",
+        "source": "已确认订单与图纸快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "ORDER-A-DEMO-001"
+      },
+      {
+        "field": "图纸版本",
+        "source": "订单冻结图纸快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "DRAWING-A-DEMO-001"
+      },
+      {
+        "field": "拆单版本",
+        "source": "上一有效版本+1",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "SPLIT-A-DEMO-001"
+      },
+      {
+        "field": "部件配套件五金清单",
+        "source": "图纸+BOM规则计算后技术确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "部件32套、配套件32套、配件32套"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示生产主管王强"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-18 14:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-18 14:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "订单技术资料齐全"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "生成BOM版本并转齐套检查"
+      }
+    ],
+    "summary_fields": [
+      "SPLIT编号",
+      "订单编号",
+      "图纸版本",
+      "拆单版本",
+      "部件配套件五金清单",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF19",
+    "intent": "物料齐套检查",
+    "access_mode": "WRITE",
+    "target_note": "04｜拆单、采购与排产/04-02｜模板｜物料齐套检查.txt",
+    "title_format": "物料齐套检查｜KITCHECK编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "可用库存"
+    ],
+    "auto_fields": [
+      "KITCHECK编号",
+      "拆单版本",
+      "BOM版本",
+      "需求物料",
+      "缺料数量",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [
+      "可用库存",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "ERP未连接不得虚构库存"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已确认技术拆单快照",
+      "09-12 BOM主档与拆单确认",
+      "BOM×订单数量",
+      "ERP未连接时人工库存凭证",
+      "需求-可用-已锁",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "BOM×订单数量",
+      "需求-可用-已锁"
+    ],
+    "state_prerequisites": [
+      "拆单与BOM已确认"
+    ],
+    "on_confirm_create": [
+      "齐套检查事件"
+    ],
+    "on_confirm_update": [
+      "缺料转采购申请；齐套转排产"
+    ],
+    "idempotency_key": "KITCHECK编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "缺料转采购申请；齐套转排产",
+    "record_schema": [
+      {
+        "field": "KITCHECK编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "KITCHECK-A-DEMO-001"
+      },
+      {
+        "field": "拆单版本",
+        "source": "已确认技术拆单快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "SPLIT-A-DEMO-001"
+      },
+      {
+        "field": "BOM版本",
+        "source": "09-12 BOM主档与拆单确认",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "BOM-STATIC-A-V3"
+      },
+      {
+        "field": "需求物料",
+        "source": "BOM×订单数量",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "门芯32件、饰面64张、配件32套"
+      },
+      {
+        "field": "可用库存",
+        "source": "ERP未连接时人工库存凭证",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "门芯32件、饰面50张、配件32套"
+      },
+      {
+        "field": "缺料数量",
+        "source": "需求-可用-已锁",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "饰面14张"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示采购专员赵宁"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-18 16:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-18 16:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "拆单与BOM已确认"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "缺料转采购申请；齐套转排产"
+      }
+    ],
+    "summary_fields": [
+      "KITCHECK编号",
+      "拆单版本",
+      "BOM版本",
+      "需求物料",
+      "可用库存",
+      "缺料数量",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF20",
+    "intent": "新增缺料或采购申请",
+    "access_mode": "WRITE",
+    "target_note": "04｜拆单、采购与排产/04-03｜模板｜新增缺料或采购申请.txt",
+    "title_format": "新增缺料或采购申请｜PURCHREQ编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "批准人"
+    ],
+    "auto_fields": [
+      "PURCHREQ编号",
+      "订单编号",
+      "缺料明细",
+      "要求到货日",
+      "申请原因",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [
+      "批准人",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得把计划库存当真实库存"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "齐套检查快照",
+      "已确认齐套检查",
+      "排产需求反推",
+      "缺料事件",
+      "本动作业务事实，由具备相应权限的人员确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "排产需求反推"
+    ],
+    "state_prerequisites": [
+      "存在真实缺料且未重复申请"
+    ],
+    "on_confirm_create": [
+      "采购申请事件"
+    ],
+    "on_confirm_update": [
+      "建立采购订单待办"
+    ],
+    "idempotency_key": "PURCHREQ编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "建立采购订单待办",
+    "record_schema": [
+      {
+        "field": "PURCHREQ编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "PURCHREQ-A-DEMO-001"
+      },
+      {
+        "field": "订单编号",
+        "source": "齐套检查快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "ORDER-A-DEMO-001"
+      },
+      {
+        "field": "缺料明细",
+        "source": "已确认齐套检查",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "DEMO原材料A14张"
+      },
+      {
+        "field": "要求到货日",
+        "source": "排产需求反推",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "2026-08-18"
+      },
+      {
+        "field": "申请原因",
+        "source": "缺料事件",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "库存不足影响8月20日开工"
+      },
+      {
+        "field": "批准人",
+        "source": "本动作业务事实，由具备相应权限的人员确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示采购经理"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示采购专员赵宁"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-18 17:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-18 17:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "存在真实缺料且未重复申请"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "建立采购订单待办"
+      }
+    ],
+    "summary_fields": [
+      "PURCHREQ编号",
+      "订单编号",
+      "缺料明细",
+      "要求到货日",
+      "申请原因",
+      "批准人",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF21",
+    "intent": "新增采购订单",
+    "access_mode": "WRITE",
+    "target_note": "04｜拆单、采购与排产/04-04｜模板｜新增采购订单.txt",
+    "title_format": "新增采购订单｜PO编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "采购单价",
+      "承诺到货日"
+    ],
+    "auto_fields": [
+      "PO编号",
+      "采购申请号",
+      "供应商",
+      "物料数量",
+      "采购总额",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "采购单价",
+      "承诺到货日"
+    ],
+    "permission_confirm_fields": [
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得自动批准超预算采购"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已批准采购申请",
+      "09-13供应商主档有效版本",
+      "采购申请快照",
+      "有效供应商报价/OCR",
+      "数量×单价+税费+运费",
+      "供应商确认单/OCR",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "数量×单价+税费+运费"
+    ],
+    "state_prerequisites": [
+      "采购申请已批准且供应商有效"
+    ],
+    "on_confirm_create": [
+      "采购订单事件"
+    ],
+    "on_confirm_update": [
+      "建立到货与来料检验待办"
+    ],
+    "idempotency_key": "PO编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "建立到货与来料检验待办",
+    "record_schema": [
+      {
+        "field": "PO编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "PO-A-DEMO-001"
+      },
+      {
+        "field": "采购申请号",
+        "source": "已批准采购申请",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "PURCHREQ-A-DEMO-001"
+      },
+      {
+        "field": "供应商",
+        "source": "09-13供应商主档有效版本",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "DEMO原材料供应商"
+      },
+      {
+        "field": "物料数量",
+        "source": "采购申请快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "DEMO原材料A14张"
+      },
+      {
+        "field": "采购单价",
+        "source": "有效供应商报价/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "180元/张"
+      },
+      {
+        "field": "采购总额",
+        "source": "数量×单价+税费+运费",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "2670元"
+      },
+      {
+        "field": "承诺到货日",
+        "source": "供应商确认单/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-08-18"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示采购专员赵宁"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-18 18:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-18 18:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "采购申请已批准且供应商有效"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "建立到货与来料检验待办"
+      }
+    ],
+    "summary_fields": [
+      "PO编号",
+      "采购申请号",
+      "供应商",
+      "物料数量",
+      "采购单价",
+      "采购总额",
+      "承诺到货日",
+      "实际操作人"
+    ],
+    "employee_field_count": 2
+  },
+  {
+    "workflow_id": "AWF22",
+    "intent": "物料到货与来料检验",
+    "access_mode": "WRITE",
+    "target_note": "04｜拆单、采购与排产/04-05｜模板｜物料到货与来料检验.txt",
+    "title_format": "物料到货与来料检验｜IQC编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "到货数量",
+      "检验数据",
+      "实收数量",
+      "检验结论"
+    ],
+    "auto_fields": [
+      "IQC编号",
+      "采购单号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "到货数量",
+      "检验数据"
+    ],
+    "permission_confirm_fields": [
+      "实收数量",
+      "检验结论",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得由送货单自动判合格"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已确认采购订单快照",
+      "本次送货单/OCR",
+      "仓库点收确认",
+      "本次检验记录",
+      "有权限质检员点击确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "采购单有效且实物已到"
+    ],
+    "on_confirm_create": [
+      "到货检验事件"
+    ],
+    "on_confirm_update": [
+      "合格入库并更新齐套；不合格隔离"
+    ],
+    "idempotency_key": "IQC编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "合格入库并更新齐套；不合格隔离",
+    "record_schema": [
+      {
+        "field": "IQC编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "IQC-A-DEMO-001"
+      },
+      {
+        "field": "采购单号",
+        "source": "已确认采购订单快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "PO-A-DEMO-001"
+      },
+      {
+        "field": "到货数量",
+        "source": "本次送货单/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "14张"
+      },
+      {
+        "field": "实收数量",
+        "source": "仓库点收确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "14张"
+      },
+      {
+        "field": "检验数据",
+        "source": "本次检验记录",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "含水率9%，表面无破损"
+      },
+      {
+        "field": "检验结论",
+        "source": "有权限质检员点击确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "14张合格"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示采购专员赵宁"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-19 10:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-19 10:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "采购单有效且实物已到"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "合格入库并更新齐套；不合格隔离"
+      }
+    ],
+    "summary_fields": [
+      "IQC编号",
+      "采购单号",
+      "到货数量",
+      "实收数量",
+      "检验数据",
+      "检验结论",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 4
+  },
+  {
+    "workflow_id": "AWF23",
+    "intent": "新增排产计划",
+    "access_mode": "WRITE",
+    "target_note": "04｜拆单、采购与排产/04-06｜模板｜新增排产计划.txt",
+    "title_format": "新增排产计划｜SCHEDULE编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "排产批准人"
+    ],
+    "auto_fields": [
+      "SCHEDULE编号",
+      "订单编号",
+      "可开工数量",
+      "计划开工",
+      "计划完工",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [
+      "排产批准人",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "缺关键物料不得强行排为可开工"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "订单与拆单快照",
+      "齐套检查+已确认库存",
+      "产能排班与交期倒排",
+      "工艺工时与产能计算",
+      "本动作业务事实，由具备相应权限的人员确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "齐套检查+已确认库存",
+      "产能排班与交期倒排",
+      "工艺工时与产能计算"
+    ],
+    "state_prerequisites": [
+      "BOM确认且关键物料齐套"
+    ],
+    "on_confirm_create": [
+      "排产事件"
+    ],
+    "on_confirm_update": [
+      "建立生产批次与工序待办"
+    ],
+    "idempotency_key": "SCHEDULE编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "建立生产批次与工序待办",
+    "record_schema": [
+      {
+        "field": "SCHEDULE编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "SCHEDULE-A-DEMO-001"
+      },
+      {
+        "field": "订单编号",
+        "source": "订单与拆单快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "ORDER-A-DEMO-001"
+      },
+      {
+        "field": "可开工数量",
+        "source": "齐套检查+已确认库存",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "32件"
+      },
+      {
+        "field": "计划开工",
+        "source": "产能排班与交期倒排",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "2026-08-20"
+      },
+      {
+        "field": "计划完工",
+        "source": "工艺工时与产能计算",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "2026-09-05"
+      },
+      {
+        "field": "排产批准人",
+        "source": "本动作业务事实，由具备相应权限的人员确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示生产经理"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示生产主管王强"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-19 15:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-19 15:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "BOM确认且关键物料齐套"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "建立生产批次与工序待办"
+      }
+    ],
+    "summary_fields": [
+      "SCHEDULE编号",
+      "订单编号",
+      "可开工数量",
+      "计划开工",
+      "计划完工",
+      "排产批准人",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF24",
+    "intent": "插单延期或交期协调",
+    "access_mode": "WRITE",
+    "target_note": "04｜拆单、采购与排产/04-07｜模板｜插单、延期或交期协调.txt",
+    "title_format": "插单延期或交期协调｜DELAYS编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "协调结论"
+    ],
+    "auto_fields": [
+      "DELAYS编号",
+      "订单编号",
+      "原承诺交期",
+      "预计新交期",
+      "延期原因",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [
+      "协调结论",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得凭计划自动改合同交期"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "排产与订单承诺快照",
+      "订单快照",
+      "缺料和产能事实计算",
+      "已确认缺料/异常事件",
+      "本动作业务事实，由具备相应权限的人员确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "缺料和产能事实计算"
+    ],
+    "state_prerequisites": [
+      "存在真实产能或物料影响"
+    ],
+    "on_confirm_create": [
+      "交期协调事件"
+    ],
+    "on_confirm_update": [
+      "更新风险卡和客户沟通待办"
+    ],
+    "idempotency_key": "DELAYS编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "更新风险卡和客户沟通待办",
+    "record_schema": [
+      {
+        "field": "DELAYS编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "DELAYS-A-DEMO-002"
+      },
+      {
+        "field": "订单编号",
+        "source": "排产与订单承诺快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "ORDER-A-DEMO-002"
+      },
+      {
+        "field": "原承诺交期",
+        "source": "订单快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "2026-09-10"
+      },
+      {
+        "field": "预计新交期",
+        "source": "缺料和产能事实计算",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "2026-09-15"
+      },
+      {
+        "field": "延期原因",
+        "source": "已确认缺料/异常事件",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "进口五金晚到5天"
+      },
+      {
+        "field": "协调结论",
+        "source": "本动作业务事实，由具备相应权限的人员确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "客户接受分批交付"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示生产主管王强"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-20 15:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-20 15:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "存在真实产能或物料影响"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "更新风险卡和客户沟通待办"
+      }
+    ],
+    "summary_fields": [
+      "DELAYS编号",
+      "订单编号",
+      "原承诺交期",
+      "预计新交期",
+      "延期原因",
+      "协调结论",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF25",
+    "intent": "生产开工",
+    "access_mode": "WRITE",
+    "target_note": "05｜生产、质检与入库/05-01｜模板｜生产开工.txt",
+    "title_format": "生产开工｜START编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "实际开工时间",
+      "开工数量"
+    ],
+    "auto_fields": [
+      "START编号",
+      "生产批次号",
+      "订单编号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [
+      "实际开工时间",
+      "开工数量",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "排产不等于实际开工"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "排产计划按09-18规则生成",
+      "排产快照",
+      "车间有权限人员点击确认",
+      "领料与批次确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "排产放行且物料齐套"
+    ],
+    "on_confirm_create": [
+      "生产开工事件"
+    ],
+    "on_confirm_update": [
+      "更新生产状态并建立工序任务"
+    ],
+    "idempotency_key": "START编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "更新生产状态并建立工序任务",
+    "record_schema": [
+      {
+        "field": "START编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "START-A-DEMO-001"
+      },
+      {
+        "field": "生产批次号",
+        "source": "排产计划按09-18规则生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "BATCH-A-DEMO-001"
+      },
+      {
+        "field": "订单编号",
+        "source": "排产快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "ORDER-A-DEMO-001"
+      },
+      {
+        "field": "实际开工时间",
+        "source": "车间有权限人员点击确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "2026-08-20 08:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "开工数量",
+        "source": "领料与批次确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "32件"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示生产主管王强"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-20 08:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-20 08:10:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "排产放行且物料齐套"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "更新生产状态并建立工序任务"
+      }
+    ],
+    "summary_fields": [
+      "START编号",
+      "生产批次号",
+      "订单编号",
+      "实际开工时间",
+      "开工数量",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 2
+  },
+  {
+    "workflow_id": "AWF26",
+    "intent": "工序进度更新",
+    "access_mode": "WRITE",
+    "target_note": "05｜生产、质检与入库/05-02｜模板｜工序进度更新.txt",
+    "title_format": "工序进度更新｜PROCESS编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "本次完成数量"
+    ],
+    "auto_fields": [
+      "PROCESS编号",
+      "生产批次号",
+      "工序",
+      "累计完成",
+      "未完成",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [
+      "本次完成数量",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得跨工序报完成"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已开工批次快照",
+      "09-14工艺路线当前节点",
+      "工序报工单/OCR后确认",
+      "已确认同工序事件累计",
+      "开工数量-累计完成",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "已确认同工序事件累计",
+      "开工数量-累计完成"
+    ],
+    "state_prerequisites": [
+      "前序工序已放行"
+    ],
+    "on_confirm_create": [
+      "工序进度事件"
+    ],
+    "on_confirm_update": [
+      "更新批次进度与下一工序待办"
+    ],
+    "idempotency_key": "PROCESS编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "更新批次进度与下一工序待办",
+    "record_schema": [
+      {
+        "field": "PROCESS编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "PROCESS-A-DEMO-001"
+      },
+      {
+        "field": "生产批次号",
+        "source": "已开工批次快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "BATCH-A-DEMO-001"
+      },
+      {
+        "field": "工序",
+        "source": "09-14工艺路线当前节点",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "部件组装"
+      },
+      {
+        "field": "本次完成数量",
+        "source": "工序报工单/OCR后确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "20件"
+      },
+      {
+        "field": "累计完成",
+        "source": "已确认同工序事件累计",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "20件"
+      },
+      {
+        "field": "未完成",
+        "source": "开工数量-累计完成",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "12件"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示生产主管王强"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-25 17:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-25 17:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "前序工序已放行"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "更新批次进度与下一工序待办"
+      }
+    ],
+    "summary_fields": [
+      "PROCESS编号",
+      "生产批次号",
+      "工序",
+      "本次完成数量",
+      "累计完成",
+      "未完成",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF27",
+    "intent": "生产异常",
+    "access_mode": "WRITE",
+    "target_note": "05｜生产、质检与入库/05-03｜模板｜生产异常.txt",
+    "title_format": "生产异常｜PRODISSUE编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "异常类型",
+      "影响数量",
+      "停线范围",
+      "临时措施"
+    ],
+    "auto_fields": [
+      "PRODISSUE编号",
+      "生产批次号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "异常类型",
+      "影响数量"
+    ],
+    "permission_confirm_fields": [
+      "停线范围",
+      "临时措施",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得自动认定供应商责任"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已开工批次快照",
+      "本次现场描述/照片",
+      "本次点检",
+      "生产负责人确认",
+      "本次处置确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "批次与工序唯一"
+    ],
+    "on_confirm_create": [
+      "生产异常事件"
+    ],
+    "on_confirm_update": [
+      "建立质量复核和交期风险待办"
+    ],
+    "idempotency_key": "PRODISSUE编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "建立质量复核和交期风险待办",
+    "record_schema": [
+      {
+        "field": "PRODISSUE编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "PRODISSUE-A-DEMO-002"
+      },
+      {
+        "field": "生产批次号",
+        "source": "已开工批次快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "BATCH-A-DEMO-002"
+      },
+      {
+        "field": "异常类型",
+        "source": "本次现场描述/照片",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "饰面色差"
+      },
+      {
+        "field": "影响数量",
+        "source": "本次点检",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "4件"
+      },
+      {
+        "field": "停线范围",
+        "source": "生产负责人确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "暂停4件饰面工序"
+      },
+      {
+        "field": "临时措施",
+        "source": "本次处置确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "隔离并复核同批饰面"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示生产主管王强"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-26 11:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-26 11:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "批次与工序唯一"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "建立质量复核和交期风险待办"
+      }
+    ],
+    "summary_fields": [
+      "PRODISSUE编号",
+      "生产批次号",
+      "异常类型",
+      "影响数量",
+      "停线范围",
+      "临时措施",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 4
+  },
+  {
+    "workflow_id": "AWF28",
+    "intent": "质量检验",
+    "access_mode": "WRITE",
+    "target_note": "05｜生产、质检与入库/05-04｜模板｜质量检验.txt",
+    "title_format": "质量检验｜QC编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "检验数量",
+      "检验结论"
+    ],
+    "auto_fields": [
+      "QC编号",
+      "生产批次号",
+      "合格数量",
+      "不合格数量",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "检验数量"
+    ],
+    "permission_confirm_fields": [
+      "检验结论",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "生产完成不等于质检合格"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已完成生产批次快照",
+      "本次检验清单/OCR",
+      "检验数据统计",
+      "检验数量-合格数量",
+      "本动作业务事实，由具备相应权限的人员确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "检验数据统计",
+      "检验数量-合格数量"
+    ],
+    "state_prerequisites": [
+      "工序完成且检验标准有效"
+    ],
+    "on_confirm_create": [
+      "成品质检事件"
+    ],
+    "on_confirm_update": [
+      "合格转入库；不合格转返工"
+    ],
+    "idempotency_key": "QC编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "合格转入库；不合格转返工",
+    "record_schema": [
+      {
+        "field": "QC编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "QC-A-DEMO-001"
+      },
+      {
+        "field": "生产批次号",
+        "source": "已完成生产批次快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "BATCH-A-DEMO-001"
+      },
+      {
+        "field": "检验数量",
+        "source": "本次检验清单/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "32件"
+      },
+      {
+        "field": "合格数量",
+        "source": "检验数据统计",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "31件"
+      },
+      {
+        "field": "不合格数量",
+        "source": "检验数量-合格数量",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "1件"
+      },
+      {
+        "field": "检验结论",
+        "source": "本动作业务事实，由具备相应权限的人员确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "31件合格，1件部件划伤待返工"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示质检员孙梅"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-05 15:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-05 15:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "工序完成且检验标准有效"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "合格转入库；不合格转返工"
+      }
+    ],
+    "summary_fields": [
+      "QC编号",
+      "生产批次号",
+      "检验数量",
+      "合格数量",
+      "不合格数量",
+      "检验结论",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 2
+  },
+  {
+    "workflow_id": "AWF29",
+    "intent": "不合格返工或报废",
+    "access_mode": "WRITE",
+    "target_note": "05｜生产、质检与入库/05-05｜模板｜不合格返工或报废.txt",
+    "title_format": "不合格返工或报废｜REWORK编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "处理方式",
+      "报废数量"
+    ],
+    "auto_fields": [
+      "REWORK编号",
+      "质检编号",
+      "不合格对象",
+      "复验要求",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [
+      "处理方式",
+      "报废数量",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得由AI自动决定报废或责任"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "不合格质检事件快照",
+      "质检明细",
+      "有权限质量负责人点击确认",
+      "处理结论",
+      "09-15质检标准+处理结论",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "不合格事实已确认"
+    ],
+    "on_confirm_create": [
+      "返工报废事件"
+    ],
+    "on_confirm_update": [
+      "建立返工与复验待办"
+    ],
+    "idempotency_key": "REWORK编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "建立返工与复验待办",
+    "record_schema": [
+      {
+        "field": "REWORK编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "REWORK-A-DEMO-001"
+      },
+      {
+        "field": "质检编号",
+        "source": "不合格质检事件快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "QC-A-DEMO-001"
+      },
+      {
+        "field": "不合格对象",
+        "source": "质检明细",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "OPENING-18部件1件"
+      },
+      {
+        "field": "处理方式",
+        "source": "有权限质量负责人点击确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "返工补漆"
+      },
+      {
+        "field": "报废数量",
+        "source": "处理结论",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "0件"
+      },
+      {
+        "field": "复验要求",
+        "source": "09-15质检标准+处理结论",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "外观复验并拍照"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示质检员孙梅"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-05 16:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-05 16:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "不合格事实已确认"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "建立返工与复验待办"
+      }
+    ],
+    "summary_fields": [
+      "REWORK编号",
+      "质检编号",
+      "不合格对象",
+      "处理方式",
+      "报废数量",
+      "复验要求",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 2
+  },
+  {
+    "workflow_id": "AWF30",
+    "intent": "成品入库",
+    "access_mode": "WRITE",
+    "target_note": "05｜生产、质检与入库/05-06｜模板｜成品入库.txt",
+    "title_format": "成品入库｜FINISHIN编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "本次入库数量"
+    ],
+    "auto_fields": [
+      "FINISHIN编号",
+      "生产批次号",
+      "合格可入库数量",
+      "仓库库位",
+      "累计入库",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [
+      "本次入库数量",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得让未复验品入合格库"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已合格质检快照",
+      "质检合格-已入库",
+      "入库单/OCR后仓管确认",
+      "09-16仓库主档有效库位",
+      "已确认入库事件累计",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "质检合格-已入库",
+      "已确认入库事件累计"
+    ],
+    "state_prerequisites": [
+      "质检合格且库位有效"
+    ],
+    "on_confirm_create": [
+      "成品入库事件"
+    ],
+    "on_confirm_update": [
+      "更新成品库存与备货待办"
+    ],
+    "idempotency_key": "FINISHIN编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "更新成品库存与备货待办",
+    "record_schema": [
+      {
+        "field": "FINISHIN编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "FINISHIN-A-DEMO-001"
+      },
+      {
+        "field": "生产批次号",
+        "source": "已合格质检快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "BATCH-A-DEMO-001"
+      },
+      {
+        "field": "合格可入库数量",
+        "source": "质检合格-已入库",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "31件"
+      },
+      {
+        "field": "本次入库数量",
+        "source": "入库单/OCR后仓管确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "31件"
+      },
+      {
+        "field": "仓库库位",
+        "source": "09-16仓库主档有效库位",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "成品库A-03"
+      },
+      {
+        "field": "累计入库",
+        "source": "已确认入库事件累计",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "31件"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示仓储发货员刘洋"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-05 17:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-05 17:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "质检合格且库位有效"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "更新成品库存与备货待办"
+      }
+    ],
+    "summary_fields": [
+      "FINISHIN编号",
+      "生产批次号",
+      "合格可入库数量",
+      "本次入库数量",
+      "仓库库位",
+      "累计入库",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF31",
+    "intent": "备货与装车复核",
+    "access_mode": "WRITE",
+    "target_note": "06｜发货、安装与验收/06-01｜模板｜备货与装车复核.txt",
+    "title_format": "备货与装车复核｜LOADCHECK编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "本次装车数量"
+    ],
+    "auto_fields": [
+      "LOADCHECK编号",
+      "订单编号",
+      "待发数量",
+      "可发库存",
+      "装车差异",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [
+      "本次装车数量",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得把备货当实际发货"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "订单交付快照",
+      "订单数量-已确认发货",
+      "已确认合格入库与锁货",
+      "装车清单/OCR后确认",
+      "清单数量-实点数量",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "订单数量-已确认发货",
+      "清单数量-实点数量"
+    ],
+    "state_prerequisites": [
+      "合格库存足够且包装完成"
+    ],
+    "on_confirm_create": [
+      "装车复核事件"
+    ],
+    "on_confirm_update": [
+      "允许生成发货批次"
+    ],
+    "idempotency_key": "LOADCHECK编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "允许生成发货批次",
+    "record_schema": [
+      {
+        "field": "LOADCHECK编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "LOADCHECK-A-DEMO-001"
+      },
+      {
+        "field": "订单编号",
+        "source": "订单交付快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "ORDER-A-DEMO-001"
+      },
+      {
+        "field": "待发数量",
+        "source": "订单数量-已确认发货",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "32件"
+      },
+      {
+        "field": "可发库存",
+        "source": "已确认合格入库与锁货",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "31件"
+      },
+      {
+        "field": "本次装车数量",
+        "source": "装车清单/OCR后确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "20件"
+      },
+      {
+        "field": "装车差异",
+        "source": "清单数量-实点数量",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "0件"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示仓储发货员刘洋"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-06 08:30:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-06 08:35:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "合格库存足够且包装完成"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "允许生成发货批次"
+      }
+    ],
+    "summary_fields": [
+      "LOADCHECK编号",
+      "订单编号",
+      "待发数量",
+      "可发库存",
+      "本次装车数量",
+      "装车差异",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF32",
+    "intent": "新增发货",
+    "access_mode": "WRITE",
+    "target_note": "06｜发货、安装与验收/06-02｜模板｜新增发货.txt",
+    "title_format": "新增发货｜SHIPEVENT编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "承运商运单",
+      "实际发货时间"
+    ],
+    "auto_fields": [
+      "SHIPEVENT编号",
+      "发货单号",
+      "订单编号",
+      "本批数量",
+      "收货地址联系人快照",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "承运商运单"
+    ],
+    "permission_confirm_fields": [
+      "实际发货时间",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得由装车计划自动生成已发"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "09-18编号规则新生成",
+      "装车复核与订单快照",
+      "已确认装车清单",
+      "订单冻结送货点",
+      "本次物流面单/OCR",
+      "本动作业务事实，由具备相应权限的人员确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "装车复核通过"
+    ],
+    "on_confirm_create": [
+      "发货事件"
+    ],
+    "on_confirm_update": [
+      "累计已发并建立物流跟踪"
+    ],
+    "idempotency_key": "SHIPEVENT编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "累计已发并建立物流跟踪",
+    "record_schema": [
+      {
+        "field": "SHIPEVENT编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "SHIPEVENT-A-DEMO-001A"
+      },
+      {
+        "field": "发货单号",
+        "source": "09-18编号规则新生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "SHIP-A-DEMO-001A"
+      },
+      {
+        "field": "订单编号",
+        "source": "装车复核与订单快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "ORDER-A-DEMO-001"
+      },
+      {
+        "field": "本批数量",
+        "source": "已确认装车清单",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "20件"
+      },
+      {
+        "field": "收货地址联系人快照",
+        "source": "订单冻结送货点",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "云台路88号／陈工"
+      },
+      {
+        "field": "承运商运单",
+        "source": "本次物流面单/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "顺丰大件 SF-A-DEMO-001"
+      },
+      {
+        "field": "实际发货时间",
+        "source": "本动作业务事实，由具备相应权限的人员确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "2026-09-06 09:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示仓储发货员刘洋"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-06 09:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-06 09:10:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "装车复核通过"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "累计已发并建立物流跟踪"
+      }
+    ],
+    "summary_fields": [
+      "SHIPEVENT编号",
+      "发货单号",
+      "订单编号",
+      "本批数量",
+      "收货地址联系人快照",
+      "承运商运单",
+      "实际发货时间",
+      "实际操作人"
+    ],
+    "employee_field_count": 2
+  },
+  {
+    "workflow_id": "AWF33",
+    "intent": "物流跟踪或异常",
+    "access_mode": "WRITE",
+    "target_note": "06｜发货、安装与验收/06-03｜模板｜物流跟踪或异常.txt",
+    "title_format": "物流跟踪或异常｜LOGISTICS编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "物流状态",
+      "异常说明"
+    ],
+    "auto_fields": [
+      "LOGISTICS编号",
+      "发货单号",
+      "运单号",
+      "更新时间",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "物流状态",
+      "异常说明"
+    ],
+    "permission_confirm_fields": [
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "未连接接口不得虚构实时轨迹"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已确认发货事件快照",
+      "发货事件快照",
+      "当前未接接口：截图或人工状态/OCR",
+      "承运商截图或人工核实",
+      "系统保存确认时间",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "真实物流来源可追溯"
+    ],
+    "on_confirm_create": [
+      "物流事件"
+    ],
+    "on_confirm_update": [
+      "更新物流卡；异常建待办"
+    ],
+    "idempotency_key": "LOGISTICS编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "更新物流卡；异常建待办",
+    "record_schema": [
+      {
+        "field": "LOGISTICS编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "LOGISTICS-A-DEMO-001"
+      },
+      {
+        "field": "发货单号",
+        "source": "已确认发货事件快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "SHIP-A-DEMO-001A"
+      },
+      {
+        "field": "运单号",
+        "source": "发货事件快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "SF-A-DEMO-001"
+      },
+      {
+        "field": "物流状态",
+        "source": "当前未接接口：截图或人工状态/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-09-07 14:00 已到上海分拨"
+      },
+      {
+        "field": "异常说明",
+        "source": "承运商截图或人工核实",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "无异常"
+      },
+      {
+        "field": "更新时间",
+        "source": "系统保存确认时间",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-07 14:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示仓储发货员刘洋"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-07 14:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-07 14:10:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "真实物流来源可追溯"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "更新物流卡；异常建待办"
+      }
+    ],
+    "summary_fields": [
+      "LOGISTICS编号",
+      "发货单号",
+      "运单号",
+      "物流状态",
+      "异常说明",
+      "更新时间",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 2
+  },
+  {
+    "workflow_id": "AWF34",
+    "intent": "到货签收",
+    "access_mode": "WRITE",
+    "target_note": "06｜发货、安装与验收/06-04｜模板｜到货签收.txt",
+    "title_format": "到货签收｜SIGN编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "签收数量",
+      "破损数量",
+      "签收时间",
+      "实际签收人"
+    ],
+    "auto_fields": [
+      "SIGN编号",
+      "发货单号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "签收数量",
+      "破损数量",
+      "签收时间"
+    ],
+    "permission_confirm_fields": [
+      "实际签收人",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "签收不等于安装验收"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已确认发货批次快照",
+      "本次签收单/OCR",
+      "签收照片与签收人确认",
+      "本动作业务事实，由具备相应权限的人员确认",
+      "签收凭证/OCR后确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "货物实际到达且凭证齐全"
+    ],
+    "on_confirm_create": [
+      "到货签收事件"
+    ],
+    "on_confirm_update": [
+      "更新签收累计并转安装"
+    ],
+    "idempotency_key": "SIGN编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "更新签收累计并转安装",
+    "record_schema": [
+      {
+        "field": "SIGN编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "SIGN-A-DEMO-001"
+      },
+      {
+        "field": "发货单号",
+        "source": "已确认发货批次快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "SHIP-A-DEMO-001"
+      },
+      {
+        "field": "签收数量",
+        "source": "本次签收单/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "20件"
+      },
+      {
+        "field": "破损数量",
+        "source": "签收照片与签收人确认",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "0件"
+      },
+      {
+        "field": "实际签收人",
+        "source": "本动作业务事实，由具备相应权限的人员确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示收货员"
+      },
+      {
+        "field": "签收时间",
+        "source": "签收凭证/OCR后确认",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-09-08 10:30:00 Asia/Shanghai"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示仓储发货员刘洋"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-08 10:35:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-08 10:40:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "货物实际到达且凭证齐全"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "更新签收累计并转安装"
+      }
+    ],
+    "summary_fields": [
+      "SIGN编号",
+      "发货单号",
+      "签收数量",
+      "破损数量",
+      "实际签收人",
+      "签收时间",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 4
+  },
+  {
+    "workflow_id": "AWF35",
+    "intent": "安装任务与现场交底",
+    "access_mode": "WRITE",
+    "target_note": "06｜发货、安装与验收/06-05｜模板｜安装任务与现场交底.txt",
+    "title_format": "安装任务与现场交底｜INSTALL编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "计划安装日期",
+      "现场交底"
+    ],
+    "auto_fields": [
+      "INSTALL编号",
+      "订单发货快照",
+      "安装班组",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "计划安装日期"
+    ],
+    "permission_confirm_fields": [
+      "现场交底",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得把计划安装当实际完工"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已签收批次与订单",
+      "09-17安装班组主档与排班",
+      "项目交付约定与排班",
+      "本次项目交底确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "已签收且现场具备条件"
+    ],
+    "on_confirm_create": [
+      "安装任务事件"
+    ],
+    "on_confirm_update": [
+      "建立安装工单和验收待办"
+    ],
+    "idempotency_key": "INSTALL编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "建立安装工单和验收待办",
+    "record_schema": [
+      {
+        "field": "INSTALL编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "INSTALL-A-DEMO-001"
+      },
+      {
+        "field": "订单发货快照",
+        "source": "已签收批次与订单",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "ORDER-A-DEMO-001／SHIP-A-DEMO-001／20件"
+      },
+      {
+        "field": "安装班组",
+        "source": "09-17安装班组主档与排班",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "安装一组"
+      },
+      {
+        "field": "计划安装日期",
+        "source": "项目交付约定与排班",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-09-09"
+      },
+      {
+        "field": "现场交底",
+        "source": "本次项目交底确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "成品保护、收口标准、钥匙移交"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示安装验收工程师郭凯"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-08 15:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-08 15:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "已签收且现场具备条件"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "建立安装工单和验收待办"
+      }
+    ],
+    "summary_fields": [
+      "INSTALL编号",
+      "订单发货快照",
+      "安装班组",
+      "计划安装日期",
+      "现场交底",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 2
+  },
+  {
+    "workflow_id": "AWF36",
+    "intent": "完工验收",
+    "access_mode": "WRITE",
+    "target_note": "06｜发货、安装与验收/06-06｜模板｜完工验收.txt",
+    "title_format": "完工验收｜ACCEPT编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "本次验收数量",
+      "遗留问题",
+      "验收结论"
+    ],
+    "auto_fields": [
+      "ACCEPT编号",
+      "安装任务号",
+      "合格数量",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "本次验收数量",
+      "遗留问题"
+    ],
+    "permission_confirm_fields": [
+      "验收结论",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "签收或安装报工不得自动判验收合格"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已确认安装任务快照",
+      "验收清单/OCR",
+      "验收项目统计",
+      "验收单与现场照片",
+      "本动作业务事实，由具备相应权限的人员确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "验收项目统计"
+    ],
+    "state_prerequisites": [
+      "安装实际完成且客户参与验收"
+    ],
+    "on_confirm_create": [
+      "安装验收事件"
+    ],
+    "on_confirm_update": [
+      "更新交付状态并处理遗留项"
+    ],
+    "idempotency_key": "ACCEPT编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "更新交付状态并处理遗留项",
+    "record_schema": [
+      {
+        "field": "ACCEPT编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "ACCEPT-A-DEMO-001"
+      },
+      {
+        "field": "安装任务号",
+        "source": "已确认安装任务快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "INSTALL-A-DEMO-001"
+      },
+      {
+        "field": "本次验收数量",
+        "source": "验收清单/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "20件"
+      },
+      {
+        "field": "合格数量",
+        "source": "验收项目统计",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "20件"
+      },
+      {
+        "field": "遗留问题",
+        "source": "验收单与现场照片",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "卧室2门吸待补装"
+      },
+      {
+        "field": "验收结论",
+        "source": "本动作业务事实，由具备相应权限的人员确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "20件安装合格，1项辅件待办"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示安装验收工程师郭凯"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-10 17:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-10 17:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "安装实际完成且客户参与验收"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "更新交付状态并处理遗留项"
+      }
+    ],
+    "summary_fields": [
+      "ACCEPT编号",
+      "安装任务号",
+      "本次验收数量",
+      "合格数量",
+      "遗留问题",
+      "验收结论",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 3
+  },
+  {
+    "workflow_id": "AWF37",
+    "intent": "新增售后工单",
+    "access_mode": "WRITE",
+    "target_note": "07｜售后、回访与复购/07-01｜模板｜新增售后工单.txt",
+    "title_format": "新增售后工单｜AFTERSALE编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "问题描述",
+      "证据附件",
+      "影响数量"
+    ],
+    "auto_fields": [
+      "AFTERSALE编号",
+      "订单编号",
+      "受理状态",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "问题描述",
+      "证据附件",
+      "影响数量"
+    ],
+    "permission_confirm_fields": [
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得受理即自动认责"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "订单/发货/验收快照唯一关联",
+      "客户反馈与本次照片",
+      "本次上传",
+      "本次核实",
+      "规则生成",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "订单可追溯且问题证据可定位"
+    ],
+    "on_confirm_create": [
+      "售后受理事件"
+    ],
+    "on_confirm_update": [
+      "建立现场核实待办"
+    ],
+    "idempotency_key": "AFTERSALE编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "建立现场核实待办",
+    "record_schema": [
+      {
+        "field": "AFTERSALE编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "AFTERSALE-A-DEMO-002"
+      },
+      {
+        "field": "订单编号",
+        "source": "订单/发货/验收快照唯一关联",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "ORDER-A-DEMO-002"
+      },
+      {
+        "field": "问题描述",
+        "source": "客户反馈与本次照片",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "卧室门关闭后摩擦地面"
+      },
+      {
+        "field": "证据附件",
+        "source": "本次上传",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "现场摩擦视频.mp4；照片3张.zip"
+      },
+      {
+        "field": "影响数量",
+        "source": "本次核实",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "1件"
+      },
+      {
+        "field": "受理状态",
+        "source": "规则生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "已受理，责任待判"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示售后专员何静"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-12 10:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-12 10:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "订单可追溯且问题证据可定位"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "建立现场核实待办"
+      }
+    ],
+    "summary_fields": [
+      "AFTERSALE编号",
+      "订单编号",
+      "问题描述",
+      "证据附件",
+      "影响数量",
+      "受理状态",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 3
+  },
+  {
+    "workflow_id": "AWF38",
+    "intent": "补件或返修任务",
+    "access_mode": "WRITE",
+    "target_note": "07｜售后、回访与复购/07-02｜模板｜补件或返修任务.txt",
+    "title_format": "补件或返修任务｜AFTERTASK编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "计划完成日",
+      "处理方案",
+      "补件数量",
+      "费用承担"
+    ],
+    "auto_fields": [
+      "AFTERTASK编号",
+      "售后工单号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "计划完成日"
+    ],
+    "permission_confirm_fields": [
+      "处理方案",
+      "补件数量",
+      "费用承担",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得在责任未判时自动扣款赔偿"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "已受理售后快照",
+      "有权限售后负责人确认",
+      "方案与产品快照",
+      "产能与客户预约",
+      "责任复核结论",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "问题已核实且方案可执行"
+    ],
+    "on_confirm_create": [
+      "售后处理事件"
+    ],
+    "on_confirm_update": [
+      "建立返修、复验待办"
+    ],
+    "idempotency_key": "AFTERTASK编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "建立返修、复验待办",
+    "record_schema": [
+      {
+        "field": "AFTERTASK编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "AFTERTASK-A-DEMO-002"
+      },
+      {
+        "field": "售后工单号",
+        "source": "已受理售后快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "AFTERSALE-A-DEMO-002"
+      },
+      {
+        "field": "处理方案",
+        "source": "有权限售后负责人确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "返厂调整部件下沿"
+      },
+      {
+        "field": "补件数量",
+        "source": "方案与产品快照",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "0件"
+      },
+      {
+        "field": "计划完成日",
+        "source": "产能与客户预约",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-09-18"
+      },
+      {
+        "field": "费用承担",
+        "source": "责任复核结论",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "责任待判，暂不结算"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示售后专员何静"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-13 10:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-13 10:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "问题已核实且方案可执行"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "建立返修、复验待办"
+      }
+    ],
+    "summary_fields": [
+      "AFTERTASK编号",
+      "售后工单号",
+      "处理方案",
+      "补件数量",
+      "计划完成日",
+      "费用承担",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 4
+  },
+  {
+    "workflow_id": "AWF39",
+    "intent": "售后复验与结案",
+    "access_mode": "WRITE",
+    "target_note": "07｜售后、回访与复购/07-03｜模板｜售后处理关闭.txt",
+    "title_format": "售后复验与结案｜AFTERCLOSE编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "完成事实",
+      "客户确认",
+      "结案结论"
+    ],
+    "auto_fields": [
+      "AFTERCLOSE编号",
+      "售后工单号",
+      "未完成待办数",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "完成事实",
+      "客户确认"
+    ],
+    "permission_confirm_fields": [
+      "结案结论",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得无复验或未完待办强制结案"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "处理任务与工单快照",
+      "返修签收与现场复验凭证",
+      "客户签字或聊天确认凭证",
+      "售后待办统计",
+      "本动作业务事实，由具备相应权限的人员确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "售后待办统计"
+    ],
+    "state_prerequisites": [
+      "处理完成、客户确认且待办数为0"
+    ],
+    "on_confirm_create": [
+      "售后复验结案事件"
+    ],
+    "on_confirm_update": [
+      "关闭工单并建立回访"
+    ],
+    "idempotency_key": "AFTERCLOSE编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "关闭工单并建立回访",
+    "record_schema": [
+      {
+        "field": "AFTERCLOSE编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "AFTERCLOSE-A-DEMO-002"
+      },
+      {
+        "field": "售后工单号",
+        "source": "处理任务与工单快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "AFTERSALE-A-DEMO-002"
+      },
+      {
+        "field": "完成事实",
+        "source": "返修签收与现场复验凭证",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-09-18调试完成，开关顺畅"
+      },
+      {
+        "field": "客户确认",
+        "source": "客户签字或聊天确认凭证",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "客户确认问题已解决.pdf"
+      },
+      {
+        "field": "未完成待办数",
+        "source": "售后待办统计",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "0"
+      },
+      {
+        "field": "结案结论",
+        "source": "本动作业务事实，由具备相应权限的人员确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "同意结案"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示售后专员何静"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-18 17:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-18 17:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "处理完成、客户确认且待办数为0"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "关闭工单并建立回访"
+      }
+    ],
+    "summary_fields": [
+      "AFTERCLOSE编号",
+      "售后工单号",
+      "完成事实",
+      "客户确认",
+      "未完成待办数",
+      "结案结论",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 3
+  },
+  {
+    "workflow_id": "AWF40",
+    "intent": "客户回访与复购",
+    "access_mode": "WRITE",
+    "target_note": "07｜售后、回访与复购/07-04｜模板｜客户回访与复购.txt",
+    "title_format": "客户回访与复购｜RETURNVISIT编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "回访日期",
+      "客户反馈",
+      "复购线索",
+      "下次动作"
+    ],
+    "auto_fields": [
+      "RETURNVISIT编号",
+      "关联订单或售后",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "回访日期",
+      "客户反馈",
+      "复购线索",
+      "下次动作"
+    ],
+    "permission_confirm_fields": [
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得把满意自动推定为复购订单"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "订单/已结案售后快照",
+      "本次沟通确认",
+      "本次电话记录",
+      "客户本次表达",
+      "本次计划",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "订单已交付或售后已结案"
+    ],
+    "on_confirm_create": [
+      "回访事件"
+    ],
+    "on_confirm_update": [
+      "形成复购商机或改进行动"
+    ],
+    "idempotency_key": "RETURNVISIT编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "形成复购商机或改进行动",
+    "record_schema": [
+      {
+        "field": "RETURNVISIT编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "RETURNVISIT-A-DEMO-002"
+      },
+      {
+        "field": "关联订单或售后",
+        "source": "订单/已结案售后快照",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "ORDER-A-DEMO-002／AFTERSALE-A-DEMO-002"
+      },
+      {
+        "field": "回访日期",
+        "source": "本次沟通确认",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-09-25"
+      },
+      {
+        "field": "客户反馈",
+        "source": "本次电话记录",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "部件使用正常，对处理速度满意"
+      },
+      {
+        "field": "复购线索",
+        "source": "客户本次表达",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "二期预计新增12件"
+      },
+      {
+        "field": "下次动作",
+        "source": "本次计划",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-10-10联系二期测量"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示售后专员何静"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-25 16:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-25 16:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "订单已交付或售后已结案"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "形成复购商机或改进行动"
+      }
+    ],
+    "summary_fields": [
+      "RETURNVISIT编号",
+      "关联订单或售后",
+      "回访日期",
+      "客户反馈",
+      "复购线索",
+      "下次动作",
+      "实际操作人",
+      "创建时间"
+    ],
+    "employee_field_count": 4
+  },
+  {
+    "workflow_id": "AWF41",
+    "intent": "新增产品档案",
+    "access_mode": "WRITE",
+    "target_note": "09｜基础档案与作业标准/09-01｜模板｜新增产品档案.txt",
+    "title_format": "新增产品档案｜PRODUCT编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "产品名称",
+      "规格单位",
+      "标准价格",
+      "有效日期"
+    ],
+    "auto_fields": [
+      "PRODUCT编号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "产品名称",
+      "规格单位"
+    ],
+    "permission_confirm_fields": [
+      "标准价格",
+      "有效日期",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得改写历史订单产品快照"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "本次产品资料/OCR",
+      "产品图册与技术确认",
+      "批准价格表",
+      "本次版本确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "名称规格查重且审批通过"
+    ],
+    "on_confirm_create": [
+      "产品主档版本"
+    ],
+    "on_confirm_update": [
+      "发布新产品有效版本"
+    ],
+    "idempotency_key": "PRODUCT编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "发布新产品有效版本",
+    "record_schema": [
+      {
+        "field": "PRODUCT编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "PRODUCT-A-DEMO-001"
+      },
+      {
+        "field": "产品名称",
+        "source": "本次产品资料/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "DEMO标准产品A"
+      },
+      {
+        "field": "规格单位",
+        "source": "产品图册与技术确认",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "厚45mm／件"
+      },
+      {
+        "field": "标准价格",
+        "source": "批准价格表",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "2800元/件"
+      },
+      {
+        "field": "有效日期",
+        "source": "本次版本确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "2026-08-01"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示资料管理员吴岚"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-10 10:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-10 10:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "名称规格查重且审批通过"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "发布新产品有效版本"
+      }
+    ],
+    "summary_fields": [
+      "PRODUCT编号",
+      "产品名称",
+      "规格单位",
+      "标准价格",
+      "有效日期",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 4
+  },
+  {
+    "workflow_id": "AWF42",
+    "intent": "新增物料档案",
+    "access_mode": "WRITE",
+    "target_note": "09｜基础档案与作业标准/09-02｜模板｜新增物料档案.txt",
+    "title_format": "新增物料档案｜MATERIAL编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "物料名称",
+      "规格单位",
+      "安全库存"
+    ],
+    "auto_fields": [
+      "MATERIAL编号",
+      "默认供应商",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "物料名称",
+      "规格单位"
+    ],
+    "permission_confirm_fields": [
+      "安全库存",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得混用张和平方米累计"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "本次物料资料/OCR",
+      "物料确认资料",
+      "仓储规则确认",
+      "09-13有效供应商主档",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "物料编码查重且单位明确"
+    ],
+    "on_confirm_create": [
+      "物料主档版本"
+    ],
+    "on_confirm_update": [
+      "发布物料版本并供BOM引用"
+    ],
+    "idempotency_key": "MATERIAL编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "发布物料版本并供BOM引用",
+    "record_schema": [
+      {
+        "field": "MATERIAL编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "MATERIAL-A-DEMO-001"
+      },
+      {
+        "field": "物料名称",
+        "source": "本次物料资料/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "DEMO原材料A"
+      },
+      {
+        "field": "规格单位",
+        "source": "物料确认资料",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "1220×2440×3mm／张"
+      },
+      {
+        "field": "安全库存",
+        "source": "仓储规则确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "50张"
+      },
+      {
+        "field": "默认供应商",
+        "source": "09-13有效供应商主档",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "DEMO原材料供应商"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示资料管理员吴岚"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-10 10:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-10 10:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "物料编码查重且单位明确"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "发布物料版本并供BOM引用"
+      }
+    ],
+    "summary_fields": [
+      "MATERIAL编号",
+      "物料名称",
+      "规格单位",
+      "安全库存",
+      "默认供应商",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 3
+  },
+  {
+    "workflow_id": "AWF43",
+    "intent": "新增供应商档案",
+    "access_mode": "WRITE",
+    "target_note": "09｜基础档案与作业标准/09-03｜模板｜新增供应商档案.txt",
+    "title_format": "新增供应商档案｜SUPPLIER编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "供应商名称",
+      "供应品类",
+      "联系人电话",
+      "结算条件"
+    ],
+    "auto_fields": [
+      "SUPPLIER编号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "供应商名称",
+      "供应品类",
+      "联系人电话"
+    ],
+    "permission_confirm_fields": [
+      "结算条件",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得自动赋予合格供应商状态"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "营业执照与本次资料/OCR",
+      "本次准入资料",
+      "已批准协议",
+      "本次名片/OCR",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "营业信息查重且完成准入"
+    ],
+    "on_confirm_create": [
+      "供应商主档版本"
+    ],
+    "on_confirm_update": [
+      "发布供应商有效版本"
+    ],
+    "idempotency_key": "SUPPLIER编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "发布供应商有效版本",
+    "record_schema": [
+      {
+        "field": "SUPPLIER编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "SUPPLIER-A-DEMO-001"
+      },
+      {
+        "field": "供应商名称",
+        "source": "营业执照与本次资料/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "DEMO原材料供应商"
+      },
+      {
+        "field": "供应品类",
+        "source": "本次准入资料",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "木饰面"
+      },
+      {
+        "field": "结算条件",
+        "source": "已批准协议",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "月结30天"
+      },
+      {
+        "field": "联系人电话",
+        "source": "本次名片/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "周经理 139****8821"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示资料管理员吴岚"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-10 10:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-10 10:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "营业信息查重且完成准入"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "发布供应商有效版本"
+      }
+    ],
+    "summary_fields": [
+      "SUPPLIER编号",
+      "供应商名称",
+      "供应品类",
+      "结算条件",
+      "联系人电话",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 4
+  },
+  {
+    "workflow_id": "AWF44",
+    "intent": "新增工艺或质检标准",
+    "access_mode": "WRITE",
+    "target_note": "09｜基础档案与作业标准/09-04｜模板｜新增工艺或质检标准.txt",
+    "title_format": "新增工艺或质检标准｜STANDARD编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "标准类型",
+      "检验项目与阈值"
+    ],
+    "auto_fields": [
+      "STANDARD编号",
+      "适用产品",
+      "版本号",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "标准类型",
+      "检验项目与阈值"
+    ],
+    "permission_confirm_fields": [
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得用新标准回写旧批次结论"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "员工描述识别后确认",
+      "09-10产品主档",
+      "批准标准文件/OCR",
+      "上一有效版本+1",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "技术质量负责人批准"
+    ],
+    "on_confirm_create": [
+      "工艺质检标准版本"
+    ],
+    "on_confirm_update": [
+      "发布新版本并保留旧版本"
+    ],
+    "idempotency_key": "STANDARD编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "发布新版本并保留旧版本",
+    "record_schema": [
+      {
+        "field": "STANDARD编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "STANDARD-A-DEMO-001"
+      },
+      {
+        "field": "标准类型",
+        "source": "员工描述识别后确认",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "成品外观检验"
+      },
+      {
+        "field": "适用产品",
+        "source": "09-10产品主档",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "DEMO标准产品A"
+      },
+      {
+        "field": "检验项目与阈值",
+        "source": "批准标准文件/OCR",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "表面无划伤；部件翘曲≤2mm"
+      },
+      {
+        "field": "版本号",
+        "source": "上一有效版本+1",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "QC-DOOR-A-V3"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示资料管理员吴岚"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-10 10:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-10 10:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "技术质量负责人批准"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "发布新版本并保留旧版本"
+      }
+    ],
+    "summary_fields": [
+      "STANDARD编号",
+      "标准类型",
+      "适用产品",
+      "检验项目与阈值",
+      "版本号",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 2
+  },
+  {
+    "workflow_id": "AWF45",
+    "intent": "岗位交接",
+    "access_mode": "WRITE",
+    "target_note": "09｜基础档案与作业标准/09-05｜模板｜岗位交接.txt",
+    "title_format": "岗位交接｜HANDOVER编号｜订单或项目｜日期",
+    "minimal_inputs": [
+      "未完事项",
+      "接收人",
+      "生效时间"
+    ],
+    "auto_fields": [
+      "HANDOVER编号",
+      "交接岗位",
+      "创建时间",
+      "最后更新时间",
+      "当前步骤",
+      "下一步"
+    ],
+    "confirm_fields": [
+      "未完事项"
+    ],
+    "permission_confirm_fields": [
+      "接收人",
+      "生效时间",
+      "实际操作人"
+    ],
+    "must_not_infer": [
+      "不得自动转移未披露责任"
+    ],
+    "data_sources": [
+      "09-18编号规则；新对象查重后生成",
+      "09-07员工岗位主档",
+      "当前待办与人工补充",
+      "本动作业务事实，由具备相应权限的人员确认",
+      "本次交接确认",
+      "当前登录人员+09-07员工岗位权限主档校验",
+      "系统首次保存时间（Asia/Shanghai）",
+      "系统最近保存时间（Asia/Shanghai）",
+      "已确认前置事件和状态规则",
+      "本流程确认结果和业务因果规则"
+    ],
+    "formulas": [
+      "本动作不推算金额或数量，只保存已确认事实"
+    ],
+    "state_prerequisites": [
+      "接收人权限匹配且事项列清"
+    ],
+    "on_confirm_create": [
+      "岗位交接事件"
+    ],
+    "on_confirm_update": [
+      "转移待办负责人并保留历史"
+    ],
+    "idempotency_key": "HANDOVER编号+对象快照版本+发生时间",
+    "blocking_conditions": [
+      "对象多匹配或零匹配",
+      "前置状态未满足",
+      "当前登录人员无权限",
+      "重复提交或关键事实矛盾"
+    ],
+    "next_step": "转移待办负责人并保留历史",
+    "record_schema": [
+      {
+        "field": "HANDOVER编号",
+        "source": "09-18编号规则；新对象查重后生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "HANDOVER-A-DEMO-001"
+      },
+      {
+        "field": "交接岗位",
+        "source": "09-07员工岗位主档",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "订单跟单"
+      },
+      {
+        "field": "未完事项",
+        "source": "当前待办与人工补充",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "ORDER-A-DEMO-001余款催收、二批发货"
+      },
+      {
+        "field": "接收人",
+        "source": "本动作业务事实，由具备相应权限的人员确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示李经理"
+      },
+      {
+        "field": "生效时间",
+        "source": "本次交接确认",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "2026-08-31 18:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "实际操作人",
+        "source": "当前登录人员+09-07员工岗位权限主档校验",
+        "mode": "当前登录且有权限的人员点击确认",
+        "confirm_when": "系统显示当前登录本人，只需点击确认，无需填写姓名",
+        "example": "当前登录人员：演示资料管理员吴岚"
+      },
+      {
+        "field": "创建时间",
+        "source": "系统首次保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-10 10:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "最后更新时间",
+        "source": "系统最近保存时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-08-10 10:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "当前步骤",
+        "source": "已确认前置事件和状态规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "接收人权限匹配且事项列清"
+      },
+      {
+        "field": "下一步",
+        "source": "本流程确认结果和业务因果规则",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "转移待办负责人并保留历史"
+      }
+    ],
+    "summary_fields": [
+      "HANDOVER编号",
+      "交接岗位",
+      "未完事项",
+      "接收人",
+      "生效时间",
+      "实际操作人",
+      "创建时间",
+      "最后更新时间"
+    ],
+    "employee_field_count": 3
+  },
+  {
+    "workflow_id": "AWF46",
+    "intent": "今日待办与风险",
+    "access_mode": "READ_ONLY",
+    "target_note": "08｜经营会议与风险/08-01｜模板｜今日经营待办.txt",
+    "title_format": "今日待办与风险",
+    "minimal_inputs": [
+      "查询条件"
+    ],
+    "auto_fields": [
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [],
+    "must_not_infer": [
+      "查询只读，不新增或修改任何业务记录；默认排除目录10和DEMO数据"
+    ],
+    "data_sources": [
+      "待办卡+已确认事件+09-18风险与统计规则主档",
+      "09-07员工岗位权限主档",
+      "09-18统计规则"
+    ],
+    "formulas": [
+      "按结果卡所列口径复算"
+    ],
+    "state_prerequisites": [
+      "当前登录账号有效"
+    ],
+    "on_confirm_create": [],
+    "on_confirm_update": [],
+    "idempotency_key": "零写入查询",
+    "blocking_conditions": [
+      "越权字段自动过滤",
+      "零命中明确说明"
+    ],
+    "next_step": "返回只读结果卡",
+    "record_schema": [],
+    "result_schema": [
+      {
+        "field": "查询条件",
+        "source": "员工本次自然语言查询",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "包含DEMO、截至当前"
+      },
+      {
+        "field": "数据权限",
+        "source": "当前登录账号+09-07员工岗位权限主档",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "仅显示本人有权查看的订单"
+      },
+      {
+        "field": "统计截止时间",
+        "source": "本次查询选择的当前状态或历史时点",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-09-25 16:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "结果字段",
+        "source": "待办卡+已确认事件+09-18风险与统计规则主档",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "待办编号、业务对象、客户项目订单、风险级别、触发原因、负责人、截止时间、建议动作"
+      },
+      {
+        "field": "合计与口径",
+        "source": "09-18统计规则+统计截止前已确认事件",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "严格截至统计截止时间计算"
+      },
+      {
+        "field": "当前步骤与卡点",
+        "source": "统计截止前状态规则+未完成待办",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "显示该时点真实卡点"
+      },
+      {
+        "field": "负责人和下一步",
+        "source": "09-07员工岗位权限主档+统计截止前待办卡",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "按该时点责任人和状态显示"
+      },
+      {
+        "field": "生成时间",
+        "source": "系统生成结果卡时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-25 16:10:00 Asia/Shanghai"
+      },
+      {
+        "field": "零命中说明",
+        "source": "本次查询结果生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "不适用（本次有结果）"
+      }
+    ],
+    "summary_fields": [
+      "查询条件",
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF47",
+    "intent": "销售商机与报价",
+    "access_mode": "READ_ONLY",
+    "target_note": "08｜经营会议与风险/08-02｜模板｜销售商机与报价.txt",
+    "title_format": "销售商机与报价",
+    "minimal_inputs": [
+      "查询条件"
+    ],
+    "auto_fields": [
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [],
+    "must_not_infer": [
+      "查询只读，不新增或修改任何业务记录；默认排除目录10和DEMO数据"
+    ],
+    "data_sources": [
+      "客户商机跟进+报价审批事件",
+      "09-07员工岗位权限主档",
+      "09-18统计规则"
+    ],
+    "formulas": [
+      "按结果卡所列口径复算"
+    ],
+    "state_prerequisites": [
+      "当前登录账号有效"
+    ],
+    "on_confirm_create": [],
+    "on_confirm_update": [],
+    "idempotency_key": "零写入查询",
+    "blocking_conditions": [
+      "越权字段自动过滤",
+      "零命中明确说明"
+    ],
+    "next_step": "返回只读结果卡",
+    "record_schema": [],
+    "result_schema": [
+      {
+        "field": "查询条件",
+        "source": "员工本次自然语言查询",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "包含DEMO、DEMO云栖项目"
+      },
+      {
+        "field": "数据权限",
+        "source": "当前登录账号+09-07员工岗位权限主档",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "仅显示本人有权查看的订单"
+      },
+      {
+        "field": "统计截止时间",
+        "source": "本次查询选择的当前状态或历史时点",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-09-25 16:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "结果字段",
+        "source": "客户商机跟进+报价审批事件",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "客户、商机号、项目、阶段、预计门数、报价号、报价总额、有效期、负责人、下一步"
+      },
+      {
+        "field": "合计与口径",
+        "source": "09-18统计规则+统计截止前已确认事件",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "严格截至统计截止时间计算"
+      },
+      {
+        "field": "当前步骤与卡点",
+        "source": "统计截止前状态规则+未完成待办",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "显示该时点真实卡点"
+      },
+      {
+        "field": "负责人和下一步",
+        "source": "09-07员工岗位权限主档+统计截止前待办卡",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "按该时点责任人和状态显示"
+      },
+      {
+        "field": "生成时间",
+        "source": "系统生成结果卡时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-25 16:10:00 Asia/Shanghai"
+      },
+      {
+        "field": "零命中说明",
+        "source": "本次查询结果生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "不适用（本次有结果）"
+      }
+    ],
+    "summary_fields": [
+      "查询条件",
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF48",
+    "intent": "单订单360度",
+    "access_mode": "READ_ONLY",
+    "target_note": "08｜经营会议与风险/08-03｜模板｜单订单360度.txt",
+    "title_format": "单订单360度",
+    "minimal_inputs": [
+      "查询条件"
+    ],
+    "auto_fields": [
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [],
+    "must_not_infer": [
+      "查询只读，不新增或修改任何业务记录；默认排除目录10和DEMO数据"
+    ],
+    "data_sources": [
+      "订单历史快照+全链已确认事件",
+      "09-07员工岗位权限主档",
+      "09-18统计规则"
+    ],
+    "formulas": [
+      "按结果卡所列口径复算"
+    ],
+    "state_prerequisites": [
+      "当前登录账号有效"
+    ],
+    "on_confirm_create": [],
+    "on_confirm_update": [],
+    "idempotency_key": "零写入查询",
+    "blocking_conditions": [
+      "越权字段自动过滤",
+      "零命中明确说明"
+    ],
+    "next_step": "返回只读结果卡",
+    "record_schema": [],
+    "result_schema": [
+      {
+        "field": "查询条件",
+        "source": "员工本次自然语言查询",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "包含DEMO、ORDER-A-DEMO-001"
+      },
+      {
+        "field": "数据权限",
+        "source": "当前登录账号+09-07员工岗位权限主档",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "仅显示本人有权查看的订单"
+      },
+      {
+        "field": "统计截止时间",
+        "source": "本次查询选择的当前状态或历史时点",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-09-25 16:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "结果字段",
+        "source": "订单历史快照+全链已确认事件",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "订单、客户项目、产品需求项、合同金额、已收未收、拆单BOM、生产质检入库、已发签收验收、售后、卡点、下一步"
+      },
+      {
+        "field": "合计与口径",
+        "source": "09-18统计规则+统计截止前已确认事件",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "严格截至统计截止时间计算"
+      },
+      {
+        "field": "当前步骤与卡点",
+        "source": "统计截止前状态规则+未完成待办",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "显示该时点真实卡点"
+      },
+      {
+        "field": "负责人和下一步",
+        "source": "09-07员工岗位权限主档+统计截止前待办卡",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "按该时点责任人和状态显示"
+      },
+      {
+        "field": "生成时间",
+        "source": "系统生成结果卡时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-25 16:10:00 Asia/Shanghai"
+      },
+      {
+        "field": "零命中说明",
+        "source": "本次查询结果生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "不适用（本次有结果）"
+      }
+    ],
+    "summary_fields": [
+      "查询条件",
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF49",
+    "intent": "生产与缺料",
+    "access_mode": "READ_ONLY",
+    "target_note": "08｜经营会议与风险/08-04｜模板｜生产与缺料.txt",
+    "title_format": "生产与缺料",
+    "minimal_inputs": [
+      "查询条件"
+    ],
+    "auto_fields": [
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [],
+    "must_not_infer": [
+      "查询只读，不新增或修改任何业务记录；默认排除目录10和DEMO数据"
+    ],
+    "data_sources": [
+      "拆单BOM+齐套+采购+生产事件",
+      "09-07员工岗位权限主档",
+      "09-18统计规则"
+    ],
+    "formulas": [
+      "按结果卡所列口径复算"
+    ],
+    "state_prerequisites": [
+      "当前登录账号有效"
+    ],
+    "on_confirm_create": [],
+    "on_confirm_update": [],
+    "idempotency_key": "零写入查询",
+    "blocking_conditions": [
+      "越权字段自动过滤",
+      "零命中明确说明"
+    ],
+    "next_step": "返回只读结果卡",
+    "record_schema": [],
+    "result_schema": [
+      {
+        "field": "查询条件",
+        "source": "员工本次自然语言查询",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "包含DEMO、ORDER-A-DEMO-002"
+      },
+      {
+        "field": "数据权限",
+        "source": "当前登录账号+09-07员工岗位权限主档",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "仅显示本人有权查看的订单"
+      },
+      {
+        "field": "统计截止时间",
+        "source": "本次查询选择的当前状态或历史时点",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-09-25 16:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "结果字段",
+        "source": "拆单BOM+齐套+采购+生产事件",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "订单、生产批次、工序、计划实际数量、已生产未生产、缺料物料数量、预计到料、负责人"
+      },
+      {
+        "field": "合计与口径",
+        "source": "09-18统计规则+统计截止前已确认事件",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "严格截至统计截止时间计算"
+      },
+      {
+        "field": "当前步骤与卡点",
+        "source": "统计截止前状态规则+未完成待办",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "显示该时点真实卡点"
+      },
+      {
+        "field": "负责人和下一步",
+        "source": "09-07员工岗位权限主档+统计截止前待办卡",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "按该时点责任人和状态显示"
+      },
+      {
+        "field": "生成时间",
+        "source": "系统生成结果卡时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-25 16:10:00 Asia/Shanghai"
+      },
+      {
+        "field": "零命中说明",
+        "source": "本次查询结果生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "不适用（本次有结果）"
+      }
+    ],
+    "summary_fields": [
+      "查询条件",
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF50",
+    "intent": "采购与到货",
+    "access_mode": "READ_ONLY",
+    "target_note": "08｜经营会议与风险/08-05｜模板｜采购与到货.txt",
+    "title_format": "采购与到货",
+    "minimal_inputs": [
+      "查询条件"
+    ],
+    "auto_fields": [
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [],
+    "must_not_infer": [
+      "查询只读，不新增或修改任何业务记录；默认排除目录10和DEMO数据"
+    ],
+    "data_sources": [
+      "采购申请+采购订单+到货检验事件",
+      "09-07员工岗位权限主档",
+      "09-18统计规则"
+    ],
+    "formulas": [
+      "按结果卡所列口径复算"
+    ],
+    "state_prerequisites": [
+      "当前登录账号有效"
+    ],
+    "on_confirm_create": [],
+    "on_confirm_update": [],
+    "idempotency_key": "零写入查询",
+    "blocking_conditions": [
+      "越权字段自动过滤",
+      "零命中明确说明"
+    ],
+    "next_step": "返回只读结果卡",
+    "record_schema": [],
+    "result_schema": [
+      {
+        "field": "查询条件",
+        "source": "员工本次自然语言查询",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "包含DEMO、PO-A-DEMO-001"
+      },
+      {
+        "field": "数据权限",
+        "source": "当前登录账号+09-07员工岗位权限主档",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "仅显示本人有权查看的订单"
+      },
+      {
+        "field": "统计截止时间",
+        "source": "本次查询选择的当前状态或历史时点",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-09-25 16:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "结果字段",
+        "source": "采购申请+采购订单+到货检验事件",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "采购申请、采购单、供应商、物料、采购数量、到货实收、检验合格不合格、承诺到货、逾期"
+      },
+      {
+        "field": "合计与口径",
+        "source": "09-18统计规则+统计截止前已确认事件",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "严格截至统计截止时间计算"
+      },
+      {
+        "field": "当前步骤与卡点",
+        "source": "统计截止前状态规则+未完成待办",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "显示该时点真实卡点"
+      },
+      {
+        "field": "负责人和下一步",
+        "source": "09-07员工岗位权限主档+统计截止前待办卡",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "按该时点责任人和状态显示"
+      },
+      {
+        "field": "生成时间",
+        "source": "系统生成结果卡时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-25 16:10:00 Asia/Shanghai"
+      },
+      {
+        "field": "零命中说明",
+        "source": "本次查询结果生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "不适用（本次有结果）"
+      }
+    ],
+    "summary_fields": [
+      "查询条件",
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF51",
+    "intent": "发货安装与验收",
+    "access_mode": "READ_ONLY",
+    "target_note": "08｜经营会议与风险/08-06｜模板｜发货安装与验收.txt",
+    "title_format": "发货安装与验收",
+    "minimal_inputs": [
+      "查询条件"
+    ],
+    "auto_fields": [
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [],
+    "must_not_infer": [
+      "查询只读，不新增或修改任何业务记录；默认排除目录10和DEMO数据"
+    ],
+    "data_sources": [
+      "发货+物流+签收+安装+验收事件",
+      "09-07员工岗位权限主档",
+      "09-18统计规则"
+    ],
+    "formulas": [
+      "按结果卡所列口径复算"
+    ],
+    "state_prerequisites": [
+      "当前登录账号有效"
+    ],
+    "on_confirm_create": [],
+    "on_confirm_update": [],
+    "idempotency_key": "零写入查询",
+    "blocking_conditions": [
+      "越权字段自动过滤",
+      "零命中明确说明"
+    ],
+    "next_step": "返回只读结果卡",
+    "record_schema": [],
+    "result_schema": [
+      {
+        "field": "查询条件",
+        "source": "员工本次自然语言查询",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "包含DEMO、ORDER-A-DEMO-001"
+      },
+      {
+        "field": "数据权限",
+        "source": "当前登录账号+09-07员工岗位权限主档",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "仅显示本人有权查看的订单"
+      },
+      {
+        "field": "统计截止时间",
+        "source": "本次查询选择的当前状态或历史时点",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-09-25 16:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "结果字段",
+        "source": "发货+物流+签收+安装+验收事件",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "订单、发货单、已发未发、运单物流、签收、安装、验收、遗留问题、负责人"
+      },
+      {
+        "field": "合计与口径",
+        "source": "09-18统计规则+统计截止前已确认事件",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "严格截至统计截止时间计算"
+      },
+      {
+        "field": "当前步骤与卡点",
+        "source": "统计截止前状态规则+未完成待办",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "显示该时点真实卡点"
+      },
+      {
+        "field": "负责人和下一步",
+        "source": "09-07员工岗位权限主档+统计截止前待办卡",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "按该时点责任人和状态显示"
+      },
+      {
+        "field": "生成时间",
+        "source": "系统生成结果卡时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-25 16:10:00 Asia/Shanghai"
+      },
+      {
+        "field": "零命中说明",
+        "source": "本次查询结果生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "不适用（本次有结果）"
+      }
+    ],
+    "summary_fields": [
+      "查询条件",
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF52",
+    "intent": "应收与回款风险",
+    "access_mode": "READ_ONLY",
+    "target_note": "08｜经营会议与风险/08-07｜模板｜应收与回款风险.txt",
+    "title_format": "应收与回款风险",
+    "minimal_inputs": [
+      "查询条件"
+    ],
+    "auto_fields": [
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [],
+    "must_not_infer": [
+      "查询只读，不新增或修改任何业务记录；默认排除目录10和DEMO数据"
+    ],
+    "data_sources": [
+      "合同订单+实际到账+催款事件",
+      "09-07员工岗位权限主档",
+      "09-18统计规则"
+    ],
+    "formulas": [
+      "按结果卡所列口径复算"
+    ],
+    "state_prerequisites": [
+      "当前登录账号有效"
+    ],
+    "on_confirm_create": [],
+    "on_confirm_update": [],
+    "idempotency_key": "零写入查询",
+    "blocking_conditions": [
+      "越权字段自动过滤",
+      "零命中明确说明"
+    ],
+    "next_step": "返回只读结果卡",
+    "record_schema": [],
+    "result_schema": [
+      {
+        "field": "查询条件",
+        "source": "员工本次自然语言查询",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "包含DEMO、ORDER-A-DEMO-001"
+      },
+      {
+        "field": "数据权限",
+        "source": "当前登录账号+09-07员工岗位权限主档",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "仅显示本人有权查看的订单"
+      },
+      {
+        "field": "统计截止时间",
+        "source": "本次查询选择的当前状态或历史时点",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-09-25 16:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "结果字段",
+        "source": "合同订单+实际到账+催款事件",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "订单、合同总额、到期应收、已确认到账、未收、付款节点、逾期天数、催款人、下一步"
+      },
+      {
+        "field": "合计与口径",
+        "source": "09-18统计规则+统计截止前已确认事件",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "严格截至统计截止时间计算"
+      },
+      {
+        "field": "当前步骤与卡点",
+        "source": "统计截止前状态规则+未完成待办",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "显示该时点真实卡点"
+      },
+      {
+        "field": "负责人和下一步",
+        "source": "09-07员工岗位权限主档+统计截止前待办卡",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "按该时点责任人和状态显示"
+      },
+      {
+        "field": "生成时间",
+        "source": "系统生成结果卡时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-25 16:10:00 Asia/Shanghai"
+      },
+      {
+        "field": "零命中说明",
+        "source": "本次查询结果生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "不适用（本次有结果）"
+      }
+    ],
+    "summary_fields": [
+      "查询条件",
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF53",
+    "intent": "质量与售后",
+    "access_mode": "READ_ONLY",
+    "target_note": "08｜经营会议与风险/08-08｜模板｜质量与售后.txt",
+    "title_format": "质量与售后",
+    "minimal_inputs": [
+      "查询条件"
+    ],
+    "auto_fields": [
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [],
+    "must_not_infer": [
+      "查询只读，不新增或修改任何业务记录；默认排除目录10和DEMO数据"
+    ],
+    "data_sources": [
+      "质检+返工+售后处理复验事件",
+      "09-07员工岗位权限主档",
+      "09-18统计规则"
+    ],
+    "formulas": [
+      "按结果卡所列口径复算"
+    ],
+    "state_prerequisites": [
+      "当前登录账号有效"
+    ],
+    "on_confirm_create": [],
+    "on_confirm_update": [],
+    "idempotency_key": "零写入查询",
+    "blocking_conditions": [
+      "越权字段自动过滤",
+      "零命中明确说明"
+    ],
+    "next_step": "返回只读结果卡",
+    "record_schema": [],
+    "result_schema": [
+      {
+        "field": "查询条件",
+        "source": "员工本次自然语言查询",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "包含DEMO、ORDER-A-DEMO-002"
+      },
+      {
+        "field": "数据权限",
+        "source": "当前登录账号+09-07员工岗位权限主档",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "仅显示本人有权查看的订单"
+      },
+      {
+        "field": "统计截止时间",
+        "source": "本次查询选择的当前状态或历史时点",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-09-25 16:05:00 Asia/Shanghai"
+      },
+      {
+        "field": "结果字段",
+        "source": "质检+返工+售后处理复验事件",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "订单批次、质检数量、合格不合格、返工报废、售后工单、责任状态、处理进度、未完待办"
+      },
+      {
+        "field": "合计与口径",
+        "source": "09-18统计规则+统计截止前已确认事件",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "严格截至统计截止时间计算"
+      },
+      {
+        "field": "当前步骤与卡点",
+        "source": "统计截止前状态规则+未完成待办",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "显示该时点真实卡点"
+      },
+      {
+        "field": "负责人和下一步",
+        "source": "09-07员工岗位权限主档+统计截止前待办卡",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "按该时点责任人和状态显示"
+      },
+      {
+        "field": "生成时间",
+        "source": "系统生成结果卡时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-25 16:10:00 Asia/Shanghai"
+      },
+      {
+        "field": "零命中说明",
+        "source": "本次查询结果生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "不适用（本次有结果）"
+      }
+    ],
+    "summary_fields": [
+      "查询条件",
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "employee_field_count": 1
+  },
+  {
+    "workflow_id": "AWF54",
+    "intent": "月度经营",
+    "access_mode": "READ_ONLY",
+    "target_note": "08｜经营会议与风险/08-09｜模板｜月度经营.txt",
+    "title_format": "月度经营",
+    "minimal_inputs": [
+      "查询条件"
+    ],
+    "auto_fields": [
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "confirm_fields": [],
+    "permission_confirm_fields": [],
+    "must_not_infer": [
+      "查询只读，不新增或修改任何业务记录；默认排除目录10和DEMO数据"
+    ],
+    "data_sources": [
+      "全链已确认事件+09-18风险与统计规则主档",
+      "09-07员工岗位权限主档",
+      "09-18统计规则"
+    ],
+    "formulas": [
+      "按结果卡所列口径复算"
+    ],
+    "state_prerequisites": [
+      "当前登录账号有效"
+    ],
+    "on_confirm_create": [],
+    "on_confirm_update": [],
+    "idempotency_key": "零写入查询",
+    "blocking_conditions": [
+      "越权字段自动过滤",
+      "零命中明确说明"
+    ],
+    "next_step": "返回只读结果卡",
+    "record_schema": [],
+    "result_schema": [
+      {
+        "field": "查询条件",
+        "source": "员工本次自然语言查询",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "包含DEMO、2026年8月"
+      },
+      {
+        "field": "数据权限",
+        "source": "当前登录账号+09-07员工岗位权限主档",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "仅显示本人有权查看的订单"
+      },
+      {
+        "field": "统计截止时间",
+        "source": "本次查询选择的当前状态或历史时点",
+        "mode": "附件或OCR识别后确认",
+        "confirm_when": "AI识别后检查本次变化",
+        "example": "2026-08-31 23:59:59 Asia/Shanghai"
+      },
+      {
+        "field": "结果字段",
+        "source": "全链已确认事件+09-18风险与统计规则主档",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "月份、销售额、回款、未收、订单门数、准交率、生产达成、质量合格率、售后、风险、下月行动"
+      },
+      {
+        "field": "合计与口径",
+        "source": "09-18统计规则+统计截止前已确认事件",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "严格截至统计截止时间计算"
+      },
+      {
+        "field": "当前步骤与卡点",
+        "source": "统计截止前状态规则+未完成待办",
+        "mode": "系统计算",
+        "confirm_when": "展示公式、输入和结果供复核",
+        "example": "显示该时点真实卡点"
+      },
+      {
+        "field": "负责人和下一步",
+        "source": "09-07员工岗位权限主档+统计截止前待办卡",
+        "mode": "主档/历史快照自动带出",
+        "confirm_when": "唯一匹配自动带出；多候选时选择",
+        "example": "按该时点责任人和状态显示"
+      },
+      {
+        "field": "生成时间",
+        "source": "系统生成结果卡时间（Asia/Shanghai）",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "2026-09-01 09:00:00 Asia/Shanghai"
+      },
+      {
+        "field": "零命中说明",
+        "source": "本次查询结果生成",
+        "mode": "系统生成",
+        "confirm_when": "由规则生成，无需手填",
+        "example": "不适用（本次有结果）"
+      }
+    ],
+    "summary_fields": [
+      "查询条件",
+      "数据权限",
+      "统计截止时间",
+      "结果字段",
+      "合计与口径",
+      "当前步骤与卡点",
+      "负责人和下一步",
+      "生成时间",
+      "零命中说明"
+    ],
+    "employee_field_count": 1
+  }
+]

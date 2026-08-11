@@ -17,6 +17,10 @@
 | `douyin-workflow-skill-publisher` | 抖音 skill 视频到组合 workflow skill，再到独立 GitHub 技能包发布的完整流水线 | [skill-packs/douyin-workflow-skill-publisher](skill-packs/douyin-workflow-skill-publisher) |
 | `github-skill-pack-publisher` | 把 skill/workflow 整理成独立 GitHub 技能包、文档、脚本、zip 并上传 | [skill-packs/github-skill-pack-publisher](skill-packs/github-skill-pack-publisher) |
 | `skill-guide-writer` | 全面审计任意 AI Skill，核验能力、安装与在线资源，并生成第一屏可直接调用的中文 Markdown 使用说明 | [skill-packs/skill-guide-writer](skill-packs/skill-guide-writer) |
+| `manufacturing-enterprise-operations-ai-frontdesk` | 制造企业通用经营知识库 AI 前台，覆盖销售、订单、BOM、采购、生产、质检、交付、财务和售后 | [skill-packs/manufacturing-enterprise-operations-ai-frontdesk](skill-packs/manufacturing-enterprise-operations-ai-frontdesk) |
+| `partner-sales-service-ai-frontdesk` | 合作商通用销售服务知识库 AI 前台，覆盖客户项目、报价订单、到账、交付、售后和经营查询 | [skill-packs/partner-sales-service-ai-frontdesk](skill-packs/partner-sales-service-ai-frontdesk) |
+| `senxu-door-business-ai-frontdesk` | 森旭木门内部经营管理样例库专用 AI 前台，用于完整制造业务链展示与培训 | [skill-packs/senxu-door-business-ai-frontdesk](skill-packs/senxu-door-business-ai-frontdesk) |
+| `youyou-business-ai-frontdesk` | 优优无机板合作商经营服务样例库专用 AI 前台，含 40 个意图工作流和严格业务边界 | [skill-packs/youyou-business-ai-frontdesk](skill-packs/youyou-business-ai-frontdesk) |
 | `customer-acquisition-pipeline` | 抖音获客流水线组合 skill：公开线索抓取、飞书客户库、冷邮件草稿 | [skill-packs/customer-acquisition-pipeline](skill-packs/customer-acquisition-pipeline) |
 | `youyou-demo-page-delivery-pipeline` | 优优无机板演示系统页面从参考图到生成、接入、部署、审计和记忆收尾的完整交付流水线 | [skill-packs/youyou-demo-page-delivery-pipeline](skill-packs/youyou-demo-page-delivery-pipeline) |
 | `youyou-inorganic-board-guide` | 优优无机板产品顾问 skill：面向客户/经销商讲解产品体系、话术和公开资料入口 | [skill-packs/youyou-inorganic-board-guide](skill-packs/youyou-inorganic-board-guide) |

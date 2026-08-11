@@ -1,0 +1,107 @@
+{
+  "enterprise_profile_schema_version": "B-PARTNER-PROFILE-1.0.0",
+  "profile_version": "1.0.0",
+  "data_scope": "DEMO",
+  "enterprise": {
+    "name": "DEMO青禾区域合作商",
+    "business_type": "合作商经营服务企业",
+    "timezone": "Asia/Shanghai",
+    "currency": "CNY"
+  },
+  "offerings": [
+    {
+      "offering_id": "OFFERING-QH-001",
+      "name": "DEMO商业服务方案B",
+      "specification": "DEMO商业服务方案B标准规格",
+      "unit": "项",
+      "price_policy": "按已确认合作价格版本"
+    }
+  ],
+  "employees_roles_permissions": [
+    {
+      "account_id": "EMP-QH-001",
+      "display_name": "DEMO经营管理员沈悦",
+      "role": "企业资料管理员",
+      "permissions": [
+        "企业启用确认",
+        "报价预览",
+        "订单预览",
+        "服务预览"
+      ]
+    }
+  ],
+  "partners": [
+    {
+      "partner_id": "PARTNER-QH-001",
+      "partner_name": "DEMO青禾品牌合作方"
+    }
+  ],
+  "customers_projects": [
+    {
+      "customer_id": "CUSTOMER-QH-001",
+      "customer_name": "DEMO新域商业",
+      "project_id": "PROJECT-QH-001",
+      "project_name": "DEMO门店升级项目",
+      "order_seed": "ORDER-B-DEMO-202"
+    }
+  ],
+  "fulfillment": {
+    "receiving_points": [
+      {
+        "id": "RECEIVE-QH-001",
+        "name": "DEMO门店升级项目收货点"
+      }
+    ],
+    "warehouses": [
+      {
+        "id": "WAREHOUSE-QH-001",
+        "name": "DEMO青禾服务仓"
+      }
+    ],
+    "carriers": [
+      {
+        "id": "CARRIER-QH-001",
+        "name": "DEMO青禾签约承运商"
+      }
+    ]
+  },
+  "numbering_rules": {
+    "quote": "QH-QUOTE-{YYYY}-{SEQ4}",
+    "order": "QH-ORDER-{YYYY}-{SEQ4}",
+    "receipt": "QH-RECEIPT-{YYYY}-{SEQ4}",
+    "shipment": "QH-SHIP-{YYYY}-{SEQ4}",
+    "aftersale": "QH-AFTER-{YYYY}-{SEQ4}"
+  },
+  "enabled_workflows": [
+    "合作商",
+    "客户项目",
+    "报价",
+    "订单",
+    "实际到账",
+    "交付",
+    "售后回访"
+  ],
+  "external_interfaces": {
+    "CRM": "未连接",
+    "物流": "未连接",
+    "财务": "未连接",
+    "OCR": "未连接"
+  },
+  "source_evidence": [
+    {
+      "sha256": "D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4",
+      "source": "DEMO-BETA-PROFILE-SOURCE",
+      "extracted_at": "2026-08-11T10:00:00+08:00"
+    }
+  ],
+  "conflicts": [],
+  "confirmation": {
+    "status": "CONFIRMED",
+    "confirmed_by_account_id": "EMP-QH-001",
+    "display_name_snapshot": "DEMO经营管理员沈悦",
+    "role_snapshot": "企业资料管理员",
+    "confirmed_at": "2026-08-11T10:10:00+08:00",
+    "source_profile_version": "1.0.0",
+    "source_sha256": "D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "enterprise_profile_schema_version": "B-PARTNER-PROFILE-1.0.0",
+  "profile_version": "1.0.0",
+  "data_scope": "DEMO",
+  "enterprise": {
+    "name": "DEMO云帆渠道服务商",
+    "business_type": "合作商经营服务企业",
+    "timezone": "Asia/Shanghai",
+    "currency": "CNY"
+  },
+  "offerings": [
+    {
+      "offering_id": "OFFERING-YF-001",
+      "name": "DEMO工程配套产品A",
+      "specification": "DEMO工程配套产品A标准规格",
+      "unit": "箱",
+      "price_policy": "按已确认合作价格版本"
+    }
+  ],
+  "employees_roles_permissions": [
+    {
+      "account_id": "EMP-YF-001",
+      "display_name": "DEMO渠道管理员周岚",
+      "role": "企业资料管理员",
+      "permissions": [
+        "企业启用确认",
+        "报价预览",
+        "订单预览",
+        "服务预览"
+      ]
+    }
+  ],
+  "partners": [
+    {
+      "partner_id": "PARTNER-YF-001",
+      "partner_name": "DEMO云帆品牌合作方"
+    }
+  ],
+  "customers_projects": [
+    {
+      "customer_id": "CUSTOMER-YF-001",
+      "customer_name": "DEMO东岸工程",
+      "project_id": "PROJECT-YF-001",
+      "project_name": "DEMO滨江配套项目",
+      "order_seed": "ORDER-B-DEMO-101"
+    }
+  ],
+  "fulfillment": {
+    "receiving_points": [
+      {
+        "id": "RECEIVE-YF-001",
+        "name": "DEMO滨江配套项目收货点"
+      }
+    ],
+    "warehouses": [
+      {
+        "id": "WAREHOUSE-YF-001",
+        "name": "DEMO云帆服务仓"
+      }
+    ],
+    "carriers": [
+      {
+        "id": "CARRIER-YF-001",
+        "name": "DEMO云帆签约承运商"
+      }
+    ]
+  },
+  "numbering_rules": {
+    "quote": "YF-QUOTE-{YYYY}-{SEQ4}",
+    "order": "YF-ORDER-{YYYY}-{SEQ4}",
+    "receipt": "YF-RECEIPT-{YYYY}-{SEQ4}",
+    "shipment": "YF-SHIP-{YYYY}-{SEQ4}",
+    "aftersale": "YF-AFTER-{YYYY}-{SEQ4}"
+  },
+  "enabled_workflows": [
+    "合作商",
+    "客户项目",
+    "报价",
+    "订单",
+    "实际到账",
+    "交付",
+    "售后回访"
+  ],
+  "external_interfaces": {
+    "CRM": "未连接",
+    "物流": "未连接",
+    "财务": "未连接",
+    "OCR": "未连接"
+  },
+  "source_evidence": [
+    {
+      "sha256": "C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3",
+      "source": "DEMO-ALPHA-PROFILE-SOURCE",
+      "extracted_at": "2026-08-11T10:00:00+08:00"
+    }
+  ],
+  "conflicts": [],
+  "confirmation": {
+    "status": "CONFIRMED",
+    "confirmed_by_account_id": "EMP-YF-001",
+    "display_name_snapshot": "DEMO渠道管理员周岚",
+    "role_snapshot": "企业资料管理员",
+    "confirmed_at": "2026-08-11T10:10:00+08:00",
+    "source_profile_version": "1.0.0",
+    "source_sha256": "C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "manufacturing-enterprise-operations-ai-frontdesk-pack",
+  "version": "1.0.0",
+  "type": "single-skill-pack",
+  "category": "skills/agents",
+  "skill": {
+    "name": "manufacturing-enterprise-operations-ai-frontdesk",
+    "path": "skills/manufacturing-enterprise-operations-ai-frontdesk",
+    "purpose": "Initialize and operate a manufacturing enterprise knowledge base across sales, orders, BOM, procurement, production, quality, delivery, finance and after-sales.",
+    "workflowCount": 54,
+    "sourceFileCount": 8,
+    "sourceTreeSha256": "21DEBE38D751EFD5BF3C1CBC8169EE020C5A50E9C16E76805A71F0ED55D0577B",
+    "sourceTreeHashAlgorithm": "SHA-256 of ordinal-sorted UTF-8 lines: relative/path<TAB>raw-file-SHA256, joined with LF and no trailing LF"
+  },
+  "companionKnowledgeBase": "A manufacturing-enterprise generic knowledge-base template using schema A-MFG-PROFILE-1.1.0",
+  "runtime": {
+    "agent": "Codex or another SKILL.md-compatible agent",
+    "python": ">=3.9 for render_enterprise.py",
+    "network": "not required for bundled validation; external ERP, logistics, finance and OCR interfaces are unconnected by default"
+  },
+  "validation": {
+    "renderer": {
+      "enabled": true,
+      "script": "scripts/render_enterprise.py",
+      "demoInput": "assets/DEMO-MFG-ALPHA.json",
+      "expectedMode": "DEMO"
+    },
+    "imaE2EVerified": false
+  },
+  "installScript": "scripts/install.ps1",
+  "verifyScript": "scripts/verify.ps1",
+  "verifiedAt": "2026-08-11"
+}

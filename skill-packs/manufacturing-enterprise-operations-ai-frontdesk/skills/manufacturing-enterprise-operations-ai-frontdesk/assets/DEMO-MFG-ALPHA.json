@@ -1,0 +1,94 @@
+{
+  "enterprise_profile_schema_version": "A-MFG-PROFILE-1.1.0",
+  "profile_version": "1.0.0",
+  "data_scope": "DEMO",
+  "enterprise": {
+    "name": "DEMO北辰精密制造",
+    "business_type": "制造企业",
+    "timezone": "Asia/Shanghai",
+    "currency": "CNY"
+  },
+  "products_and_units": [
+    {
+      "product_id": "PRODUCT-BC-001",
+      "name": "DEMO传动组件A",
+      "specification": "DEMO传动组件A-标准规格",
+      "unit": "套",
+      "price_policy": "按已确认报价版本"
+    }
+  ],
+  "employees_roles_permissions": [
+    {
+      "account_id": "EMP-BC-001",
+      "display_name": "DEMO生产主管林峰",
+      "role": "企业资料管理员",
+      "permissions": [
+        "企业启用确认",
+        "订单预览",
+        "生产预览"
+      ]
+    }
+  ],
+  "customers_projects": [
+    {
+      "customer_id": "CUSTOMER-BC-001",
+      "customer_name": "DEMO远航装备",
+      "project_id": "PROJECT-BC-001",
+      "project_name": "DEMO海岬装备项目",
+      "order_seed": "ORDER-A-DEMO-101"
+    }
+  ],
+  "suppliers_warehouses_logistics": {
+    "suppliers": [
+      {
+        "id": "SUPPLIER-BC-001",
+        "name": "DEMO北辰精密制造供应伙伴"
+      }
+    ],
+    "warehouses": [
+      {
+        "id": "WAREHOUSE-BC-001",
+        "name": "DEMO北辰精密制造成品仓"
+      }
+    ],
+    "logistics": [
+      {
+        "id": "LOGISTICS-BC-001",
+        "name": "DEMO北辰精密制造签约物流"
+      }
+    ]
+  },
+  "numbering_rules": {
+    "order": "BC-ORDER-{YYYY}-{SEQ4}",
+    "production": "BC-BATCH-{YYYY}-{SEQ4}"
+  },
+  "enabled_workflows": [
+    "订单",
+    "生产",
+    "质检",
+    "交付"
+  ],
+  "external_interfaces": {
+    "ERP": "未连接",
+    "物流": "未连接",
+    "财务": "未连接",
+    "OCR": "未连接"
+  },
+  "source_evidence": [
+    {
+      "sha256": "A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1",
+      "source": "DEMO-ALPHA-PROFILE-SOURCE",
+      "extracted_at": "2026-08-11T09:00:00+08:00"
+    }
+  ],
+  "conflicts": [],
+  "confirmation": {
+    "status": "CONFIRMED",
+    "confirmed_by_account_id": "EMP-BC-001",
+    "display_name_snapshot": "DEMO生产主管林峰",
+    "role_snapshot": "企业资料管理员",
+    "confirmed_at": "2026-08-11T09:10:00+08:00",
+    "source_profile_version": "1.0.0",
+    "source_sha256": "A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1A1"
+  }
+}

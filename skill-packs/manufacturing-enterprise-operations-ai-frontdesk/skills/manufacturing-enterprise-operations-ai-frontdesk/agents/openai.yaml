@@ -1,0 +1,4 @@
+interface:
+  display_name: "制造企业经营 AI 前台"
+  short_description: "初始化并运行制造企业销售生产交付全链经营知识库"
+  default_prompt: "Use $manufacturing-enterprise-operations-ai-frontdesk to initialize this enterprise or handle its next manufacturing operation safely."

@@ -1,0 +1,24 @@
+{
+  "core_contract_version": "AB-CORE-1.0.0",
+  "steps": [
+    "描述或上传",
+    "AI预览",
+    "当前有权限人员确认"
+  ],
+  "modes": {
+    "DEMO": "仅样例且默认排除",
+    "SETUP": "正式写入0",
+    "LIVE": "初始化Gate通过后允许正式写入"
+  },
+  "field_sources": [
+    "系统生成",
+    "主档/历史快照自动带出",
+    "附件或OCR识别后确认",
+    "当前登录且有权限的人员点击确认",
+    "系统计算"
+  ],
+  "append_only": true,
+  "query_read_only": true,
+  "demo_excluded_by_default": true,
+  "external_unconnected_fallback": "上传凭证或人工提供已核实事实"
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "合作商经营服务 AI 前台"
+  short_description: "初始化并安全运行合作商销售、服务、交付和经营查询工作流"
+  default_prompt: "Use $partner-sales-service-ai-frontdesk to initialize this partner enterprise or handle its next sales and service operation safely."

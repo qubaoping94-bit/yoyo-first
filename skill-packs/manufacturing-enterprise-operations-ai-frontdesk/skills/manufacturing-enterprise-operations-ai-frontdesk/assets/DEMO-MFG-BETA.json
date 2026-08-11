@@ -1,0 +1,94 @@
+{
+  "enterprise_profile_schema_version": "A-MFG-PROFILE-1.1.0",
+  "profile_version": "1.0.0",
+  "data_scope": "DEMO",
+  "enterprise": {
+    "name": "DEMO星澜照明制造",
+    "business_type": "制造企业",
+    "timezone": "Asia/Shanghai",
+    "currency": "CNY"
+  },
+  "products_and_units": [
+    {
+      "product_id": "PRODUCT-XL-001",
+      "name": "DEMO工业灯具B",
+      "specification": "DEMO工业灯具B-标准规格",
+      "unit": "台",
+      "price_policy": "按已确认报价版本"
+    }
+  ],
+  "employees_roles_permissions": [
+    {
+      "account_id": "EMP-XL-001",
+      "display_name": "DEMO交付主管许晴",
+      "role": "企业资料管理员",
+      "permissions": [
+        "企业启用确认",
+        "订单预览",
+        "生产预览"
+      ]
+    }
+  ],
+  "customers_projects": [
+    {
+      "customer_id": "CUSTOMER-XL-001",
+      "customer_name": "DEMO华东工程服务",
+      "project_id": "PROJECT-XL-001",
+      "project_name": "DEMO澄光改造项目",
+      "order_seed": "ORDER-A-DEMO-202"
+    }
+  ],
+  "suppliers_warehouses_logistics": {
+    "suppliers": [
+      {
+        "id": "SUPPLIER-XL-001",
+        "name": "DEMO星澜照明制造供应伙伴"
+      }
+    ],
+    "warehouses": [
+      {
+        "id": "WAREHOUSE-XL-001",
+        "name": "DEMO星澜照明制造成品仓"
+      }
+    ],
+    "logistics": [
+      {
+        "id": "LOGISTICS-XL-001",
+        "name": "DEMO星澜照明制造签约物流"
+      }
+    ]
+  },
+  "numbering_rules": {
+    "order": "XL-ORDER-{YYYY}-{SEQ4}",
+    "production": "XL-BATCH-{YYYY}-{SEQ4}"
+  },
+  "enabled_workflows": [
+    "订单",
+    "生产",
+    "质检",
+    "交付"
+  ],
+  "external_interfaces": {
+    "ERP": "未连接",
+    "物流": "未连接",
+    "财务": "未连接",
+    "OCR": "未连接"
+  },
+  "source_evidence": [
+    {
+      "sha256": "B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2",
+      "source": "DEMO-BETA-PROFILE-SOURCE",
+      "extracted_at": "2026-08-11T09:00:00+08:00"
+    }
+  ],
+  "conflicts": [],
+  "confirmation": {
+    "status": "CONFIRMED",
+    "confirmed_by_account_id": "EMP-XL-001",
+    "display_name_snapshot": "DEMO交付主管许晴",
+    "role_snapshot": "企业资料管理员",
+    "confirmed_at": "2026-08-11T09:10:00+08:00",
+    "source_profile_version": "1.0.0",
+    "source_sha256": "B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "partner-sales-service-ai-frontdesk-pack",
+  "version": "1.0.0",
+  "type": "single-skill-pack",
+  "category": "skills/agents",
+  "skill": {
+    "name": "partner-sales-service-ai-frontdesk",
+    "path": "skills/partner-sales-service-ai-frontdesk",
+    "purpose": "Initialize and operate a partner sales and service knowledge base from customer and quotation through order, payment, delivery, settlement, after-sales and management queries.",
+    "workflowCount": 40,
+    "sourceFileCount": 8,
+    "sourceTreeSha256": "5E9547DB9F6B8BC65D1AEDEC00B6455DE91859FD7293A20647056AD4EE8CE4C7",
+    "sourceTreeHashAlgorithm": "SHA-256 of ordinal-sorted UTF-8 lines: relative/path<TAB>raw-file-SHA256, joined with LF and no trailing LF"
+  },
+  "companionKnowledgeBase": "A partner sales-and-service generic knowledge-base template using schema B-PARTNER-PROFILE-1.0.0",
+  "runtime": {
+    "agent": "Codex or another SKILL.md-compatible agent",
+    "python": ">=3.9 for render_enterprise.py",
+    "network": "not required for bundled validation; external CRM, logistics, finance and OCR interfaces are unconnected by default"
+  },
+  "validation": {
+    "renderer": {
+      "enabled": true,
+      "script": "scripts/render_enterprise.py",
+      "demoInput": "assets/DEMO-PARTNER-ALPHA.json",
+      "expectedMode": "DEMO"
+    },
+    "imaE2EVerified": false
+  },
+  "installScript": "scripts/install.ps1",
+  "verifyScript": "scripts/verify.ps1",
+  "verifiedAt": "2026-08-11"
+}

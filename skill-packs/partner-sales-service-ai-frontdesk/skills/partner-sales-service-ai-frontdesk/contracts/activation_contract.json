@@ -1,0 +1,74 @@
+{
+  "contract_version": "B-ACTIVATION-1.0.0",
+  "enterprise_profile_schema_version": "B-PARTNER-PROFILE-1.0.0",
+  "profile_file": "企业启用档案.json",
+  "runtime_mode_rule": "mode由render唯一计算：未完整或未授权确认=SETUP；完整DEMO=DEMO；完整FORMAL且授权确认=LIVE",
+  "minimum_required": {
+    "enterprise": [
+      "enterprise.name",
+      "enterprise.business_type",
+      "enterprise.timezone",
+      "enterprise.currency"
+    ],
+    "offerings": [
+      "offerings[].offering_id",
+      "offerings[].name",
+      "offerings[].specification",
+      "offerings[].unit",
+      "offerings[].price_policy"
+    ],
+    "people": [
+      "employees_roles_permissions[].account_id",
+      "employees_roles_permissions[].display_name",
+      "employees_roles_permissions[].role",
+      "employees_roles_permissions[].permissions"
+    ],
+    "operations": [
+      "numbering_rules.quote",
+      "numbering_rules.order",
+      "numbering_rules.receipt",
+      "numbering_rules.shipment",
+      "numbering_rules.aftersale",
+      "enabled_workflows",
+      "external_interfaces"
+    ],
+    "evidence": [
+      "source_evidence[].sha256",
+      "source_evidence[].source",
+      "source_evidence[].extracted_at"
+    ]
+  },
+  "conditional_required": {
+    "合作商": [
+      "partners[]"
+    ],
+    "客户项目": [
+      "customers_projects[]"
+    ],
+    "交付": [
+      "fulfillment.receiving_points[]",
+      "fulfillment.carriers[]"
+    ],
+    "仓储": [
+      "fulfillment.warehouses[]"
+    ]
+  },
+  "confirmation": {
+    "permission_required": "企业启用确认",
+    "account_path": "confirmation.confirmed_by_account_id",
+    "snapshot_paths": [
+      "confirmation.display_name_snapshot",
+      "confirmation.role_snapshot",
+      "confirmation.confirmed_at",
+      "confirmation.source_profile_version",
+      "confirmation.source_sha256"
+    ],
+    "before_confirmation_formal_write_count": 0
+  },
+  "idempotency_key_fields": [
+    "enterprise.name",
+    "profile_version",
+    "confirmation.source_sha256"
+  ],
+  "activation_never_creates_business_records": true
+}
