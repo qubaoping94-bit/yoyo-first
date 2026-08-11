@@ -9,8 +9,8 @@
     "purpose": "Initialize and operate a partner sales and service knowledge base from customer and quotation through order, payment, delivery, settlement, after-sales and management queries.",
     "workflowCount": 40,
     "sourceFileCount": 8,
-    "sourceTreeSha256": "5E9547DB9F6B8BC65D1AEDEC00B6455DE91859FD7293A20647056AD4EE8CE4C7",
-    "sourceTreeHashAlgorithm": "SHA-256 of ordinal-sorted UTF-8 lines: relative/path<TAB>raw-file-SHA256, joined with LF and no trailing LF"
+    "sourceTreeSha256": "22C576D181294FB0B38D1F6E894ADF142B62BA437906DFF0CA7CB521213263D6",
+    "sourceTreeHashAlgorithm": "SHA-256 of ordinal-sorted UTF-8 lines: relative/path<TAB>canonical-UTF8-LF-file-SHA256, joined with LF and no trailing LF"
   },
   "companionKnowledgeBase": "A partner sales-and-service generic knowledge-base template using schema B-PARTNER-PROFILE-1.0.0",
   "runtime": {

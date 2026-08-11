@@ -9,8 +9,8 @@
     "purpose": "Operate and demonstrate the Senxu wooden-door internal business knowledge-base sample across sales, measurement, design, orders, finance, production, delivery, installation, acceptance and after-sales.",
     "workflowCount": 54,
     "sourceFileCount": 5,
-    "sourceTreeSha256": "2FE0F1476C6F6FBD146F0ED8EA8A64FB6843FCB676CB92CA9EB6C8015AC87B7B",
-    "sourceTreeHashAlgorithm": "SHA-256 of ordinal-sorted UTF-8 lines: relative/path<TAB>raw-file-SHA256, joined with LF and no trailing LF"
+    "sourceTreeSha256": "922DEE78D40AA98E6AEEE40B322800BA39B9EEEB43E205DC88D2388BE47389F3",
+    "sourceTreeHashAlgorithm": "SHA-256 of ordinal-sorted UTF-8 lines: relative/path<TAB>canonical-UTF8-LF-file-SHA256, joined with LF and no trailing LF"
   },
   "companionKnowledgeBase": "The Senxu wooden-door A sample knowledge base; this sample-specific Skill is not a generic enterprise template",
   "runtime": {

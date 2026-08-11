@@ -182,7 +182,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1 -Instal
 - 适配对象：优优无机板 B V6.2 R5 business-record 样例
 - 工作流数量：40
 - 源文件数量：11
-- 源树 SHA-256：`A50825928A9098612ECABC054EFDA2BA7F2D252AAD1A4FC9E22F0CEF4983D5F0`
+- 标准化内容树 SHA-256（UTF-8/LF）：`09010789ED8120EDBFC76EC9DD557124478F12C36147D3ADE5EA9318C2195B37`
 - 最后核验日期：2026-08-11
 - 依据：原始 `SKILL.md`、40 项工作流合同、主档匹配、事件因果、搜索汇总、计算防错、预览确认、外部接口和异常提醒规则、Codex quick validation
 - 许可证：本技能包随仓库根目录 MIT License 发布

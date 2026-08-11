@@ -53,18 +53,24 @@ if (@($workflowIds | Sort-Object -Unique).Count -ne $workflowIds.Count) {
 
 $hashMap = @{}
 $relativePaths = @()
-foreach ($file in Get-ChildItem -LiteralPath $skillPath -Recurse -File) {
-    $relative = $file.FullName.Substring($skillPath.Length).TrimStart("\").Replace("\", "/")
-    $hashMap[$relative] = (Get-FileHash -Algorithm SHA256 -LiteralPath $file.FullName).Hash
-    $relativePaths += $relative
-}
-$orderedPaths = [string[]]$relativePaths
-[Array]::Sort($orderedPaths, [System.StringComparer]::Ordinal)
-$treeLines = @($orderedPaths | ForEach-Object { "$_`t$($hashMap[$_])" })
-$treePayload = [string]::Join("`n", $treeLines)
-$treeBytes = [System.Text.UTF8Encoding]::new($false).GetBytes($treePayload)
 $sha = [System.Security.Cryptography.SHA256]::Create()
+# Canonical UTF-8/LF content hashing remains stable across Git and Windows line-ending conversions.
+$utf8Strict = [System.Text.UTF8Encoding]::new($false, $true)
+$utf8NoBom = [System.Text.UTF8Encoding]::new($false)
 try {
+    foreach ($file in Get-ChildItem -LiteralPath $skillPath -Recurse -File) {
+        $relative = $file.FullName.Substring($skillPath.Length).TrimStart("\").Replace("\", "/")
+        $text = [System.IO.File]::ReadAllText($file.FullName, $utf8Strict)
+        $canonicalText = $text.Replace("`r`n", "`n").Replace("`r", "`n")
+        $canonicalBytes = $utf8NoBom.GetBytes($canonicalText)
+        $hashMap[$relative] = ([System.BitConverter]::ToString($sha.ComputeHash($canonicalBytes))).Replace("-", "")
+        $relativePaths += $relative
+    }
+    $orderedPaths = [string[]]$relativePaths
+    [Array]::Sort($orderedPaths, [System.StringComparer]::Ordinal)
+    $treeLines = @($orderedPaths | ForEach-Object { "$_`t$($hashMap[$_])" })
+    $treePayload = [string]::Join("`n", $treeLines)
+    $treeBytes = $utf8NoBom.GetBytes($treePayload)
     $treeHash = ([System.BitConverter]::ToString($sha.ComputeHash($treeBytes))).Replace("-", "")
 } finally {
     $sha.Dispose()

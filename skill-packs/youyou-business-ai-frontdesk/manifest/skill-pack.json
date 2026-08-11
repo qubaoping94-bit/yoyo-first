@@ -9,8 +9,8 @@
     "purpose": "Operate and demonstrate the Youyou inorganic-board partner service knowledge-base sample with 40 intent-specific workflows and strict business-state boundaries.",
     "workflowCount": 40,
     "sourceFileCount": 11,
-    "sourceTreeSha256": "A50825928A9098612ECABC054EFDA2BA7F2D252AAD1A4FC9E22F0CEF4983D5F0",
-    "sourceTreeHashAlgorithm": "SHA-256 of ordinal-sorted UTF-8 lines: relative/path<TAB>raw-file-SHA256, joined with LF and no trailing LF"
+    "sourceTreeSha256": "09010789ED8120EDBFC76EC9DD557124478F12C36147D3ADE5EA9318C2195B37",
+    "sourceTreeHashAlgorithm": "SHA-256 of ordinal-sorted UTF-8 lines: relative/path<TAB>canonical-UTF8-LF-file-SHA256, joined with LF and no trailing LF"
   },
   "companionKnowledgeBase": "The Youyou inorganic-board B V6.2 R5 business-record sample knowledge base; this sample-specific Skill is not a generic partner template",
   "runtime": {

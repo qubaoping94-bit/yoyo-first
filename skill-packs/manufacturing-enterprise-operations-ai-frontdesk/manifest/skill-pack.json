@@ -9,8 +9,8 @@
     "purpose": "Initialize and operate a manufacturing enterprise knowledge base across sales, orders, BOM, procurement, production, quality, delivery, finance and after-sales.",
     "workflowCount": 54,
     "sourceFileCount": 8,
-    "sourceTreeSha256": "21DEBE38D751EFD5BF3C1CBC8169EE020C5A50E9C16E76805A71F0ED55D0577B",
-    "sourceTreeHashAlgorithm": "SHA-256 of ordinal-sorted UTF-8 lines: relative/path<TAB>raw-file-SHA256, joined with LF and no trailing LF"
+    "sourceTreeSha256": "42E959DD6BE984E9E36BD623268442BFC8034759A0DDACC95AF758256EE11151",
+    "sourceTreeHashAlgorithm": "SHA-256 of ordinal-sorted UTF-8 lines: relative/path<TAB>canonical-UTF8-LF-file-SHA256, joined with LF and no trailing LF"
   },
   "companionKnowledgeBase": "A manufacturing-enterprise generic knowledge-base template using schema A-MFG-PROFILE-1.1.0",
   "runtime": {

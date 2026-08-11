@@ -169,7 +169,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1 -Instal
 - 适配对象：森旭木门 A 样例知识库 V6.1
 - 工作流数量：54
 - 源文件数量：5
-- 源树 SHA-256：`2FE0F1476C6F6FBD146F0ED8EA8A64FB6843FCB676CB92CA9EB6C8015AC87B7B`
+- 标准化内容树 SHA-256（UTF-8/LF）：`922DEE78D40AA98E6AEEE40B322800BA39B9EEEB43E205DC88D2388BE47389F3`
 - 最后核验日期：2026-08-11
 - 依据：原始 `SKILL.md`、54 项工作流合同、DEMO 实体 ID 真值矩阵、业务快照规则、搜索权限规则、Codex quick validation
 - 许可证：本技能包随仓库根目录 MIT License 发布

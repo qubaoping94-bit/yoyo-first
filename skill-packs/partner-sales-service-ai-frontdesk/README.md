@@ -184,7 +184,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1 -Instal
 - 共享核心合同：`AB-CORE-1.0.0`
 - 工作流数量：40
 - 源文件数量：8
-- 源树 SHA-256：`5E9547DB9F6B8BC65D1AEDEC00B6455DE91859FD7293A20647056AD4EE8CE4C7`
+- 标准化内容树 SHA-256（UTF-8/LF）：`22C576D181294FB0B38D1F6E894ADF142B62BA437906DFF0CA7CB521213263D6`
 - 最后核验日期：2026-08-11
 - 依据：原始 `SKILL.md`、激活合同、40 项工作流合同、两份 DEMO 配置、渲染器安全冒烟测试、Codex quick validation
 - 许可证：本技能包随仓库根目录 MIT License 发布
