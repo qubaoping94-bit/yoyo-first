@@ -1,0 +1,20 @@
+{
+  "companions": [
+    {
+      "name": "wechat-publisher",
+      "requiredFor": "推送微信草稿箱",
+      "installMethod": "按本机 WorkBuddy 配置安装，并在本地 .env 配置凭据"
+    },
+    {
+      "name": "humanizer-zh-moli",
+      "requiredFor": "可选的中文去 AI 味审校",
+      "installMethod": "可选本地技能"
+    },
+    {
+      "name": "guizang-social-card-skill",
+      "requiredFor": "可选的小红书八卡扩展",
+      "installMethod": "可选本地技能"
+    }
+  ]
+}
+

@@ -24,6 +24,7 @@
 | `customer-acquisition-pipeline` | 抖音获客流水线组合 skill：公开线索抓取、飞书客户库、冷邮件草稿 | [skill-packs/customer-acquisition-pipeline](skill-packs/customer-acquisition-pipeline) |
 | `youyou-demo-page-delivery-pipeline` | 优优无机板演示系统页面从参考图到生成、接入、部署、审计和记忆收尾的完整交付流水线 | [skill-packs/youyou-demo-page-delivery-pipeline](skill-packs/youyou-demo-page-delivery-pipeline) |
 | `youyou-inorganic-board-guide` | 优优无机板产品顾问 skill：面向客户/经销商讲解产品体系、话术和公开资料入口 | [skill-packs/youyou-inorganic-board-guide](skill-packs/youyou-inorganic-board-guide) |
+| `youyou-wechat-article-pipeline` | WorkBuddy 专用的优优无机板公众号文章选题、创作、排版、配图、校验与草稿箱交付流水线 | [skill-packs/youyou-wechat-article-pipeline](skill-packs/youyou-wechat-article-pipeline) |
 | `youyou-ai-product-advisor` | 优优 AI 产品顾问 skill：安装后可直接按标准文库回答客户问题、匹配语义问法、生成经销商话术 | [skill-packs/youyou-ai-product-advisor](skill-packs/youyou-ai-product-advisor) |
 | `mike-cover-flow` | 按 Mike 实机验收标准构建顺滑、完整显示并与网站无缝融合的 Cover Flow 图片流 | [skill-packs/mike-cover-flow](skill-packs/mike-cover-flow) |
 | `mike-web-clarity-gate` | 在网站制作与验收中约束单行标题、消除 AI 模板感并检查页面布局协调性 | [skill-packs/mike-web-clarity-gate](skill-packs/mike-web-clarity-gate) |

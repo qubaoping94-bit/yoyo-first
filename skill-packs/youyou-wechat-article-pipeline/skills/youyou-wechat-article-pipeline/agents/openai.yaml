@@ -1,0 +1,8 @@
+interface:
+  display_name: "优优公众号文章一条龙"
+  short_description: "从 IMA 选题、Mike 写作、配图排版到微信草稿箱"
+  default_prompt: "使用 $youyou-wechat-article-pipeline 创作并交付一篇优优无机板公众号文章。"
+
+policy:
+  allow_implicit_invocation: true
+
