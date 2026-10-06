@@ -10,8 +10,12 @@ $fullDest = [IO.Path]::GetFullPath($dest)
 if (!$fullDest.StartsWith(($fullRoot + '\'), [StringComparison]::OrdinalIgnoreCase)) { throw "Unexpected destination: $fullDest" }
 New-Item -ItemType Directory -Force -Path $fullRoot | Out-Null
 if (Test-Path -LiteralPath $dest) {
-  $backup = "$dest.backup-$(Get-Date -Format yyyyMMddHHmmss)"
-  Rename-Item -LiteralPath $dest -NewName (Split-Path -Leaf $backup)
+  $backupRoot = Join-Path (Split-Path -Parent $fullRoot) 'skill-backups'
+  $backup = Join-Path $backupRoot "youyou-dealer-ppt-$(Get-Date -Format yyyyMMddHHmmss)"
+  $resolvedBackup = [IO.Path]::GetFullPath($backup)
+  if (!$resolvedBackup.StartsWith(([IO.Path]::GetFullPath($backupRoot).TrimEnd('\') + '\'), [StringComparison]::OrdinalIgnoreCase)) { throw "Unexpected backup: $resolvedBackup" }
+  New-Item -ItemType Directory -Force -Path $backupRoot | Out-Null
+  Move-Item -LiteralPath $fullDest -Destination $resolvedBackup
   Write-Host "Previous skill backed up: $backup"
 }
 Copy-Item -LiteralPath $source -Destination $dest -Recurse -Force

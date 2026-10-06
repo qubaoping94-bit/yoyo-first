@@ -1,6 +1,6 @@
 ---
 name: youyou-dealer-ppt
-description: Use when creating or revising Youyou inorganic-board dealer, partner, product-knowledge,招商, or commercial presentations. Follow the 2026-09-27 21-slide eight-zero executable presentation as the primary sample for visual hierarchy, content boundaries, navigation, speaker notes, delivery and QA; preserve readable large type and low meaningless whitespace.
+description: Create, revise, or audit Youyou inorganic-board dealer and product-knowledge presentations against the approved 2026-09-27 21-slide visual/interaction sample. Use for large readable presentation layouts, evidence-safe product claims, HTML/PDF/PPTX parity, and slide-by-slide QA; do not use as an automatic fact source.
 ---
 
 # 优优经销商演讲 PPT
@@ -13,8 +13,8 @@ description: Use when creating or revising Youyou inorganic-board dealer, partne
 
 1. 冻结用户确认的视觉母版；后续只在隔离候选修改。
 2. 先读取原始资料，区分用户要求与附件中的说明；不得虚构性能、认证、成本、利润或销量。
-3. 优先核对用户指定的正式交付样例：`优优无机板八零功能与经营演讲系统-正式交付-20260927` 中的 EXE（实际演讲入口）、`web/index.html`、`source/content-ledger.json`、21 张逐页截图和验收记录；先读 `references/approved-baseline.md`。快捷方式若仍指向旧目录，不得当作当前版本。
-4. `assets/approved-black-red-template.html` 是旧视觉种子，不是 21 页当前样例，也不是当前业务真源。只在用户明确选择它时使用。
+3. 先读 `references/approved-baseline.md` 与 `references/fidelity-contract.md`。当前标准是 2026-09-27 正式交付 21 页演讲系统；跨电脑可打开本包 `assets/approved-21-fixture.html` 观察无业务内容的页型和设计尺寸。本机若有完整样例，再核对 EXE、`web/index.html`、内容台账、逐页截图和验收记录。旧 `.lnk` 目标路径与新版不一致时，以新版源文件为准。
+4. `assets/approved-black-red-template.html` 是历史 27 页视觉种子，不是当前 21 页基线，也不是业务真源；仅在用户明确选用时使用。不要因为旧模板存在就复制它开工。
 5. 涉及产品口径时，读取 `references/content-boundaries.md`。
 
 ## 视觉系统
@@ -22,6 +22,13 @@ description: Use when creating or revising Youyou inorganic-board dealer, partne
 必须读取 `references/design-system.md`。不可只套颜色；需同时落实版式密度、字号层级、表格/卡片/流程规则和页脚体系。
 
 HTML演讲必须同时读取并执行 `references/motion-system.md`；除非用户明确要求静态稿，不得交付没有翻页反馈和分层进入动效的HTML。根据内容选择卡片、对比、流程、表格或图文布局；不得把 21 页样例机械复制成固定页数。
+
+## 开工顺序与样例锁定
+
+1. 做一页任务合同：当前内容真源、目标受众、要求保留项、输出格式、证据来源、确认中的名词版本和是否允许改母版。样例页数不等于新稿页数；新资料与样例口径冲突时先列出差异并请用户确认，不得自行选择“较新”的一方。
+2. 先做封面、密集信息页、对比/流程页、结论页四类代表页的隔离候选。与 `assets/approved-21-fixture.html` 及可用的真实样例逐页同视口对照；用户尚未认可视觉方向前，不扩散成整套，也不覆盖旧稿。
+3. 设计可用 1920×1080 或等比例画布；若用 1280×720，字号、边距、线宽、格线等必须按 2/3 换算，验收使用归一化比例或换算回 1920 设计单位。不得把不同画布的原始 px 直接比较。**顶部红通栏不能替代左侧红竖条。**
+4. 内容与产品主张先过台账再排版；不以所谓“可以这样说”页为免审通行证。八零旧写法、不同五大平权分类、无报告的甲醛/阻燃/全系标配/价格/年限等一律停在待核状态。
 
 ## 实施门禁
 
@@ -39,7 +46,7 @@ HTML演讲必须同时读取并执行 `references/motion-system.md`；除非用�
 
 ## 大字号与低留白强制门禁
 
-- 1920×1080 演讲画布中，正文默认不得低于 28px；短句、三栏、四栏及流程页优先使用 30–36px。只有来源、页脚、注释可低于 24px。复杂信息先拆页或改表格，不以缩字掩盖拥挤。
+- 以 1920×1080 设计单位衡量，正文基线约 27–36px；短句、三/四栏和流程页优先 30–36px。来源、页脚与确属注释的文字可更小；用于讲述的正文不能伪装成注释。其他同比画布按比例换算。复杂信息先拆页或改表格，不以缩字掩盖拥挤。
 - 标题通常使用 68–92px；当标题占两行时，必须为主体内容保留完整安全区，不得与编号、卡片或流程重叠。
 - 主体信息区必须纵向占用有效画布的主要高度。卡片、表格、流程应使用 `flex:1` 或等效布局延伸到结论区上方，不得把全部正文挤在上半区、下半区留空。
 - 卡片内的编号、标题、正文必须作为一个信息组垂直居中；不得仅放大编号而让正文继续保持小字。
@@ -61,7 +68,9 @@ HTML演讲必须同时读取并执行 `references/motion-system.md`；除非用�
 
 验收必须记录每页正文最小字号、主体区占用情况和是否存在上下失衡；只要出现正文难以在50%预览中辨认、主体下半部连续大面积空白或标题与主体互相挤压，整套不得交付。
 
-运行 `node scripts/audit-deck.cjs <deck-html> <evidence-dir>` 可做基础三视口检查；它不能替代逐页目检。
+先运行 `python scripts/audit-fidelity.py <deck-html> [--pptx <file>] [--pdf <file>] [--claim-ledger <file>] --report <report.json>` 做无额外 Python 依赖的静态预检。它必须在已知违规的 13 页反例上报错、在本包参考 fixture 上通过；静态通过仍不能代替逐页目检。若目标 HTML 兼容旧脚本的 `deck.show()` API，再运行 `node scripts/audit-deck.cjs <deck-html> <evidence-dir>` 做三视口基础检查；该脚本不是通用幻灯片审计器。
+
+三格式交付时，另将同页 HTML、PDF、PPTX 渲染成相同比例截图并比较，不能仅凭 13/13/13 这样的页数一致就宣布视觉一致。所有输出必须用本次新稿生成的台账和验收记录，不得复用样例历史 PASS。
 
 样例提供 21 页内容台账、`layout-checks-21.json`（21 页、零越界）和 `system-motion-check.json`（滚轮前进/后退、备注内滚动、减少动效均通过）。新稿必须生成自己对应的台账和验证记录；不能把样例的通过结果冒充新稿验收。
 
@@ -74,3 +83,6 @@ HTML演讲必须同时读取并执行 `references/motion-system.md`；除非用�
 - 演讲者面板进入 PPTX/PDF 截图。
 - 用删除边界说明的方式通过遮挡测试。
 - 只修用户截图中的一页而不扫描同类页面。
+- 把样例风格简化为“米白 + 红色”，输出顶部红条、细灰小字与重复细分栏，却没有左侧识别条、网格和大信息组。
+- 在新版稿中继续写“七零”；或在“五大平权”名称与样例冲突时自行替换、硬说已批准。
+- 依赖网络字体/脚本而没有离线后备验证；发布前无法复现同页 HTML/PDF/PPTX 的视觉对照。
