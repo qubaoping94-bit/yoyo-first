@@ -26,6 +26,7 @@
 | `youyou-inorganic-board-guide` | 优优无机板产品顾问 skill：面向客户/经销商讲解产品体系、话术和公开资料入口 | [skill-packs/youyou-inorganic-board-guide](skill-packs/youyou-inorganic-board-guide) |
 | `youyou-wechat-article-pipeline` | WorkBuddy 专用的优优无机板公众号文章选题、创作、排版、配图、校验与草稿箱交付流水线 | [skill-packs/youyou-wechat-article-pipeline](skill-packs/youyou-wechat-article-pipeline) |
 | `youyou-ai-product-advisor` | 优优 AI 产品顾问 skill：安装后可直接按标准文库回答客户问题、匹配语义问法、生成经销商话术 | [skill-packs/youyou-ai-product-advisor](skill-packs/youyou-ai-product-advisor) |
+| `youyou-dealer-ppt` | 以 2026-09-27 正式交付的 21 页八零演讲系统为优先样例，制作与验收优优经销商演示 | [skill-packs/youyou-dealer-ppt](skill-packs/youyou-dealer-ppt) |
 | `mike-cover-flow` | 按 Mike 实机验收标准构建顺滑、完整显示并与网站无缝融合的 Cover Flow 图片流 | [skill-packs/mike-cover-flow](skill-packs/mike-cover-flow) |
 | `mike-web-clarity-gate` | 在网站制作与验收中约束单行标题、消除 AI 模板感并检查页面布局协调性 | [skill-packs/mike-web-clarity-gate](skill-packs/mike-web-clarity-gate) |
 | `mike-website-production-pipeline` | 编排 Product Design、Figma、Hallmark、Taste、Mike 门禁和 GSAP，完成网站设计、开发、验收与发布全流程 | [skill-packs/mike-website-production-pipeline](skill-packs/mike-website-production-pipeline) |

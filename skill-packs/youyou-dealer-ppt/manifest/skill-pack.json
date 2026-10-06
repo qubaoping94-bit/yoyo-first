@@ -1,0 +1,12 @@
+{
+  "name": "youyou-dealer-ppt",
+  "version": "2.0.0",
+  "type": "single-skill-pack",
+  "skill": {
+    "name": "youyou-dealer-ppt",
+    "path": "skills/youyou-dealer-ppt",
+    "purpose": "Build and validate Youyou dealer presentations against the 2026-09-27 21-slide eight-zero executable sample."
+  },
+  "installScript": "scripts/install.ps1",
+  "verifyScript": "scripts/verify.ps1"
+}

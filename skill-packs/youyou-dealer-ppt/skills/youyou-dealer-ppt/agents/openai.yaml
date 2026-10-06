@@ -1,0 +1,4 @@
+interface:
+  display_name: "优优经销商演讲PPT"
+  short_description: "参照优优21页八零演讲系统制作大字号、低留白经销商演示"
+  default_prompt: "使用 $youyou-dealer-ppt；先核对用户指定的2026-09-27正式交付EXE与21页源文件，再按当前证据边界制作演示。按用户要求交付载体，逐页验收视觉、翻页、备注和输出。"
