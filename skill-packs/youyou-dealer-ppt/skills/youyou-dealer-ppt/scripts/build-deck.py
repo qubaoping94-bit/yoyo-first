@@ -16,6 +16,16 @@ def esc(value):
     return html.escape(str(value or ""), quote=True)
 
 
+def headline_html(value, *, process=False):
+    """Break long headlines at a natural clause boundary, avoiding orphan words."""
+    value = str(value or "")
+    breaks = [i + 1 for i, char in enumerate(value) if char in "，；。" and 7 <= i + 1 <= len(value) - 6]
+    if len(value) >= (16 if process else 20) and breaks:
+        split = min(breaks, key=lambda pos: abs(pos - len(value) / 2))
+        return f"{esc(value[:split])}<br>{esc(value[split:])}"
+    return esc(value)
+
+
 def image_html(image_id, assets, source_dir, used, *, fallback=""):
     if not image_id:
         return f'<div class="blankvisual">{esc(fallback)}</div>'
@@ -40,7 +50,7 @@ def render_slide(slide, index, total, assets, source_dir, used):
     # Interior slides already identify their section in the masthead. Repeating
     # it in red above the title made the approved layout needlessly top-heavy.
     kicker = f'<div class="kicker">{esc(slide.get("kicker", ""))}</div>' if layout == "cover" else ""
-    title = f'<h1>{esc(slide.get("title", ""))}</h1>'
+    title = f'<h1>{headline_html(slide.get("title", ""), process=layout == "process")}</h1>'
     subtitle = f'<p>{esc(slide.get("subtitle", ""))}</p>' if slide.get("subtitle") else ""
     conclusion = f'<div class="conclusion">{esc(slide["conclusion"])}</div>' if slide.get("conclusion") else ""
     items = slide.get("items", [])
@@ -61,11 +71,16 @@ def render_slide(slide, index, total, assets, source_dir, used):
         noimage = " noimage" if not slide.get("image") else ""
         main = f'<main class="imagemain{noimage}"><div>{kicker}{title}{subtitle}<div class="bodygrid">{cards}</div></div>{visual}</main>'
     elif layout == "table":
-        cells = "".join(f'<div class="tablecell"><strong>{i:02d}</strong><span>{esc(x)}</span></div>' for i, x in enumerate(items, 1))
-        main = f'<main class="tablemain" style="--rows:{(len(items)+1)//2}">{kicker}{title}{subtitle}<div class="tablegrid">{cells}</div>{conclusion}</main>'
+        def table_cell(value, number):
+            parts = value.split("｜")
+            body = (f'<strong class="table-title">{esc(parts[0])}</strong>'
+                    + ''.join(f'<span class="table-detail">{esc(part)}</span>' for part in parts[1:]))
+            return f'<div class="tablecell"><span class="table-num">{number:02d}</span>{body}</div>'
+        cells = "".join(table_cell(x, i) for i, x in enumerate(items, 1))
+        main = f'<main class="tablemain table-{len(items)}">{kicker}{title}{subtitle}<div class="tablegrid">{cells}</div>{conclusion}</main>'
     else:
         count = len(items)
-        cls = "cards-8" if count > 6 else "cards-6" if count > 4 else f"cards-{min(max(count, 2), 4)}"
+        cls = "cards-8" if count > 6 else "cards-6" if count == 6 else "cards-5" if count == 5 else f"cards-{min(max(count, 2), 4)}"
         cols = count if layout == "process" else min(count, 4)
         def numbered_card(value, number):
             # The approved sample distinguishes a short bold label from regular
@@ -145,7 +160,7 @@ def build(source, output, allow_hold=False):
         raise ValueError("CONTENT_HOLD: " + "; ".join(sorted(set(hold))))
     pages = [render_slide(s, i, len(slides), assets, source.parent, used) for i, s in enumerate(slides, 1)]
     css = (ROOT / "assets" / "deck.css").read_text(encoding="utf-8")
-    css += ".covermain .blankvisual{border:0;border-top:4px solid var(--red);border-bottom:4px solid var(--red);background:transparent}.imagemain.noimage{grid-template-columns:1fr}.imagemain.noimage .blankvisual{display:none}.imagemain.noimage .bodygrid{grid-template-columns:repeat(2,1fr)}.imagemain.noimage .card{min-height:210px;font-size:36px}.cards-6{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr)}.process .bodygrid{grid-template-rows:1fr}.tablegrid{display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(var(--rows),1fr);gap:16px;flex:1;min-height:0;margin-top:24px}.tablecell{display:flex;align-items:center;background:var(--card);border-left:5px solid var(--red);padding:18px 26px;font-size:34px;font-weight:700}.tablecell strong{font-size:44px;color:var(--red);margin-right:25px}"
+    css += ".covermain .blankvisual{border:0;border-top:4px solid var(--red);border-bottom:4px solid var(--red);background:transparent}.imagemain.noimage{grid-template-columns:1fr}.imagemain.noimage .blankvisual{display:none}.imagemain.noimage .bodygrid{grid-template-columns:repeat(2,1fr)}.imagemain.noimage .card{min-height:210px;font-size:36px}.cards-6{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr)}.process .bodygrid{grid-template-rows:1fr}"
     css += ".summary .bodygrid{grid-template-columns:repeat(var(--cols),1fr);grid-template-rows:1fr}"
     css += "#notes-panel{position:fixed;right:20px;top:20px;bottom:20px;width:min(420px,40vw);padding:25px;background:#171815;color:#fff;z-index:5;overflow:auto;font-size:20px;line-height:1.5;box-shadow:0 12px 40px #0007}#notes-panel[hidden]{display:none!important}#notes-panel h2{font-size:25px;margin:0 0 18px;color:#fff}@media print{#notes-panel{display:none!important}}"
     js = """const slides=[...document.querySelectorAll('.slide')],panel=document.querySelector('#notes-panel');let at=0,last=0;function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);document.querySelector('#stage').style.transform=`scale(${s})`;document.querySelector('#stage').style.left=`${(innerWidth-1920*s)/2}px`;document.querySelector('#stage').style.top=`${(innerHeight-1080*s)/2}px`;}function show(n){at=Math.max(0,Math.min(slides.length-1,n));slides.forEach((x,i)=>x.classList.toggle('active',i===at));panel.querySelector('p').textContent=slides[at].querySelector('.speaker-notes').textContent;}addEventListener('resize',fit);addEventListener('keydown',e=>{if(e.key==='p'||e.key==='P'){panel.hidden=!panel.hidden;return}if(e.key==='Escape'&&!panel.hidden){panel.hidden=true;return}if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();show(at+1)}if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();show(at-1)}});addEventListener('wheel',e=>{if(e.target.closest('#notes-panel')||Math.abs(e.deltaY)<18||Date.now()-last<420)return;last=Date.now();show(at+(e.deltaY>0?1:-1))},{passive:true});fit();show(0);"""

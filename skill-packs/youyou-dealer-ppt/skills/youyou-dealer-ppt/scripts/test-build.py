@@ -52,4 +52,11 @@ markup = module.render_slide(sample, 1, 2, {}, root, set())
 assert '<strong class="card-title">无机矿物</strong>' in markup
 assert '<span class="card-detail">提供稳定底座。</span>' in markup
 assert markup.count("MATERIAL FOUNDATION") == 1, "interior section label should not repeat above title"
+five = dict(sample, items=[f"项目{i}｜解释{i}" for i in range(5)])
+assert 'class="bodygrid cards-5"' in module.render_slide(five, 1, 2, {}, root, set())
+four = dict(sample, layout="table", items=[f"层级{i}｜依据{i}｜边界{i}" for i in range(4)])
+table_markup = module.render_slide(four, 1, 2, {}, root, set())
+assert 'class="tablemain table-4"' in table_markup
+assert table_markup.count('class="tablecell"') == 4
+assert table_markup.count('class="table-detail"') == 8
 print("build-deck regression checks passed")
