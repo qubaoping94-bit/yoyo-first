@@ -37,7 +37,9 @@ def image_html(image_id, assets, source_dir, used, *, fallback=""):
 
 def render_slide(slide, index, total, assets, source_dir, used):
     layout = slide["layout"]
-    kicker = f'<div class="kicker">{esc(slide.get("kicker", ""))}</div>'
+    # Interior slides already identify their section in the masthead. Repeating
+    # it in red above the title made the approved layout needlessly top-heavy.
+    kicker = f'<div class="kicker">{esc(slide.get("kicker", ""))}</div>' if layout == "cover" else ""
     title = f'<h1>{esc(slide.get("title", ""))}</h1>'
     subtitle = f'<p>{esc(slide.get("subtitle", ""))}</p>' if slide.get("subtitle") else ""
     conclusion = f'<div class="conclusion">{esc(slide["conclusion"])}</div>' if slide.get("conclusion") else ""
@@ -65,11 +67,19 @@ def render_slide(slide, index, total, assets, source_dir, used):
         count = len(items)
         cls = "cards-8" if count > 6 else "cards-6" if count > 4 else f"cards-{min(max(count, 2), 4)}"
         cols = count if layout == "process" else min(count, 4)
-        cards = "".join(f'<div class="card"><span class="num">{i:02d}</span><span>{esc(x)}</span></div>' for i, x in enumerate(items, 1))
+        def numbered_card(value, number):
+            # The approved sample distinguishes a short bold label from regular
+            # explanatory copy. Preserve the source text while restoring that hierarchy.
+            heading, separator, detail = value.partition("｜")
+            copy = (f'<span class="card-copy"><strong class="card-title">{esc(heading)}</strong>'
+                    f'<span class="card-detail">{esc(detail)}</span></span>' if separator else
+                    f'<span class="card-copy"><span class="card-detail">{esc(value)}</span></span>')
+            return f'<div class="card"><span class="num">{number:02d}</span>{copy}</div>'
+        cards = "".join(numbered_card(x, i) for i, x in enumerate(items, 1))
         density = " dense" if max(map(len, items), default=0) > 65 else ""
         main = f'<main class="{layout}{density}" style="--cols:{cols}">{kicker}{title}{subtitle}<div class="bodygrid {cls}">{cards}</div>{conclusion}</main>'
     return (f'<section class="slide" data-slide-id="{esc(slide["id"])}" data-layout="{layout}">'
-            f'<div class="head"><span>YOUYOU INORGANIC BOARD</span><span>{esc(slide.get("kicker", ""))}</span></div>'
+            f'<div class="head"><span>{esc(slide.get("kicker", ""))}</span><span>优优无机板 · 产品知识工作台</span></div>'
             f'{main}<div class="foot"><span>优优无机板 · 本页内容需按项目核准</span><b>{index:02d} / {total:02d}</b></div>'
             f'<aside class="speaker-notes">{esc(slide.get("notes", ""))}</aside></section>')
 

@@ -47,4 +47,9 @@ case["assets"]["demo"]["rights"] = "hold"; run_case(case, True, "image rights ho
 case["assets"]["demo"]["rights"] = "approved"
 case["slides"][7]["image"] = "demo"; run_case(case, True, "image reused without reason", with_image=True)
 case["assets"]["demo"]["reuse_reason"] = "same deck identity"; run_case(case, False, "explicit image reuse", with_image=True)
+sample = {"id": "hierarchy-test", "layout": "cards", "title": "样例", "kicker": "MATERIAL FOUNDATION", "items": ["无机矿物｜提供稳定底座。", "玄武岩纤维｜参与增强。"]}
+markup = module.render_slide(sample, 1, 2, {}, root, set())
+assert '<strong class="card-title">无机矿物</strong>' in markup
+assert '<span class="card-detail">提供稳定底座。</span>' in markup
+assert markup.count("MATERIAL FOUNDATION") == 1, "interior section label should not repeat above title"
 print("build-deck regression checks passed")
