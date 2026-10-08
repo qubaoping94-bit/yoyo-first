@@ -5,7 +5,9 @@ description: Create, revise, or audit Youyou inorganic-board dealer and product-
 
 # 优优经销商演讲 PPT
 
-## 通用模板 v3 候选路线
+## 通用模板 v3.0.0
+
+2026-10-09，Mike 已确认完整 21 页视觉回归候选。该确认使本模板的视觉路线成为当前基线，不代表历史业务主张、五大平权名称或新稿内容获批；每份新稿仍需独立内容和逐页视觉验收。
 
 本包在 21 页认可样例的视觉合同外，提供**单一内容源**的可运行模板系统。需要新建标准稿时，先读 `references/deck-schema.md`，从 `assets/deck-example.json` 复制一份到项目候选目录，再按内容关系选 9 种页型。示例只演示结构，不含批准的业务主张。不要直接修改示例或认可样例。已有复杂稿可只使用设计规范审计，不强迫迁移到模板引擎。
 
@@ -13,9 +15,9 @@ description: Create, revise, or audit Youyou inorganic-board dealer and product-
 
 `claims` 与 `assets` 的审批字段属于**输入证据**，不是模型生成的事实。缺批准来源、旧七零或五大平权口径未定时停在 `CONTENT_HOLD`；`--allow-hold` 仅供隔离预览，不得公开交付。图片文字须保持完整，重复图需写复用理由；授权和材料真实性仍由人工核对。
 
-真实样例回归先用 `assets/baseline-regression-four.json` 与 `scripts/audit-baseline-regression.py` 核对正式 21 页源稿中封面、材料卡片、流程、收束四类代表页的文案和备注，再用 `scripts/capture-regression.cjs` 生成同尺寸截图并人工并排比较。该 JSON 是历史样例的隔离候选且故意标记 `CONTENT_HOLD`；文字一致和机器检查不能代替 Mike 视觉认可。四类代表页方向获认可后，才可扩展至其余页面。
+真实样例回归先用 `assets/baseline-regression-four.json` 与 `scripts/audit-baseline-regression.py` 核对正式 21 页源稿中封面、材料卡片、流程、收束四类代表页的文案和备注，再用 `scripts/capture-regression.cjs` 生成同尺寸截图并人工并排比较。该 JSON 是历史样例的隔离候选且故意标记 `CONTENT_HOLD`；新项目仍先做代表页，由 Mike 确认后再扩展全稿。
 
-Mike 已确认四类代表页视觉方向后，完整 21 页回归可用 `scripts/import-approved-sample.py` 从**本机只读** `source/index.html` 和 `source/content-ledger.json` 导入隔离 JSON；不得把完整源稿提交到技能仓库。随后运行 `scripts/audit-baseline-regression.py` 检查全部可见文字、备注、稳定 ID 和页序，逐页截图检查 1920×1080、1440×900、1280×720。长文卡片须按实际字数调整密度，不能让文字越过卡片边界。完整结果仍须再次交由 Mike 确认，不能用四页视觉确认替代全稿验收。
+完整 21 页回归可用 `scripts/import-approved-sample.py` 从**本机只读** `source/index.html` 和 `source/content-ledger.json` 导入隔离 JSON；不得把完整源稿提交到技能仓库。随后运行 `scripts/audit-baseline-regression.py` 检查全部可见文字、备注、稳定 ID 和页序，逐页截图检查 1920×1080、1440×900、1280×720。长文卡片须按实际字数调整密度，不能让文字越过卡片边界。Mike 对 2026-10-09 回归版的视觉确认不可冒充未来新稿的验收。
 
 用 `scripts/build-visual-review.py` 生成 21 页正式截图与候选截图的同视口并排审阅页。该页面是人工视觉验收入口，不是自动通过证明；候选完整稿在 Mike 再确认前保持隔离。
 

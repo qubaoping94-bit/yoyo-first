@@ -12,7 +12,7 @@ if ($text -notmatch '(?s)^---\s*name:\s*youyou-dealer-ppt\s*description:\s*.+?--
 foreach ($term in @('2026-09-27','references/approved-baseline.md','references/fidelity-contract.md','references/content-boundaries.md','scripts/audit-fidelity.py')) { if (!$text.Contains($term)) { throw "Missing standard: $term" } }
 $manifest = Get-Content -Raw -Encoding UTF8 (Join-Path $root 'manifest\skill-pack.json') | ConvertFrom-Json
 if ($manifest.name -ne 'youyou-dealer-ppt') { throw 'Manifest mismatch' }
-if ($manifest.version -ne '3.0.0-candidate') { throw 'Manifest version mismatch' }
+if ($manifest.version -ne '3.0.0') { throw 'Manifest version mismatch' }
 $hashes = @{
   'assets\approved-black-red-template.html'='924DCA7EF658263D8292BBAA4FBAD39BD7281FEB70C529D01A5E2EA55808BA25'
   'assets\approved-black-red-density.css'='34F6C88E76E07FC0B061147C9E6BA94CA7D219F6B14DB22C0202FCF240219248'
