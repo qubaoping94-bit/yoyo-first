@@ -5,6 +5,14 @@ description: Create, revise, or audit Youyou inorganic-board dealer and product-
 
 # 优优经销商演讲 PPT
 
+## 通用模板 v3 候选路线
+
+本包在 21 页认可样例的视觉合同外，提供**单一内容源**的可运行模板系统。需要新建标准稿时，先读 `references/deck-schema.md`，从 `assets/deck-example.json` 复制一份到项目候选目录，再按内容关系选 8 种页型。示例只演示结构，不含批准的业务主张。不要直接修改示例或认可样例。已有复杂稿可只使用设计规范审计，不强迫迁移到模板引擎。
+
+使用 `scripts/build-deck.py` 从 JSON 生成自包含 HTML 和台账；使用 `scripts/export-deck.py` 从同一 HTML 生成 PDF、**图片型视觉保真 PPTX**，可选另生成简化的可编辑 PPTX。不可把图片型说成文字可编辑，也不可把可编辑版说成像素保真。导出后运行 `scripts/audit-output.py` 与 `scripts/audit-render.py`，并人工逐页比较 21 页认可样例。工具通过不等于用户认可，候选页型不得自行晋升正式母版。
+
+`claims` 与 `assets` 的审批字段属于**输入证据**，不是模型生成的事实。缺批准来源、旧七零或五大平权口径未定时停在 `CONTENT_HOLD`；`--allow-hold` 仅供隔离预览，不得公开交付。图片文字须保持完整，重复图需写复用理由；授权和材料真实性仍由人工核对。
+
 ## 核心原则
 
 为现场讲清楚而设计，不为模板留白而设计。保留内容完整性，在无溢出、无重叠、无证据越界的前提下，把标题、正文、表格和卡片做到最大可读字号，并让信息结构占满有效画布。

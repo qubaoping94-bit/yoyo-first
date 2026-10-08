@@ -1,0 +1,18 @@
+{
+  "title": "优优演讲系统页型演示（无业务主张）",
+  "subtitle": "这是占位示例，不可作为对外演讲内容",
+  "content_version": {"five_rights": "unresolved", "approval_source": ""},
+  "claims": {},
+  "assets": {},
+  "slides": [
+    {"id":"cover","layout":"cover","kicker":"YOUYOU PRESENTATION SYSTEM","title":"优优无机板","subtitle":"经销商演讲通用模板","conclusion":"把材料讲清楚，把场景讲具体。","notes":"演示封面页型；替换为本次项目已批准文案。"},
+    {"id":"section","layout":"section","kicker":"01 / SECTION","title":"先建立材料逻辑","subtitle":"一章只讲清楚一个问题。","notes":"示意章节过渡。"},
+    {"id":"cards","layout":"cards","kicker":"信息总览","title":"八项内容，一眼建立结构","items":["内容一：核心定义","内容二：适用范围","内容三：材料来源","内容四：结构逻辑","内容五：验证方法","内容六：应用场景","内容七：交付边界","内容八：下一步行动"],"notes":"演示 4×2 信息卡；不是八零产品事实。"},
+    {"id":"comparison","layout":"comparison","kicker":"对比说明","title":"把差异放在同一视野","items":["方案 A｜先讲清楚已知条件，再说明证据边界。","方案 B｜展示另一条路径及其适用条件。"],"conclusion":"比较的是适用场景，不制造无证据的优劣。","notes":"对比页需以同一指标和来源表述。"},
+    {"id":"process","layout":"process","kicker":"行动流程","title":"从理解到交付的四步","items":["确认需求","核对资料","形成方案","复核交付"],"notes":"步骤可在 2—6 项之间。"},
+    {"id":"evidence","layout":"evidence","kicker":"证据页","title":"每个结论都回到来源","items":["主张：本页实际要说什么？","证据：文件、型号与页码在哪里？","边界：适用条件和不适用条件是什么？"],"conclusion":"没有证据的确定性表述，不进入正式演讲。","notes":"证据页为结构示例。"},
+    {"id":"table","layout":"table","kicker":"专项汇总","title":"八项检查汇成一张表","items":["名称是否准确","来源是否可查","型号是否明确","图片是否适配","边界是否写清","备注是否完整","导出是否一致","现场是否可用"],"notes":"通用八项检查示例，不是产品八零内容。"},
+    {"id":"image","layout":"image","kicker":"图文讲述","title":"大图服务于一个结论","subtitle":"有图时完整展示产品与关键文字；无图时改用结构化内容，不强行填图。","items":["左侧文字保留阅读层级","右侧图像保持比例与安全边距"],"notes":"此页故意无图，测试无图回退。"},
+    {"id":"summary","layout":"summary","kicker":"收束与行动","title":"把复杂内容归为清晰行动","items":["先确认适用场景","再核对产品与证据","最后形成可复述的话术"],"conclusion":"让每一次演讲都可核对、可复用、可交付。","notes":"总结页不加入未经批准的联系方式或报价。"}
+  ]
+}
