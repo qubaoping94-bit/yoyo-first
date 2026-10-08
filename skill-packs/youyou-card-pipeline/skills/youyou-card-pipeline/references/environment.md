@@ -17,3 +17,5 @@ python scripts/count_body_chars.py <输出目录/xhs-note.md>
 渲染可加 --playwright-module <已有模块入口>、--channel chrome、--report <报告路径>。不传 channel 时使用 Playwright 配套 Chromium。报告 ok=false 或非零退出时必须修复再交付。检查自定义 HTML 时只能使用用户授权、可信的本地文档；阻断 HTTP 不是任意 HTML 的安全沙箱。
 
 WorkBuddy 有 present_files 才调用；Codex 使用当前文件展示/打开工具。两者均写输出目录交付记录.md；项目日志只追加到已确认路径。重开宿主会话以重新发现安装后的 Skill。
+
+配文独立执行只需Python标准库，无浏览器依赖：`python scripts/build_note.py --input assets/note.example.json --output <输出目录>`；再运行validate_note.py、count_body_chars.py、validate_delivery.py（仅配文时加--mode copy-only）。完整图文不得因图卡渲染通过而跳过配文。

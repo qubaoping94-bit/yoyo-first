@@ -3,16 +3,18 @@
 **复制下面这句话，在提供文章后直接使用：**
 
 ```text
-用 $youyou-card-pipeline 把我提供的文章制作成8张1080×1440图卡，保持统一字阶，并生成正文不超过1000字符的小红书配文；完成校验和逐张目检后交付。
+用 $youyou-card-pipeline 把我提供的文章制作成8张1080×1440图卡，保持统一字阶，并生成5个推荐标题、6–8段且不超过1000字符的小红书正文、6–8个标签；完成校验和逐张目检后交付。
 ```
 
 八卡示例：[查看完整示例画廊](https://github.com/qubaoping94-bit/yoyo-first/tree/main/skill-packs/youyou-card-pipeline/examples/demo)
+
+配文示例：[查看完整小红书配文](https://github.com/qubaoping94-bit/yoyo-first/blob/main/skill-packs/youyou-card-pipeline/examples/demo/xhs-note.md)
 
 发布仓库：[qubaoping94-bit/yoyo-first](https://github.com/qubaoping94-bit/yoyo-first/tree/main/skill-packs/youyou-card-pipeline)
 
 ## 这是什么
 
-`youyou-card-pipeline` 是把文章转换为八张社交图卡与配套文案的生产流程。此版为 **2.0.0，Codex 与 WorkBuddy 共用同一份 Skill**。它保留原 WorkBuddy 版的 Swiss × IKB Blue 视觉规则、七条铁律和配文字数要求，补入可独立运行的模板与脚本，取消固定盘符和外部历史母本的强制依赖。
+`youyou-card-pipeline` 是把文章转换为八张社交图卡与配套文案的生产流程。此版为 **2.1.0，Codex 与 WorkBuddy 共用同一份 Skill**。它保留原 WorkBuddy 版的 Swiss × IKB Blue 视觉规则、七条铁律和配文字数要求，补入可独立运行的模板与脚本，取消固定盘符和外部历史母本的强制依赖。
 
 文章理解、文案提炼与审美检查由宿主 Agent 完成；脚本负责结构构建、图片渲染、尺寸/字号/溢出检查与字数计数。它不是单独的设计软件，也不是自动发帖工具。
 
@@ -23,7 +25,7 @@
 - 统一主标题112px、节点48/30px、编号100/52/28px、模块46/32px、收束38px等字阶，禁止逐卡缩字。
 - 导出 xhs-01.png 至 xhs-08.png，逐张精确1080×1440。
 - 检查8卡数量与顺序、画布尺寸、字号、文字和面板边界，以及第8卡蓝块；保存 JSON 校验报告。
-- 生成 xhs-note.md，强制检查正文去空白后不超过1000字符，标点计入。
+- 生成完整 xhs-note.md：5个标题、6–8段正文、6–8个标签、爆款来源和合规口径。另交付可复制的小红书发布文案.txt；正文去空白后不超过1000字符，标点计入。
 - 按宿主可用工具展示交付，保留来源、目检与未验证事项。
 
 ## 适合怎样使用
@@ -34,7 +36,7 @@
 
 提供文章全文或可读取的 Markdown 文件；说明受众、目的、必须保留或删除的内容。如果文章包含检测等级、配方、价格等，提供当前来源。不要求绑定个人账号或 API Key。
 
-默认输出到当前工作目录的 `output/youyou-cards-主题-日期/`。其中保存 deck.json、index.html、xhs-note.md、交付记录.md；output 子目录保存8张 PNG 与渲染校验报告。已有认可成品时另建候选，避免覆盖。
+默认输出到当前工作目录的 `output/youyou-cards-主题-日期/`。其中保存 deck.json、note.json、index.html、xhs-note.md、小红书发布文案.txt、note-validation.json、delivery-validation.json、交付记录.md；output 子目录保存8张 PNG 与渲染校验报告。已有认可成品时另建候选，避免覆盖。
 
 ## 路线选择与调用示例
 
@@ -72,11 +74,49 @@ WorkBuddy 若未识别 `$` 写法，可直接说“使用 youyou-card-pipeline �
 1. 完整读文章与补充，确认受众和内容边界。
 2. 整理 deck.json。固定封面、五张内容卡、清单、第8卡收尾；内容卡包含三列与四格。
 3. 构建 HTML，按实际运行环境渲染，检查几何、字号和PNG尺寸。
-4. 写推荐标题、正文、标签、来源说明与内容边界，运行字符计数。
+4. 编写完整note.json，生成5标题、6–8段正文、6–8标签、真实来源与合规口径；导出发布文案，运行结构与字符检查。
 5. 查看全部八张图，检查裁切、对齐、箭头、蓝块、留白和可读性。
-6. 修复后验收，保存交付记录，再用宿主工具交付。
+6. 修复后运行图文齐套检查，缺配文不算完成；保存交付记录，同时链接图片和两份文案。
 
 脚本通过只证明所检查的结构与几何条件，不能代替事实核验和视觉审美。
+
+## 小红书配文怎么制作
+
+**默认交付是图片和配文一起完成。** 即使只说“配图”或“八卡”，也应同时交付配文；只有明确“只做图”才省略。只需要配文时可单独执行，不必启动浏览器。
+
+配文不是把八张图片的文字依次抄下来。Agent完整读原文后，围绕同一主题写一段连贯表达：钩子、现象/误区、来路/对照、使用端、合作商/创作者价值、结构能力与收尾。保留核心论证与必要边界，压缩重复和次要例子。优优系列有确认的Mike作者身份时保留原文口吻与开场；否则不冒用身份。
+
+完整 xhs-note.md 固定五栏：
+
+| 栏目 | 交付内容 |
+|---|---|
+| 推荐标题 | 5个不同标题，含金句式、疑问式、比喻式 |
+| 正文内容 | 6–8个自然段、无小标题/编号；去空白后含标点≤1000字符 |
+| 推荐标签 | 6–8个相关且不重复的标签 |
+| 爆款来源 | 原文与实际采用资料，不编造传播数据 |
+| 合规口径 | 与正文有关的事实、性能/环保/合作边界 |
+
+“爆款来源”是原版栏目名称，不表示示例已经获得爆款成绩。来源与合规用于编辑核对；正文需要带出的适用边界须写在正文中，不能只藏在记录里。
+
+Agent先按 assets/note.example.json 的字段写 note.json。脚本只组织已经写好的文字，不会自行理解文章或生成事实。从技能目录运行以下自带示例，无需浏览器：
+
+```powershell
+python .\scripts\build_note.py --input .\assets\note.example.json --output .\demo
+python .\scripts\validate_note.py .\demo\xhs-note.md
+python .\scripts\count_body_chars.py .\demo\xhs-note.md
+python .\scripts\validate_delivery.py .\demo --mode copy-only
+```
+
+输出两份文案：xhs-note.md用于看5个标题并核对来源，**小红书发布文案.txt**默认包含第1标题、正文与标签，便于复制。要改用其他标题，更新note.json的标题顺序再构建，避免两份文件不一致。结构检查不替代标题风格、来源真实性或图文一致性审阅。
+
+完整图文任务则用 `python scripts/validate_delivery.py` 后接实际输出目录，不加copy-only。它检查配文结构、发布文案一致性、八张PNG尺寸及成功的八卡报告；缺少配文会失败。明确只做图时不能把结果说成完整图文交付。
+
+可复制的单独配文指令：
+```text
+用 $youyou-card-pipeline 为我提供的文章只制作小红书配文，输出5个推荐标题、6–8段且不超过1000字符的正文、6–8个标签，并保留真实来源和合规口径。交付完整Markdown与可直接复制的发布文案，完成结构和字数检查。
+```
+
+网页或完整文章仍按用户要求保留内容，1000字符上限只约束另行制作的小红书正文。
 
 ## 安装、发现与验证
 
@@ -113,7 +153,7 @@ node .\scripts\validate_deck.mjs --html .\demo\index.html
 
 渲染可选参数：`--channel chrome` / `--channel msedge`、`--playwright-module` 后接已有模块绝对路径、`--report` 后接报告路径。不指定channel时使用Playwright配套Chromium。正式项目把输出目录设在工作区，避免成品混入技能目录。
 
-配文核对：`python scripts/count_body_chars.py` 后接实际 xhs-note.md 路径。要求恰有一组 `### 正文内容` 和 `### 推荐标签`；退出0通过、1超限、2格式错误。仅去除空白，标点也计数，上限不可提高。这个限额只约束该正文块，不代表平台完整发布规则。
+配文核对：`python scripts/count_body_chars.py` 后接实际 xhs-note.md 路径。正文计数要求恰有一组 `### 正文内容` 和 `### 推荐标签`；完整配文另由validate_note检查五个栏目及标题、段落、标签数量。退出0通过、1超限、2格式错误。仅去除空白，标点也计数，上限不可提高。这个限额只约束该正文块，不代表平台完整发布规则。
 
 环境细节依据 [Playwright 浏览器文档](https://playwright.dev/docs/browsers) 与 [Node 库文档](https://playwright.dev/docs/library)。
 
@@ -151,6 +191,6 @@ node .\scripts\validate_deck.mjs --html .\demo\index.html
 
 ## 版本、来源与核验
 
-版本2.0.0；核验日期2026-10-09。当前依据是同包 SKILL.md、三份 references、内置模板与示例、五个脚本及发布清单。原始版本来自用户提供的 WorkBuddy youyou-card-pipeline；通用改造保留字阶与内容约束，新增宿主适配与独立引擎。
+版本2.1.0；核验日期2026-10-09。当前依据是同包 SKILL.md、三份 references、内置模板与示例、图卡与配文脚本及发布清单。原始版本来自用户提供的 WorkBuddy youyou-card-pipeline；通用改造保留字阶与内容约束，新增宿主适配与独立引擎。2.1.0恢复原配文详细规则，并新增配文模板、构建/结构校验、发布文本和齐套检查；2.0.0只有简短配文规则与计数器，配文示例不完整。
 
-已实测：Windows、Python3.12.10、Node24.15.0、宿主已有Playwright1.62.1与Chrome；8图渲染、尺寸/字号/边界校验及逐张目检。字数边界与故意溢出输入的反例检查见 docs/VALIDATION.md。两处安装目录用同一发布文件清单核对。尚未实测：两宿主UI自动发现/展示全流程、其他操作系统、所有可能字体或原文长度。示例通过不保证任意文章直接能放下。
+已实测：Windows、Python3.12.10、Node24.15.0、宿主已有Playwright1.62.1与Chrome；8图渲染、尺寸/字号/边界校验及逐张目检。字数边界、故意溢出、配文结构与缺配文拦截的反例检查见 docs/VALIDATION.md。两处安装目录用同一发布文件清单核对。尚未实测：两宿主UI自动发现/展示全流程、其他操作系统、所有可能字体或原文长度。示例通过不保证任意文章直接能放下。

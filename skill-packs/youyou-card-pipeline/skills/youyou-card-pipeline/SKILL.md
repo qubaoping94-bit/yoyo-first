@@ -9,6 +9,8 @@ description: Codex 与 WorkBuddy 通用的优优社交卡配图配文流程。�
 
 ## 先确认宿主与输入
 
+- **默认必须图文齐套**：“配图”“八卡”“图文”任务同时产出8张图和小红书配文，不能只做图片就结束。只有用户明确“只做图”才能省略配文；“只写配文”则执行写作与配文验证，不强制出图。
+
 - **Codex**：可用 `$youyou-card-pipeline` 显式调用。使用当前会话提供的文件、终端和图片查看工具；有 `open_in_codex` 时打开配文或 HTML，最终用图片或文件链接交付。不要调用 WorkBuddy 专属 `present_files`。
 - **WorkBuddy**：使用同名 Skill；只有宿主确实提供 `present_files` 时，才按8张 PNG在前、配文在后的顺序调用。否则使用宿主支持的文件附件/链接。
 - 输入可以是附上的文章全文或任意可读 Markdown 路径，不限定某台电脑的盘符。默认输出到**当前工作目录**的 `output/youyou-cards-<主题>-<日期>/`，目录已有成品时另建候选，不覆盖已认可版本。
@@ -22,7 +24,7 @@ description: Codex 与 WorkBuddy 通用的优优社交卡配图配文流程。�
 4. **保持版式与选择器**：单卡选择器采用 `.poster.xhs#xhs-NN`，不要写成带空格的后代选择器。保留第8卡蓝色收尾区。
 5. **配文正文≤1000字符**：只计 `### 正文内容` 到 `### 推荐标签` 之间去空白后的字符，含标点。必须运行 `scripts/count_body_chars.py`，失败就压缩重写，不能提高限额。
 6. **内容有依据**：不贬低同行、不造检测数据、不承诺收益；产品与环保表述依据当前官方资料。旧模板中的检测等级、认证、配方表述不能直接当成新事实。用户明确删掉的内容，不因模板存在而补回。
-7. **交付与记录**：8张 PNG、`xhs-note.md`、可编辑的 `deck.json`、`index.html`、校验报告。输出目录写 `交付记录.md`；只有项目规则要求且路径已确认时，再追加项目记忆。公开发布文章或图片需要相应授权，不属于默认执行。
+7. **交付与记录**：默认图文齐套交付8张 PNG、`xhs-note.md`、`小红书发布文案.txt`、可编辑的 `deck.json`、`note.json`、`index.html`、校验报告。必须运行图文齐套门禁，缺配文不算完成。输出目录写 `交付记录.md`；只有项目规则要求且路径已确认时，再追加项目记忆。公开发布文章或图片需要相应授权，不属于默认执行。
 
 ## 标准流程
 
@@ -49,11 +51,17 @@ node scripts/render_deck.mjs --html <输出目录/index.html> --output <输出�
 
 ### 4. 写配文并核字数
 
-按 `references/copy-rules.md` 生成 `xhs-note.md`：推荐标题、正文内容、推荐标签、来源说明、内容边界。语气遵循文章作者与用户要求；没有作者身份依据时，不擅自使用 Mike 的职务或第一人称。
+先完整读 `references/copy-rules.md`，按同一原文编写 `note.json`，不是把图卡文字简单拼接。固定五栏：推荐标题（5个，含金句/疑问/比喻式）、正文内容（6–8段，无小标题和编号）、推荐标签（6–8个）、爆款来源（实际资料）、合规口径。正文走“钩子→现象/误区→来路/对照→使用端→合作商/创作者→结构能力→收尾”逻辑，保留核心观点与必要边界，≤1000字符。原版“爆款来源”栏目名不是传播成绩承诺。
+
+语气遵循文章作者与用户要求；有确认身份时保留Mike第一人称，没有依据不冒用职务。参考 `assets/xhs-note-template.md` 与 `assets/note.example.json`。运行构建脚本组织已写好的文字，同时生成可直接复制的发布文案；脚本不代替Agent创作。
 
 ```text
+python scripts/build_note.py --input <note.json> --output <输出目录>
+python scripts/validate_note.py <输出目录/xhs-note.md>
 python scripts/count_body_chars.py <输出目录/xhs-note.md>
 ```
+
+修改图卡后同步核对配文；来源和合规是编辑记录，发布正文需要的边界不得只写在记录里。脚本通过后人工审查标题风格、事实、来源、口吻和图文一致性。
 
 ### 5. 逐卡目检与交付
 
@@ -61,9 +69,13 @@ python scripts/count_body_chars.py <输出目录/xhs-note.md>
 
 工具验证和审美验证分开记录。写 `交付记录.md`：源文、受众、模板、字数、脚本结果、目检、输出路径、未验证事项。按宿主支持的方式交付，公开平台发布不自动执行。
 
+交付前最后运行 `python scripts/validate_delivery.py <输出目录>`，检查图与文是否齐套。只写配文加 `--mode copy-only`。最后回复同时链接8张图、`xhs-note.md` 和 `小红书发布文案.txt`；不能只展示图片，让用户找不到配文。
+
 ## 参考文件
 
 - `references/layout-map.md`：八卡顺序、JSON字段、字号、内容长度与排版。
 - `references/copy-rules.md`：配文模板、字数和产品表述边界。
 - `references/environment.md`：两种宿主的运行路径、安装与命令。
 - `assets/deck.example.json`：可运行的示例；其内容是流程示范，不是性能报告。
+- `assets/note.example.json`、`assets/xhs-note-template.md`：对应八卡示例的完整配文输入与写作模板。
+- `scripts/build_note.py`、`validate_note.py`、`validate_delivery.py`：配文文件构建、结构检查与图文齐套检查。
