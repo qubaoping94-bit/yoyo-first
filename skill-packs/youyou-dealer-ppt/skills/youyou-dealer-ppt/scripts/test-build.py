@@ -38,6 +38,9 @@ case["claims"]["test"] = {"text": "测试", "status": "hold", "source": "", "sco
 run_case(case, True, "unapproved claim")
 case = copy.deepcopy(baseline); case["slides"][0]["image"] = "missing"; run_case(case, True, "missing image")
 case = copy.deepcopy(baseline); case["slides"][0]["title"] = "五大平权"; run_case(case, True, "unresolved taxonomy")
+case["content_version"] = {"five_rights": ["安全平权", "功能平权", "品质平权", "空间平权", "环保平权"], "approval_status": "approved", "approval_source": "reviewed-record"}
+run_case(case, False, "approved taxonomy")
+case["slides"][0]["title"] = "技术平权"; run_case(case, True, "conflicting taxonomy")
 case = copy.deepcopy(baseline); case["assets"]["demo"] = {"path": "test.png", "purpose": "tiny regression image", "rights": "approved"}; case["slides"][0]["image"] = "demo"
 run_case(case, False, "approved image", with_image=True)
 case["assets"]["demo"]["rights"] = "hold"; run_case(case, True, "image rights hold", with_image=True)

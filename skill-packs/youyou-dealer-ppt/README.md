@@ -35,3 +35,7 @@ python .\scripts\test-export.py
 ```
 
 导出依赖 Python 3 的 `playwright`、`Pillow`、`PyMuPDF`、`python-pptx`；浏览器需要本机 Chromium/Edge。安装依赖前请用隔离虚拟环境，仓库不附带第三方运行时。正式演讲前仍须人工检查全部页面、内容证据和版权。
+
+真实样例四类代表页候选：`skills/youyou-dealer-ppt/assets/baseline-regression-four.json`。它逐字取自 2026-09-27 正式样例，并保留历史内容 `CONTENT_HOLD`，仅供同视口视觉对照；不会替代或修改 21 页源稿。用 `scripts/audit-baseline-regression.py` 对照样例 `source/index.html` 和 `source/content-ledger.json` 检查可见文案与备注，再用 `scripts/capture-regression.cjs` 拍摄 1920×1080 候选页。完整 21 页扩展需先获得 Mike 对代表页的视觉确认。
+
+双模式边界见 [delivery-modes.md](skills/youyou-dealer-ppt/references/delivery-modes.md)：默认 PPTX 保真但页内文字不可单独编辑；可编辑 PPTX 是内容版，不能宣称像素同版。五大平权分类须提供五个经业务批准的名称及可追溯来源，否则正式构建阻断。

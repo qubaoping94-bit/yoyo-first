@@ -7,11 +7,15 @@ description: Create, revise, or audit Youyou inorganic-board dealer and product-
 
 ## 通用模板 v3 候选路线
 
-本包在 21 页认可样例的视觉合同外，提供**单一内容源**的可运行模板系统。需要新建标准稿时，先读 `references/deck-schema.md`，从 `assets/deck-example.json` 复制一份到项目候选目录，再按内容关系选 8 种页型。示例只演示结构，不含批准的业务主张。不要直接修改示例或认可样例。已有复杂稿可只使用设计规范审计，不强迫迁移到模板引擎。
+本包在 21 页认可样例的视觉合同外，提供**单一内容源**的可运行模板系统。需要新建标准稿时，先读 `references/deck-schema.md`，从 `assets/deck-example.json` 复制一份到项目候选目录，再按内容关系选 9 种页型。示例只演示结构，不含批准的业务主张。不要直接修改示例或认可样例。已有复杂稿可只使用设计规范审计，不强迫迁移到模板引擎。
 
 使用 `scripts/build-deck.py` 从 JSON 生成自包含 HTML 和台账；使用 `scripts/export-deck.py` 从同一 HTML 生成 PDF、**图片型视觉保真 PPTX**，可选另生成简化的可编辑 PPTX。不可把图片型说成文字可编辑，也不可把可编辑版说成像素保真。导出后运行 `scripts/audit-output.py` 与 `scripts/audit-render.py`，并人工逐页比较 21 页认可样例。工具通过不等于用户认可，候选页型不得自行晋升正式母版。
 
 `claims` 与 `assets` 的审批字段属于**输入证据**，不是模型生成的事实。缺批准来源、旧七零或五大平权口径未定时停在 `CONTENT_HOLD`；`--allow-hold` 仅供隔离预览，不得公开交付。图片文字须保持完整，重复图需写复用理由；授权和材料真实性仍由人工核对。
+
+真实样例回归先用 `assets/baseline-regression-four.json` 与 `scripts/audit-baseline-regression.py` 核对正式 21 页源稿中封面、材料卡片、流程、收束四类代表页的文案和备注，再用 `scripts/capture-regression.cjs` 生成同尺寸截图并人工并排比较。该 JSON 是历史样例的隔离候选且故意标记 `CONTENT_HOLD`；文字一致和机器检查不能代替 Mike 视觉认可。四类代表页方向获认可后，才可扩展至其余页面。
+
+交付时以整页图像 PPTX 作为默认视觉保真件，另附简化可编辑 PPTX。交付清单必须分别标明“可编辑范围”和“视觉保真范围”；不得把可编辑版当作像素级同版。见 `references/delivery-modes.md`。
 
 ## 核心原则
 

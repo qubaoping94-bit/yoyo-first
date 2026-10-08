@@ -1,0 +1,15 @@
+{
+  "title": "21页正式样例 · 四类代表页回归候选（仅供视觉对照）",
+  "source_reference": "2026-09-27正式交付/source/index.html + content-ledger.json",
+  "content_version": {"five_rights": "unresolved", "approval_source": ""},
+  "claims": {
+    "historic-sample": {"text": "原21页样例文案，仅用于样式回归", "source": "2026-09-27正式交付/source/index.html", "status": "hold", "scope": "候选视觉测试", "limitations": "不证明当前商业主张或检测报告仍有效"}
+  },
+  "assets": {},
+  "slides": [
+    {"id":"cover","source_slide_id":"cover","layout":"cover","kicker":"产品知识演讲","title":"优优无机板","title_accent":"功能与经营演讲手册","subtitle":"材料基础 × 核心功能 × 产品延展 × 经销经营","cover_quote":"从材料开始，\n把功能讲清，\n把边界讲透。","cover_tags":["材料","功能","产品","经营"],"notes":"开场说明：本稿来自优优无机板产品知识工作台。先讲材料，再讲功能，最后讲应用与经营。","claim_ids":["historic-sample"]},
+    {"id":"material-base","source_slide_id":"material-base","layout":"cards","kicker":"MATERIAL FOUNDATION","title":"先换材料底座，再谈综合功能。","items":["无机矿物｜提供板材主体与稳定底座；具体矿物组成以正式技术资料为准。","玄武岩纤维｜像筋骨一样参与增强，帮助分散受力并约束裂纹扩展。","无机胶凝结构｜依靠无机体系反应、凝结与硬化形成内部稳定网络。"],"conclusion":"不是换一种胶水，而是重建一种材料结构。","notes":"解释三件组成。禁止把无机矿物直接等同玄武岩，也不说纯玄武岩板。","claim_ids":["historic-sample"]},
+    {"id":"generation-chain","source_slide_id":"generation-chain","layout":"process","kicker":"GENERATION CHAIN","title":"材料有源头，技术有逻辑，应用有系统。","items":["源起｜无机矿物材料体系","重构｜玄武岩纤维参与增强","成板｜无机胶凝结构形成板材","进化｜门面板、门、墙板、家具板","空间｜门墙柜协同的无机空间"],"notes":"用五步链路说明从材料到空间。功能与应用必须回到具体产品和验证。","claim_ids":["historic-sample"]},
+    {"id":"closing","source_slide_id":"closing","layout":"summary","kicker":"NEXT STEP","title":"先完成一个真实场景，再复制一套可经营的方法。","items":["产品确认｜场景、规格、结构和证据边界","样品与培训｜板材、截面、展板、FAQ和口播","门店试点｜销售记录、安装反馈与复盘"],"conclusion":"优优无机板，让安全、环保与稳定成为结构本身。","notes":"收口：确认一个场景、完成样品和证据、进入门店试点。","claim_ids":["historic-sample"]}
+  ]
+}

@@ -43,8 +43,14 @@ def render_slide(slide, index, total, assets, source_dir, used):
     conclusion = f'<div class="conclusion">{esc(slide["conclusion"])}</div>' if slide.get("conclusion") else ""
     items = slide.get("items", [])
     if layout == "cover":
-        visual = image_html(slide.get("image"), assets, source_dir, used, fallback="优优 · 材料与空间")
-        main = f'<main class="covermain"><div>{kicker}{title}{subtitle}</div>{visual}{conclusion}</main>'
+        if slide.get("title_accent"):
+            title = f'<h1><span>{esc(slide["title"])}</span><em>{esc(slide["title_accent"])}</em></h1>'
+        if slide.get("cover_quote"):
+            tags = "".join(f'<b>{esc(x)}</b>' for x in slide.get("cover_tags", []))
+            visual = f'<div class="cover-statement"><div>{esc(slide["cover_quote"])}</div><nav>{tags}</nav></div>'
+        else:
+            visual = image_html(slide.get("image"), assets, source_dir, used, fallback="优优 · 材料与空间")
+        main = f'<main class="covermain{" sample-cover" if slide.get("cover_quote") else ""}"><div>{kicker}{title}{subtitle}</div>{visual}{conclusion}</main>'
     elif layout == "section":
         main = f'<main class="sectionmain">{kicker}{title}{subtitle}{conclusion}</main>'
     elif layout == "image":
@@ -112,8 +118,18 @@ def build(source, output, allow_hold=False):
     if re.search(r"七零|7\s*零|七项零", text):
         hold.append("old seven-zero wording")
     version = data.get("content_version", {})
-    if "平权" in text and (version.get("five_rights") == "unresolved" or not version.get("approval_source")):
-        hold.append("five-rights taxonomy has no approval source")
+    visible = " ".join(" ".join(str(s.get(k, "")) for k in ("title", "subtitle", "conclusion")) + " " + " ".join(map(str, s.get("items", []))) for s in slides)
+    if "平权" in visible:
+        taxonomy = version.get("five_rights")
+        if (not isinstance(taxonomy, list) or len(taxonomy) != 5 or len(set(taxonomy)) != 5
+                or any(not isinstance(x, str) or not x.endswith("平权") for x in taxonomy)
+                or version.get("approval_status") != "approved" or not version.get("approval_source")):
+            hold.append("five-rights taxonomy requires five approved names and a traceable source")
+        else:
+            mentioned = set(re.findall(r"[\u4e00-\u9fff]{2,8}平权", visible))
+            known = set(taxonomy)
+            if mentioned - known - {"五大平权"}:
+                hold.append("five-rights wording conflicts with approved taxonomy: " + ",".join(sorted(mentioned - known - {"五大平权"})))
     if hold and not allow_hold:
         raise ValueError("CONTENT_HOLD: " + "; ".join(sorted(set(hold))))
     pages = [render_slide(s, i, len(slides), assets, source.parent, used) for i, s in enumerate(slides, 1)]
