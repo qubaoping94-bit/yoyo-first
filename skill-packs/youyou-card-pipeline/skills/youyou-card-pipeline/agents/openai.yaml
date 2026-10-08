@@ -1,0 +1,4 @@
+interface:
+  display_name: "优优八卡配图配文"
+  short_description: "Codex与WorkBuddy通用：八张统一风格图卡及小红书配文"
+  default_prompt: "用 $youyou-card-pipeline 为我提供的文章制作8张1080×1440图卡与正文不超过1000字符的配文，并完成校验和交付。"

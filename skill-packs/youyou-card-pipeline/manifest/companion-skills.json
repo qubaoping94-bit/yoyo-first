@@ -1,0 +1,5 @@
+{
+  "required": [],
+  "optional": [],
+  "note": "模板与脚本内置，无必须搭配的其他Skill。Python/Node/Playwright是运行时依赖。"
+}

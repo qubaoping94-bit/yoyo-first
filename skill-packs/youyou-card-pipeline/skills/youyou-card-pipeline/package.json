@@ -1,0 +1,13 @@
+{
+  "name": "youyou-card-pipeline-runtime",
+  "version": "2.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local HTML-to-PNG rendering support for the cross-host skill",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "playwright": ">=1.60.0 <2.0.0"
+  }
+}
