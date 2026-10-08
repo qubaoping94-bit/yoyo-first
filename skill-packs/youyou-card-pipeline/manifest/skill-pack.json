@@ -1,0 +1,67 @@
+{
+  "name": "youyou-card-pipeline",
+  "version": "2.0.0",
+  "type": "single-skill-pack",
+  "runtime": [
+    "Codex",
+    "WorkBuddy"
+  ],
+  "skills": [
+    "youyou-card-pipeline"
+  ],
+  "license": "MIT",
+  "files": [
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "3d4d39d22b9676c9ced31b8e21c0038790dd55205d7c5bbf66a6cc855418a304"
+    },
+    {
+      "path": "assets/deck.example.json",
+      "sha256": "10a52036bae70461dd786acdc5ccb4e5d99d73c60bac90d9b9287134ec2ab564"
+    },
+    {
+      "path": "assets/template.html",
+      "sha256": "dadc8c6808e6b4212502aa9a3467d3cbcda82092818c057c74fb5bc64fe5973c"
+    },
+    {
+      "path": "package.json",
+      "sha256": "da6b51c071c1320d83b6fbc36dd71cf0c8950b586f7a3baa6f7930cad1700421"
+    },
+    {
+      "path": "references/copy-rules.md",
+      "sha256": "f32f69d942f4df64fc2f8440f603614818f6d93a594ec9f484599a2fb2005eae"
+    },
+    {
+      "path": "references/environment.md",
+      "sha256": "fda0ef8ec160fdd5cf0ee71ca65367ba759cd99a31d87dd995fef596dbd3aa5f"
+    },
+    {
+      "path": "references/layout-map.md",
+      "sha256": "937eda6336c576af010c225b480f542eb182683a5bf109ac201ec044e4075027"
+    },
+    {
+      "path": "scripts/browser-runtime.mjs",
+      "sha256": "a56951832f18e232cc744c6c07767d67d9043ee56ea90bc7ffc004b20f2ed712"
+    },
+    {
+      "path": "scripts/build_deck.py",
+      "sha256": "ab0179d1b9cfea59d331599a5b93b627c4a63dbac82b697c8f5716c2197405e4"
+    },
+    {
+      "path": "scripts/count_body_chars.py",
+      "sha256": "58e74cb2b01fb26db82e67dd31369664d14bcc32239f23475ad8cbf45a518929"
+    },
+    {
+      "path": "scripts/render_deck.mjs",
+      "sha256": "80d2689acb3c4b4868618bb294d90939667ec9f5d02b92967a0e03db4a04bcfe"
+    },
+    {
+      "path": "scripts/validate_deck.mjs",
+      "sha256": "88b2251c0b278d2f718af0dd7132041ae13b65a2da377add568437dad1e35300"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "45cb1f648382e61310e1f13081f95f01eee9bd538fc87078f00e494d99533fa6"
+    }
+  ]
+}
