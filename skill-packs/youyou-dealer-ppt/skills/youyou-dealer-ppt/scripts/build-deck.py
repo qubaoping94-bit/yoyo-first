@@ -66,7 +66,8 @@ def render_slide(slide, index, total, assets, source_dir, used):
         cls = "cards-8" if count > 6 else "cards-6" if count > 4 else f"cards-{min(max(count, 2), 4)}"
         cols = count if layout == "process" else min(count, 4)
         cards = "".join(f'<div class="card"><span class="num">{i:02d}</span><span>{esc(x)}</span></div>' for i, x in enumerate(items, 1))
-        main = f'<main class="{layout}" style="--cols:{cols}">{kicker}{title}{subtitle}<div class="bodygrid {cls}">{cards}</div>{conclusion}</main>'
+        density = " dense" if max(map(len, items), default=0) > 65 else ""
+        main = f'<main class="{layout}{density}" style="--cols:{cols}">{kicker}{title}{subtitle}<div class="bodygrid {cls}">{cards}</div>{conclusion}</main>'
     return (f'<section class="slide" data-slide-id="{esc(slide["id"])}" data-layout="{layout}">'
             f'<div class="head"><span>YOUYOU INORGANIC BOARD</span><span>{esc(slide.get("kicker", ""))}</span></div>'
             f'{main}<div class="foot"><span>优优无机板 · 本页内容需按项目核准</span><b>{index:02d} / {total:02d}</b></div>'
@@ -141,7 +142,7 @@ def build(source, output, allow_hold=False):
     document = f'<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(data.get("title", "优优演讲"))}</title><style>{css}</style></head><body><div id="viewport"><div id="stage">{"".join(pages)}</div></div><aside id="notes-panel" hidden><h2>演讲者备注 · 按 P 关闭</h2><p></p></aside><script>{js}</script></body></html>'
     output.mkdir(parents=True, exist_ok=True)
     (output / "index.html").write_text(document, encoding="utf-8")
-    manifest = {"title": data.get("title", ""), "status": "CONTENT_HOLD" if hold else "STRUCTURE_PASS_CONTENT_NOT_VERIFIED", "holds": sorted(set(hold)), "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(), "content_version": version, "claims": claims, "assets": assets, "slides": [{"id": s["id"], "title": s["title"], "layout": s["layout"], "notes": s.get("notes", ""), "items": s.get("items", []), "subtitle": s.get("subtitle", ""), "claim_ids": s.get("claim_ids", []), "image": s.get("image")} for s in slides]}
+    manifest = {"title": data.get("title", ""), "status": "CONTENT_HOLD" if hold else "STRUCTURE_PASS_CONTENT_NOT_VERIFIED", "holds": sorted(set(hold)), "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(), "content_version": version, "claims": claims, "assets": assets, "slides": [{"id": s["id"], "title": s["title"], "title_accent": s.get("title_accent", ""), "layout": s["layout"], "notes": s.get("notes", ""), "items": s.get("items", []), "subtitle": s.get("subtitle", ""), "conclusion": s.get("conclusion", ""), "claim_ids": s.get("claim_ids", []), "image": s.get("image")} for s in slides]}
     (output / "deck-manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Built {len(slides)} slides: {output / 'index.html'}; {manifest['status']}")
 

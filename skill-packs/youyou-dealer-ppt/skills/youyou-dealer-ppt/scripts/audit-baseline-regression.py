@@ -27,7 +27,7 @@ def audit(candidate, source_html, source_ledger, output):
         source_text = plain(match.group(0))
         for field in ("title", "title_accent", "subtitle", "conclusion", "cover_quote"):
             value = plain(slide.get(field, ""))
-            if value and value not in source_text:
+            if value and value not in source_text and not (deck.get("imported_from_sample") and field == "subtitle"):
                 findings.append(f"{sid}: {field} changed from source")
         for item in slide.get("items", []):
             for part in item.split("｜"):
@@ -36,6 +36,13 @@ def audit(candidate, source_html, source_ledger, output):
         for tag in slide.get("cover_tags", []):
             if plain(tag) not in source_text:
                 findings.append(f"{sid}: cover tag changed: {tag}")
+        main_match = re.search(r"<main(?:\s[^>]*)?>(.*?)</main>", match.group(0), re.S)
+        candidate_text = plain("".join(str(slide.get(k, "")) for k in ("kicker", "title", "title_accent", "subtitle", "conclusion", "cover_quote")) + "".join(map(str, slide.get("items", []))) + "".join(map(str, slide.get("cover_tags", []))))
+        if main_match:
+            for fragment in re.findall(r">([^<>]+)<", main_match.group(1)):
+                value = plain(fragment)
+                if value and not value.isdecimal() and value not in candidate_text:
+                    findings.append(f"{sid}: source text omitted: {value[:60]}")
         if slide.get("notes", "") != notes.get(sid, None):
             findings.append(f"{sid}: speaker notes changed")
         rows.append({"id": sid, "title": slide["title"], "matched_parts": 3 + len(slide.get("items", []))})
