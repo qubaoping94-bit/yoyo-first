@@ -10,11 +10,11 @@
   "files": [
     {
       "path": "skills/internal-cooperation-brief/agents/openai.yaml",
-      "sha256": "0a7896769f241a301b1eede5cac7b0c8c97cc72f86e96f665c8c84eed20575c5"
+      "sha256": "a5bb25f49b48b87a72ed01f2db52058ffa565975fa7966290b2a05440fbca818"
     },
     {
       "path": "skills/internal-cooperation-brief/assets/approved-style.css",
-      "sha256": "209f3684183d07dab5660ef46aa8acfc6291bd5c69b852ac3cb9d24c5171e646"
+      "sha256": "9aae9f0af09d60ed22eeead88c784d9037adc4a3ca5df5c0550dacacfc9803a4"
     },
     {
       "path": "skills/internal-cooperation-brief/references/input-format.md",
@@ -34,7 +34,7 @@
     },
     {
       "path": "skills/internal-cooperation-brief/SKILL.md",
-      "sha256": "e6ad500d6d0574100a43e2c78668018c6ae88c1c0eeefb29a81adeb580382708"
+      "sha256": "3cbd52179666e5400960a540aa0c40f4c50719f194b9b497c7a800dd8eeccedc"
     }
   ]
 }
