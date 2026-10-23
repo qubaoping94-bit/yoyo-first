@@ -1,0 +1,16 @@
+name: Validate internal cooperation brief
+on:
+  push:
+    paths: ['skill-packs/internal-cooperation-brief/**', '.github/workflows/internal-cooperation-brief.yml']
+  pull_request:
+    paths: ['skill-packs/internal-cooperation-brief/**', '.github/workflows/internal-cooperation-brief.yml']
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - shell: pwsh
+        run: ./skill-packs/internal-cooperation-brief/scripts/verify.ps1 -OutputRoot $env:RUNNER_TEMP/brief-checks

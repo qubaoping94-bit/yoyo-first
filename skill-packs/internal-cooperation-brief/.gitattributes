@@ -1,0 +1,3 @@
+# Preserve exact installed payload bytes for cross-platform manifest validation.
+skills/** -text
+downloads/*.zip -text
