@@ -12,6 +12,7 @@
 
 | 技能包 | 用途 | 入口 |
 |---|---|---|
+| internal-cooperation-brief | Codex / WorkBuddy通用的内部合作汇报，固定商务蓝手机单图与一页PDF | [skill-packs/internal-cooperation-brief](skill-packs/internal-cooperation-brief) |
 | `youyou-card-pipeline` | Codex 与 WorkBuddy 通用的八卡配图配文流程，内置模板、渲染与校验 | [skill-packs/youyou-card-pipeline](skill-packs/youyou-card-pipeline) |
 | `ai-product-delivery-pipeline` | AI 产品工程化交付流水线，从需求、前端、AI 架构、Azure AI 到验证部署 | [skill-packs/ai-product-delivery-pipeline](skill-packs/ai-product-delivery-pipeline) |
 | `douyin-skill-installer` | 从抖音短视频内容识别、核验并安装提到的 Codex/agent skill | [skill-packs/douyin-skill-installer](skill-packs/douyin-skill-installer) |

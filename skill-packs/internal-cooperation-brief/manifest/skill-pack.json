@@ -1,0 +1,40 @@
+{
+  "name": "internal-cooperation-brief",
+  "version": "1.0.0",
+  "type": "single-skill-pack",
+  "compatibleHosts": [
+    "Codex",
+    "WorkBuddy"
+  ],
+  "entry": "skills/internal-cooperation-brief/SKILL.md",
+  "files": [
+    {
+      "path": "skills/internal-cooperation-brief/agents/openai.yaml",
+      "sha256": "0a7896769f241a301b1eede5cac7b0c8c97cc72f86e96f665c8c84eed20575c5"
+    },
+    {
+      "path": "skills/internal-cooperation-brief/assets/approved-style.css",
+      "sha256": "209f3684183d07dab5660ef46aa8acfc6291bd5c69b852ac3cb9d24c5171e646"
+    },
+    {
+      "path": "skills/internal-cooperation-brief/references/input-format.md",
+      "sha256": "c7d2d924c5fe57fd55f3595408d14253987872edcd97d3b6b18aadaf1116d298"
+    },
+    {
+      "path": "skills/internal-cooperation-brief/scripts/check.cjs",
+      "sha256": "8fc803fc4b02563462ad4c7f1c897d5ca763af7cc0a79dd0a4ed6933d4ec0abf"
+    },
+    {
+      "path": "skills/internal-cooperation-brief/scripts/export.cjs",
+      "sha256": "101c739976c5f1952b1581465c040afa6660708db16537fec3aa187e398d9c7d"
+    },
+    {
+      "path": "skills/internal-cooperation-brief/scripts/render.cjs",
+      "sha256": "1b58976bfe04d1b6c62611e9246d71c35570df4bde669dfde7d220ea94277576"
+    },
+    {
+      "path": "skills/internal-cooperation-brief/SKILL.md",
+      "sha256": "e6ad500d6d0574100a43e2c78668018c6ae88c1c0eeefb29a81adeb580382708"
+    }
+  ]
+}

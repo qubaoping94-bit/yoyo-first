@@ -1,0 +1,4 @@
+interface:
+  display_name: "内部合作汇报"
+  short_description: "把零散合作材料整理为固定商务蓝手机单图和一页PDF，供内部经营汇报使用"
+  default_prompt: "使用 $internal-cooperation-brief，把以下材料整理为内部合作汇报，生成微信单图与一页PDF。"
